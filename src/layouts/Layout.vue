@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper w-full h-full flex flex-row">
+    <div v-if="user" class="wrapper w-full h-full flex flex-row">
         <topico-nav-bar class="topico-nav h-full" />
         <main class="content h-full p-4">
             <router-view></router-view>
@@ -8,20 +8,26 @@
 </template>
 
 <script lang="ts">
-import TopicoNavBar from "@/components/nav/TopicoNavBar.vue";
-import { setLocalStorage } from "@/util/auth";
-import { defineComponent } from "vue";
-import { getUserInfo } from "@/services/userService";
+import TopicoNavBar from '@/components/nav/TopicoNavBar.vue'
+import { getUserInfo } from '@/services/userService'
+import { setLocalStorage } from '@/util/auth'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
     components: {
         TopicoNavBar,
     },
-    async created() {
-        const user: any = await getUserInfo();
-        setLocalStorage(user);
+    data() {
+        return {
+            user: undefined as User | undefined,
+        }
     },
-});
+    async mounted() {
+        const user = await getUserInfo()
+        setLocalStorage(user)
+        this.user = user
+    },
+})
 </script>
 
 <style lang="scss" scoped>
