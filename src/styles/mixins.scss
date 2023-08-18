@@ -1,0 +1,12 @@
+@mixin card-shadow {
+    box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.05);
+    outline: none;
+    border: none;
+    background-color: #fff;
+    z-index: 2;
+}
+
+@mixin card-shadow-rounded {
+    @include card-shadow;
+    border-radius: 12px;
+}
