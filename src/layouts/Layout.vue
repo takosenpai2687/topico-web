@@ -8,10 +8,10 @@
 </template>
 
 <script lang="ts">
-import TopicoNavBar from '@/components/nav/TopicoNavBar.vue'
-import { getUserInfo } from '@/services/userService'
-import { setLocalStorage } from '@/util/auth'
-import { defineComponent } from 'vue'
+import TopicoNavBar from "@/components/nav/TopicoNavBar.vue";
+import { getUserInfo } from "@/services/userService";
+import { setLocalStorage } from "@/util/auth";
+import { defineComponent } from "vue";
 
 export default defineComponent({
     components: {
@@ -20,14 +20,14 @@ export default defineComponent({
     data() {
         return {
             user: undefined as User | undefined,
-        }
+        };
     },
     async mounted() {
-        const user = await getUserInfo()
-        setLocalStorage(user)
-        this.user = user
+        const user = await getUserInfo();
+        setLocalStorage(user);
+        this.user = user;
     },
-})
+});
 </script>
 
 <style lang="scss" scoped>
@@ -39,8 +39,9 @@ export default defineComponent({
         min-width: 240px;
     }
     .content {
-        max-width: 1400px;
-        min-width: 1100px;
+        width: 100vw;
+        max-width: 1800px;
+        min-width: 1215px;
         margin: auto;
     }
 }
@@ -50,7 +51,7 @@ export default defineComponent({
         width: 20vw;
     }
     .content {
-        width: 80vw;
+        padding-left: calc(20vw + 16px);
     }
 }
 
@@ -59,7 +60,7 @@ export default defineComponent({
         width: 360px;
     }
     .content {
-        width: calc(100vw - 360px);
+        padding-left: calc(360px + 16px);
     }
 }
 </style>
