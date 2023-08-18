@@ -85,8 +85,8 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    min-width: 200px;
+    justify-content: space-between; 
+    position: fixed;
 
     .logo {
         height: 33%;
