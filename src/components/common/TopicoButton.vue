@@ -19,7 +19,7 @@ export default {
     font-size: 1em;
     color: #fff;
     background-color: $primaryColor;
-    border-radius: 8px;
+    border-radius: 20px;
     &:hover {
         background-color: $pink700;
         cursor: pointer;

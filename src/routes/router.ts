@@ -1,4 +1,4 @@
-import auth from "@/auth/navGuards";
+import auth from "@/routes/navGuards";
 import LayoutVue from "@/layouts/Layout.vue";
 import { createRouter, createWebHistory } from "vue-router";
 

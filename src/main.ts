@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import "./style.css";
 import App from "./App.vue";
-import router from "@/router";
+import router from "@/routes/router";
 import { createPinia } from "pinia";
 import VWave from "v-wave";
 import FontAwesomeIcon from "@/icons";
