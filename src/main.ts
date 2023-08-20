@@ -5,7 +5,7 @@ import App from "./App.vue";
 import router from "@/routes/router";
 import { createPinia } from "pinia";
 import VWave from "v-wave";
-import FontAwesomeIcon from "@/icons";
+import FontAwesomeIcon from "@/util/icons";
 
 const app = createApp(App);
 
