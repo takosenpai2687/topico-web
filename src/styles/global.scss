@@ -1,7 +1,4 @@
-@import "@fontsource/roboto/index.css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import './theme.scss';
 
 html {
     box-sizing: border-box;
@@ -26,7 +23,7 @@ h5,
 h6,
 a {
     box-sizing: border-box;
-    color: #61666d;
+    color: $primaryFontColor;
 }
 
 body,

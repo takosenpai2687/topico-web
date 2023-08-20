@@ -7,15 +7,15 @@
             } pr-2  mt-1`"
         >
             <div class="grid gap-4 p-1">
-                <TopicoCommunityTag
+                <CommunityPlate
                     v-for="comm in homeStore.followingComms"
                     :community="comm"
                 />
             </div>
         </div>
         <CircleButton
-            class="mx-auto mt-2 -mb-2"
-            :icon="`fa-solid ${expanded ? 'fa-angle-up' : 'fa-angle-down'}`"
+            :class="`${expanded? 'rotate-180': ''} mx-auto mt-2 -mb-2`"
+            icon="fa-solid fa-angle-down"
             @click="() => (expanded = !expanded)"
             v-if="showMore"
         />
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import TopicoCommunityTag from "@/components/common/CommunityTag.vue";
+import CommunityPlate from "@/components/common/CommunityPlate.vue";
 import CircleButton from "@/components/common/CircleButton.vue";
 import TopicoTitleCard from "@/components/common/TopicoTitleCard.vue";
 import TopicoButton from "@/components/common/TopicoButton.vue";
@@ -32,7 +32,7 @@ import useHomeStore from "@/stores/home";
 export default {
     components: {
         TopicoTitleCard,
-        TopicoCommunityTag,
+        CommunityPlate,
         CircleButton,
         TopicoButton,
     },

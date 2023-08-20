@@ -2,7 +2,7 @@
     <TopicoTitleCard title="# Recommended">
         <div class="max-h-36 overflow-y-auto">
             <div class="grid grid-cols-3 gap-4 p-1 overflow-y-auto">
-                <TopicoCommunityTag
+                <CommunityPlate
                     v-for="comm in homeStore.recommendedComms"
                     :community="comm"
                 />
@@ -12,12 +12,12 @@
 </template>
 
 <script lang="ts">
-import TopicoCommunityTag from "@/components/common/CommunityTag.vue";
+import CommunityPlate from "@/components/common/CommunityPlate.vue";
 import TopicoTitleCard from "@/components/common/TopicoTitleCard.vue";
 import useHomeStore from "@/stores/home";
 
 export default {
-    components: { TopicoTitleCard, TopicoCommunityTag },
+    components: { TopicoTitleCard, CommunityPlate },
     setup() {
         const homeStore = useHomeStore();
         return { homeStore };

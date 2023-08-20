@@ -16,17 +16,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/theme.scss';
 .btn {
-    width: 40px;
-    height: 40px;
+    width: 2.5em;
+    height: 2.5em;
     display: flex;
     user-select: none;
     align-items: center;
     justify-content: center;
     background-color: #fff;
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    color: #61666d;
+    border-radius: 1.25em;
+    color: $primaryFontColor;
+    transition: .24s all ease-out;
     &:hover {
         background-color: #eee;
         cursor: pointer;
