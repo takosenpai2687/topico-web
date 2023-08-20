@@ -7,6 +7,7 @@ import useGlobalStore from "@/stores/global";
 import { defineComponent } from "vue";
 
 const FPS: number = 60;
+const STEP_SIZE: number = 30;
 
 export default defineComponent({
     setup() {
@@ -70,7 +71,7 @@ export default defineComponent({
 
             ctx.beginPath();
             ctx.moveTo(0, this.waterLevel);
-            for (let x = 0; x < width; x += 10) {
+            for (let x = 0; x < width + STEP_SIZE; x += STEP_SIZE) {
                 const y = this.waterLevel + Math.sin(x / 80 + t) * 10;
                 ctx.lineTo(x, y);
             }

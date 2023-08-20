@@ -28,5 +28,65 @@
         ],
         "ctime": "2023-08-21 00:00:05",
         "utime": "2023-08-21 00:01:03"
+    },
+    {
+        "id": 123,
+        "community": {
+            "id": 1,
+            "name": "community1",
+            "description": "afafafa"
+        },
+        "author": {
+            "id": 1,
+            "email": "afafa@gmail.com",
+            "nickName": "Tako Senpai",
+            "avatar": "/img/test-avatar.gif"
+        },
+        "tags": [
+            "tag1",
+            "tag2",
+            "tag3",
+            "tag4"
+        ],
+        "title": "This is a title",
+        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "images": [
+            "/img/test-avatar.gif",
+            "/img/test-avatar.gif",
+            "/img/test-avatar.gif",
+            "/img/test-avatar.gif"
+        ],
+        "ctime": "2023-08-21 00:00:05",
+        "utime": "2023-08-21 00:01:03"
+    },
+    {
+        "id": 123,
+        "community": {
+            "id": 1,
+            "name": "community1",
+            "description": "afafafa"
+        },
+        "author": {
+            "id": 1,
+            "email": "afafa@gmail.com",
+            "nickName": "Tako Senpai",
+            "avatar": "/img/test-avatar.gif"
+        },
+        "tags": [
+            "tag1",
+            "tag2",
+            "tag3",
+            "tag4"
+        ],
+        "title": "This is a title",
+        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "images": [
+            "/img/test-avatar.gif",
+            "/img/test-avatar.gif",
+            "/img/test-avatar.gif",
+            "/img/test-avatar.gif"
+        ],
+        "ctime": "2023-08-21 00:00:05",
+        "utime": "2023-08-21 00:01:03"
     }
 ]
