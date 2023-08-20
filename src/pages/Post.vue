@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-row">Profile</div>
+    <div class="flex flex-row">Post</div>
 </template>
 
 <script lang="ts">
@@ -12,9 +12,9 @@ export default {
         return { globalStore };
     },
     created() {
-        document.title = "Topico - Profile";
-        this.globalStore.setShowWaves(true);
-        this.globalStore.setWaterLevel(296.5);
+        document.title = "Topico - Post";   // Change to post name
+        this.globalStore.setShowWaves(false); // If no banner, then true
+        // this.globalStore.setWaterLevel(296.5);
     },
 };
 </script>

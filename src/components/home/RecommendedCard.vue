@@ -14,7 +14,7 @@
 <script lang="ts">
 import TopicoCommunityTag from "@/components/common/CommunityTag.vue";
 import TopicoTitleCard from "@/components/common/TopicoTitleCard.vue";
-import { useHomeStore } from "@/stores/home";
+import useHomeStore from "@/stores/home";
 
 export default {
     components: { TopicoTitleCard, TopicoCommunityTag },

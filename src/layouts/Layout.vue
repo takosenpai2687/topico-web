@@ -1,13 +1,15 @@
 <template>
-    <div v-if="user" class="wrapper w-full h-full flex flex-row">
-        <topico-nav-bar class="topico-nav h-full" />
-        <main class="content h-full p-4">
+    <div v-if="user" class="wrapper w-full h-full flex flex-row relative">
+        <topico-nav-bar class="topico-nav h-full z-10" />
+        <main class="content h-full p-4 z-10">
             <router-view></router-view>
         </main>
+        <wave class="z-0" />
     </div>
 </template>
 
 <script lang="ts">
+import Wave from "@/components/common/Wave.vue";
 import TopicoNavBar from "@/components/nav/TopicoNavBar.vue";
 import { getUserInfo } from "@/services/userService";
 import { setLocalStorage } from "@/util/auth";
@@ -16,6 +18,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
     components: {
         TopicoNavBar,
+        Wave,
     },
     data() {
         return {

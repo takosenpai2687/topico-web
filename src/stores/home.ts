@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const useHomeStore = defineStore("home", {
+const useHomeStore = defineStore("home", {
     state: () => {
         return {
             followingComms: [] as Community[],
@@ -16,3 +16,5 @@ export const useHomeStore = defineStore("home", {
         },
     },
 });
+
+export default useHomeStore;

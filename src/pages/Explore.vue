@@ -3,9 +3,19 @@
 </template>
 
 <script lang="ts">
+import useGlobalStore from "@/stores/global";
+
 export default {
     components: {},
-    created() {},
+    setup() {
+        const globalStore = useGlobalStore();
+        return { globalStore };
+    },
+    created() {
+        document.title = "Topico - Explore";
+        this.globalStore.setShowWaves(true);
+        this.globalStore.setWaterLevel(296.5);
+    },
 };
 </script>
 

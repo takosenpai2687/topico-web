@@ -27,7 +27,7 @@ import TopicoCommunityTag from "@/components/common/CommunityTag.vue";
 import CircleButton from "@/components/common/CircleButton.vue";
 import TopicoTitleCard from "@/components/common/TopicoTitleCard.vue";
 import TopicoButton from "@/components/common/TopicoButton.vue";
-import { useHomeStore } from "@/stores/home";
+import useHomeStore from "@/stores/home";
 
 export default {
     components: {

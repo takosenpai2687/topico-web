@@ -1,5 +1,4 @@
 <template>
-    <div class="pink-bg"></div>
     <div class="flex flex-row">
         <div class="content w-2/3">
             <FollowingCard />
@@ -17,13 +16,20 @@ import RecommendedCard from "@/components/home/RecommendedCard.vue";
 import MyInfoCard from "@/components/home/MyInfoCard.vue";
 
 import { getFollowingComms, getRecommendedComms } from "@/services/userService";
-import { useHomeStore } from "@/stores/home";
+import useHomeStore from "@/stores/home";
+import useGlobalStore from "@/stores/global";
 
 export default {
     components: { FollowingCard, RecommendedCard, MyInfoCard },
     setup() {
         const homeStore = useHomeStore();
-        return { homeStore };
+        const globalStore = useGlobalStore();
+        return { homeStore, globalStore };
+    },
+    created() {
+        document.title = "Topico - Home";
+        this.globalStore.setShowWaves(true);
+        this.globalStore.setWaterLevel(296.5);
     },
     mounted() {
         getFollowingComms().then((data) => {
@@ -33,27 +39,7 @@ export default {
             this.homeStore.setRecommendedComms(data);
         });
     },
-    created() {
-        document.title = "Topico - Home";
-    },
 };
 </script>
 
-<style lang="scss" scoped>
-@import "@/styles/theme";
-.flex {
-    .pink-bg {
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        width: 100%;
-        height: 296.5px;
-        background-color: $primaryColor;
-        z-index: 0;
-    }
-    > * {
-        z-index: 1;
-    }
-}
-</style>
+<style lang="scss" scoped></style>
