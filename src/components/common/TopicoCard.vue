@@ -1,6 +1,6 @@
 <template>
     <div class="card-wrapper p-2">
-        <div class="card px-4 p-2"><slot /></div>
+        <div class="card px-4 p-2" ref="card"><slot /></div>
     </div>
 </template>
 
