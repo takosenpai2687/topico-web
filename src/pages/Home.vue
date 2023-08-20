@@ -33,6 +33,9 @@ export default {
             this.homeStore.setRecommendedComms(data);
         });
     },
+    created() {
+        document.title = "Topico - Home";
+    },
 };
 </script>
 

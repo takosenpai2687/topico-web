@@ -17,6 +17,7 @@
             class="mx-auto mt-2 -mb-2"
             :icon="`fa-solid ${expanded ? 'fa-angle-up' : 'fa-angle-down'}`"
             @click="() => (expanded = !expanded)"
+            v-if="showMore"
         />
     </TopicoTitleCard>
 </template>
@@ -40,7 +41,29 @@ export default {
         return { homeStore };
     },
     data() {
-        return { expanded: false };
+        return { expanded: false, isWide: window.innerWidth >= 1600 };
+    },
+    computed: {
+        showMore: function () {
+            const showMoreWide: boolean =
+                this.isWide && this.homeStore.followingComms.length > 4;
+            const showMoreNarrow: boolean =
+                !this.isWide && this.homeStore.followingComms.length > 3;
+            return showMoreWide || showMoreNarrow;
+        },
+    },
+    methods: {
+        onResize() {
+            this.isWide = window.innerWidth >= 1600;
+        },
+    },
+    created() {
+        this.$nextTick(() => {
+            window.addEventListener("resize", this.onResize);
+        });
+    },
+    beforeDestroy() {
+        window.removeEventListener("resize", this.onResize);
     },
 };
 </script>
