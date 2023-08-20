@@ -1,5 +1,5 @@
 <template>
-    <button class="btn-topico py-2 px-6">
+    <button class="btn-topico py-1 px-4">
         <slot />
     </button>
 </template>
@@ -23,7 +23,8 @@ export default {
     &:hover {
         background-color: $pink700;
         cursor: pointer;
-        transform: scale(1.02);
+        transform: scale(1.05);
+        color: #fcfcfc;
     }
     transition: all 0.16s ease-out;
 }

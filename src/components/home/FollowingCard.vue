@@ -4,7 +4,7 @@
         <div
             :class="`${
                 expanded ? 'overflow-y-visible' : 'max-h-16 overflow-y-hidden'
-            } pr-2`"
+            } pr-2  mt-1`"
         >
             <div class="grid gap-4 p-1">
                 <TopicoCommunityTag
@@ -73,6 +73,8 @@ export default {
     position: absolute;
     top: 1em;
     right: 1em;
+    font-size: 0.95em;
+    user-select: none;
 }
 
 @media screen and (max-width: 1600px) {

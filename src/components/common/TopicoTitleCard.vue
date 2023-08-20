@@ -1,16 +1,39 @@
 <template>
     <div class="card-wrapper p-2">
-        <div class="card px-4 p-1">
+        <div class="card px-4 p-2" ref="card">
             <h2 class="card-heading" v-if="title">{{ title }}</h2>
-            <div class="py-4"><slot /></div>
+            <div class="card-content py-4"><slot /></div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
+import { gsap } from "gsap";
 export default {
     props: {
         title: { type: String, required: false },
+    },
+    mounted() {
+        this.animateCard();
+    },
+    methods: {
+        animateCard() {
+            gsap.fromTo(
+                this.$refs.card!,
+                {
+                    scaleX: 1,
+                    scaleY: 1,
+                },
+                {
+                    duration: 0.1618,
+                    scaleX: 0.95,
+                    scaleY: 1.05,
+                    repeat: 1,
+                    yoyo: true,
+                    ease: "power2.inOut",
+                }
+            );
+        },
     },
 };
 </script>
@@ -21,6 +44,7 @@ export default {
     .card {
         width: 100%;
         @include card-shadow-rounded;
+
         .card-heading {
             font-weight: bolder;
             font-size: 1.4em;

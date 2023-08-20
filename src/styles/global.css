@@ -1,4 +1,4 @@
-@import "../node_modules/@fontsource/roboto/index.css";
+@import "@fontsource/roboto/index.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,6 +7,7 @@ html {
     box-sizing: border-box;
     font-size: 16px;
     font-family: "Roboto";
+    cursor: url("/img/genshin-cursor.webp"), auto;
 }
 
 html,

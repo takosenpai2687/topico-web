@@ -1,6 +1,8 @@
 <template>
     <TopicoTitleCard class="info-card" title="# My Info">
-        <div class="avatar"><img :src="user.avatarUrl" /></div>
+        <div class="avatar">
+            <img :src="user.avatarUrl" :draggable="false" />
+        </div>
         <p class="nickName">{{ user.nickName }}</p>
     </TopicoTitleCard>
 </template>
@@ -29,6 +31,7 @@ export default {
             height: 64px;
             border-radius: 32px;
             margin: 0 auto;
+            user-select: none;
         }
     }
 

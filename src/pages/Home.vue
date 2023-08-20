@@ -3,6 +3,7 @@
         <div class="content w-2/3">
             <FollowingCard />
             <RecommendedCard />
+            <SectionHeader class="px-4 py-1"># My Posts</SectionHeader>
         </div>
         <div class="content w-1/3">
             <MyInfoCard />
@@ -18,9 +19,10 @@ import MyInfoCard from "@/components/home/MyInfoCard.vue";
 import { getFollowingComms, getRecommendedComms } from "@/services/userService";
 import useHomeStore from "@/stores/home";
 import useGlobalStore from "@/stores/global";
+import SectionHeader from "@/components/common/SectionHeader.vue";
 
 export default {
-    components: { FollowingCard, RecommendedCard, MyInfoCard },
+    components: { FollowingCard, RecommendedCard, MyInfoCard, SectionHeader },
     setup() {
         const homeStore = useHomeStore();
         const globalStore = useGlobalStore();
