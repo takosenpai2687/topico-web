@@ -1,6 +1,6 @@
 <template>
     <div v-if="user" class="wrapper w-full h-full flex flex-row relative">
-        <topico-nav-bar class="topico-nav h-full z-10" />
+        <topico-nav-bar class="topico-nav h-full" />
         <main class="content h-full p-4 z-10">
             <router-view></router-view>
         </main>
@@ -40,6 +40,7 @@ export default defineComponent({
     background-color: #fcfcfc;
     .topico-nav {
         min-width: 240px;
+        z-index: 999;
     }
     .content {
         width: 100vw;
