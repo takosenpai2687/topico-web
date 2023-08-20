@@ -1,27 +1,31 @@
 <template>
-    <div class="flex flex-row justify-center align-middle gap-1">
+    <div class="flex flex-row justify-center items-center gap-1">
         <img
-            :src="avatarUrl"
+            :src="user.avatar"
             :alt="profileAlt"
             class="w-10 h-10 rounded-3xl"
             :draggable="false"
         />
-        <span class="nickname">{{ nickName }}</span>
+        <span class="nickname">{{ user.nickName }}</span>
     </div>
 </template>
 
 <script lang="ts">
+import { PropType } from "vue";
+
 export default {
     props: {
-        avatarUrl: { type: String, required: true },
-        nickName: { type: String, required: true },
+        user: {
+            type: Object as PropType<User>,
+            required: true,
+        },
     },
     data() {
         return {};
     },
     computed: {
         profileAlt: function () {
-            return this.nickName.charAt(0) ?? "";
+            return (this.user.nickName ?? "").charAt(0);
         },
     },
 };

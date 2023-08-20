@@ -2,16 +2,16 @@
     {
         "id": 1,
         "name": "Genshin Impact",
-        "avatarUrl": "/img/genshin.png"
+        "avatar": "/img/genshin.png"
     },
     {
         "id": 2,
         "name": "Cat",
-        "avatarUrl": "/img/test-avatar.gif"
+        "avatar": "/img/test-avatar.gif"
     },
     {
         "id": 1,
         "name": "Genshin Impact",
-        "avatarUrl": "/img/genshin.png"
+        "avatar": "/img/genshin.png"
     }
 ]

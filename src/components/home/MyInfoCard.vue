@@ -1,7 +1,7 @@
 <template>
     <TopicoTitleCard class="info-card" title="# My Info">
         <div class="avatar">
-            <img :src="user.avatarUrl" :draggable="false" />
+            <img :src="user.avatar" :draggable="false" />
         </div>
         <p class="nickName">{{ user.nickName }}</p>
     </TopicoTitleCard>

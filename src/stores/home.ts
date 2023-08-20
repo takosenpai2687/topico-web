@@ -5,6 +5,7 @@ const useHomeStore = defineStore("home", {
         return {
             followingComms: [] as Community[],
             recommendedComms: [] as Community[],
+            myPosts: [] as Post[],
         };
     },
     actions: {
@@ -13,6 +14,9 @@ const useHomeStore = defineStore("home", {
         },
         setRecommendedComms(comms: Community[]) {
             this.recommendedComms = comms;
+        },
+        setMyPosts(posts: Post[]) {
+            this.myPosts = posts;
         },
     },
 });

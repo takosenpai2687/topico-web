@@ -1,7 +1,7 @@
 <template>
     <div class="tag p-2">
         <img
-            :src="community.avatarUrl"
+            :src="community.avatar"
             :alt="community.name.charAt(0).toLocaleUpperCase()"
             :draggable="false"
         />

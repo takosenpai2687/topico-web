@@ -13,10 +13,7 @@
             />
         </div>
         <div class="user-row">
-            <UserNameAvatar
-                :avatarUrl="user.avatarUrl"
-                :nickName="user.nickName"
-            />
+            <UserNameAvatar :user="user" />
         </div>
     </div>
 </template>
@@ -85,7 +82,7 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
     position: fixed;
 
     .logo {

@@ -1,5 +1,6 @@
 {
-    "userName": "username123",
+    "id": 1,
+    "email": "afafa@gmail.com",
     "nickName": "Tako Senpai",
-    "avatarUrl": "/img/test-avatar.gif"
+    "avatar": "/img/test-avatar.gif"
 }

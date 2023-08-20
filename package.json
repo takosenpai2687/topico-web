@@ -23,6 +23,8 @@
         "@fortawesome/free-solid-svg-icons": "^6.4.2",
         "@fortawesome/vue-fontawesome": "^3.0.3",
         "axios": "^1.4.0",
+        "bcrypt": "^5.1.1",
+        "dayjs": "^1.11.9",
         "gsap": "^3.12.2",
         "pinia": "^2.1.6",
         "v-wave": "^1.5.1",
