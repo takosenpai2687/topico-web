@@ -1,0 +1,16 @@
+[build]
+command = 'vue-tsc && vite build'
+functions = 'functions'
+publish = 'dist'
+
+[functions]
+  node_bundler = "esbuild"
+
+[dev] 
+  framework = "vite"
+  command = "npm run dev"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
