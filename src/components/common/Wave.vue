@@ -27,7 +27,7 @@ export default defineComponent({
             stepSize: 0,
             waterLevel: 0,
             targetLevel: 0,
-            debouncedOnResize: debounce(this.onResize, 100),
+            debouncedOnResize: debounce(this.onResize as any, 100),
         };
     },
     mounted() {
