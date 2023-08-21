@@ -4,35 +4,41 @@
 
 <script lang="ts">
 import useGlobalStore from "@/stores/global";
+import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
+import { debounce } from "lodash";
 
 const FPS: number = 60;
 const STEP_SIZE: number = 30;
+const TRANSITION_TIME_MS: number = 160;
+const INTERVAL_MS: number = 1000 / FPS;
 
 export default defineComponent({
     setup() {
         const globalStore = useGlobalStore();
-        return { globalStore };
+        const { waterLevel: storeWaterLevel } = storeToRefs(globalStore);
+        return { globalStore, storeWaterLevel };
     },
     data() {
         return {
             ctx: null as CanvasRenderingContext2D | null,
             time: 0,
+            transition: false,
+            stepSize: 0,
+            waterLevel: 0,
+            targetLevel: 0,
+            debouncedOnResize: debounce(this.onResize, 100),
         };
-    },
-    computed: {
-        waterLevel: function () {
-            return this.globalStore.waterLevel;
-        },
     },
     mounted() {
         this.initCanvas();
         this.$nextTick(() => {
-            window.addEventListener("resize", this.onResize);
+            window.addEventListener("resize", this.debouncedOnResize);
         });
+        this.onWaterChange(0, this.storeWaterLevel);
     },
     beforeDestroy() {
-        window.removeEventListener("resize", this.onResize);
+        window.removeEventListener("resize", this.debouncedOnResize);
     },
     methods: {
         initCanvas() {
@@ -62,12 +68,26 @@ export default defineComponent({
             this.renderWave(this.time + 10, 0.2);
             setTimeout(() => {
                 requestAnimationFrame(this.render);
-            }, 1000 / FPS);
+            }, INTERVAL_MS);
         },
         renderWave(t: number, opacity: number) {
             const { ctx } = this;
             if (!ctx) return;
             const width = ctx.canvas.width;
+
+            // Transition
+            if (this.transition) {
+                this.waterLevel += this.stepSize;
+            }
+
+            if (
+                Math.abs(this.waterLevel - this.targetLevel) <
+                Math.abs(this.stepSize * 1.5)
+            ) {
+                this.transition = false;
+                this.targetLevel = 0;
+                this.stepSize = 0;
+            }
 
             ctx.beginPath();
             ctx.moveTo(0, this.waterLevel);
@@ -82,6 +102,17 @@ export default defineComponent({
 
             ctx.fillStyle = `rgba(251, 114, 153, ${opacity})`;
             ctx.fill();
+        },
+        onWaterChange(oldValue: number, newValue: number) {
+            this.transition = true;
+            this.targetLevel = newValue;
+            this.stepSize =
+                (newValue - oldValue) / (TRANSITION_TIME_MS / INTERVAL_MS);
+        },
+    },
+    watch: {
+        storeWaterLevel(newValue, oldValue) {
+            this.onWaterChange(oldValue, newValue);
         },
     },
 });
