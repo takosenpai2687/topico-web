@@ -1,8 +1,4 @@
 export const getTimeDiff = (dateFrom: Date, dateTo: Date): string => {
-    console.log({
-        dateFrom,
-        dateTo,
-    });
     // Calculate the time difference in milliseconds
     const timeDifference = dateTo.valueOf() - dateFrom.valueOf();
 

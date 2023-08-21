@@ -40,7 +40,7 @@ export default {
     created() {
         document.title = "Topico - Home";
         this.globalStore.setShowWaves(true);
-        this.globalStore.setWaterLevel(296.5);
+        this.globalStore.setWaterLevel(312.47);
     },
     mounted() {
         getFollowingComms().then((data) => {
