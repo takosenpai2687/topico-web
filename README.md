@@ -29,3 +29,8 @@ https://topico-prod.netlify.app/
 
 - `npm run dev`
 
+## 代码提交规范
+
+永远从 `master` 上新建分支，在新分支上开发（vscode左下角，GitHub Desktop都有显示）。
+
+新分支自测无误后提交 PR 到 `master` 分支。
