@@ -7,6 +7,12 @@
 <script lang="ts">
 import { gsap } from "gsap";
 export default {
+    props: {
+        delay: {
+            type: Number,
+            required: false,
+        },
+    },
     mounted() {
         this.animateCard();
     },
@@ -25,6 +31,7 @@ export default {
                     repeat: 1,
                     yoyo: true,
                     ease: "power2.inOut",
+                    delay: this.delay ?? 0,
                 }
             );
         },

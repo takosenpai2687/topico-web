@@ -1,5 +1,5 @@
 <template>
-    <TopicoCard>
+    <TopicoCard :delay="delay">
         <div class="flex flex-row justify-between items-center">
             <h2 class="title text-2xl">{{ post.title }}</h2>
             <p class="subtitle">
@@ -32,6 +32,10 @@ export default {
         post: {
             type: Object as PropType<Post>,
             required: true,
+        },
+        delay: {
+            type: Number,
+            required: false,
         },
     },
     computed: {

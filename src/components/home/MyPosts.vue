@@ -1,6 +1,10 @@
 <template>
     <div>
-        <TopicoPostCard v-for="post in homeStore.myPosts" :post="post" />
+        <TopicoPostCard
+            v-for="(post, i) in homeStore.myPosts"
+            :post="post"
+            :delay="i * 0.1"
+        />
     </div>
 </template>
 
