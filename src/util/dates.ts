@@ -11,11 +11,17 @@ export const getTimeDiff = (dateFrom: Date, dateTo: Date): string => {
     let formattedTimeDifference: string;
 
     if (minutes < 60) {
-        formattedTimeDifference = `${minutes} minute${minutes > 1 ? "s" : ""}`;
+        formattedTimeDifference = `${minutes === 1 ? "a" : minutes} minute${
+            minutes > 1 ? "s" : ""
+        }`;
     } else if (hours < 24) {
-        formattedTimeDifference = `${hours} hour${hours > 1 ? "s" : ""}`;
+        formattedTimeDifference = `${hours === 1 ? "an" : hours} hour${
+            hours > 1 ? "s" : ""
+        }`;
     } else {
-        formattedTimeDifference = `${days} day${days > 1 ? "s" : ""}`;
+        formattedTimeDifference = `${days === 1 ? "a" : days} day${
+            days > 1 ? "s" : ""
+        }`;
     }
     return formattedTimeDifference;
 };
