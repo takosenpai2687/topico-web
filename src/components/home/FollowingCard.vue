@@ -3,7 +3,7 @@
         <TopicoButton class="btn-checkin">Check in for all</TopicoButton>
         <div
             :class="`${
-                expanded ? 'overflow-y-visible' : 'max-h-16 overflow-y-hidden'
+                expanded ? 'overflow-y-visible' : 'max-h-14 overflow-y-hidden'
             } pr-2  mt-1`"
         >
             <div class="grid gap-4 p-1">
