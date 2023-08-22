@@ -1,6 +1,6 @@
 <template>
     <div>
-        <SectionHeader class="px-4 py-1 gap-4">
+        <SectionHeader class="px-4 py-1 gap-4 select-none">
             <span># My Posts</span>
             <font-awesome-icon
                 :icon="`fa-solid ${

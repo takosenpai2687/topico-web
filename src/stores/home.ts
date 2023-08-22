@@ -6,7 +6,7 @@ const useHomeStore = defineStore("home", {
             followingComms: [] as Community[],
             recommendedComms: [] as Community[],
             myPosts: [] as Post[],
-            showSpoilers: false,
+            showSpoilers: localStorage.getItem("showSpoilers") === "true",
         };
     },
     actions: {
@@ -21,9 +21,11 @@ const useHomeStore = defineStore("home", {
         },
         setShowSpoilers(show: boolean) {
             this.showSpoilers = show;
+            localStorage.setItem("showSpoilers", show);
         },
         toggleShowSpoilers() {
             this.showSpoilers = !this.showSpoilers;
+            localStorage.setItem("showSpoilers", this.showSpoilers);
         },
     },
 });
