@@ -21,11 +21,14 @@ const useHomeStore = defineStore("home", {
         },
         setShowSpoilers(show: boolean) {
             this.showSpoilers = show;
-            localStorage.setItem("showSpoilers", show);
+            localStorage.setItem("showSpoilers", JSON.stringify(show));
         },
         toggleShowSpoilers() {
             this.showSpoilers = !this.showSpoilers;
-            localStorage.setItem("showSpoilers", this.showSpoilers);
+            localStorage.setItem(
+                "showSpoilers",
+                JSON.stringify(this.showSpoilers)
+            );
         },
     },
 });
