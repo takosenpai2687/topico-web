@@ -12,6 +12,8 @@ import {
     faThumbsDown,
     faComments,
     faShareNodes,
+    faEye,
+    faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 
@@ -24,7 +26,9 @@ library.add(
     faThumbsUp,
     faThumbsDown,
     faComments,
-    faShareNodes
+    faShareNodes,
+    faEye,
+    faEyeSlash
 );
 
 export default FontAwesomeIcon;

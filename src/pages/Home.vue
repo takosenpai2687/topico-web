@@ -3,7 +3,6 @@
         <div class="content w-2/3">
             <FollowingCard v-if="homeStore.followingComms.length" />
             <RecommendedCard v-if="homeStore.recommendedComms.length" />
-            <SectionHeader class="px-4 py-1"># My Posts</SectionHeader>
             <MyPosts />
         </div>
         <div class="content w-1/3">
@@ -20,7 +19,6 @@ import MyInfoCard from "@/components/home/MyInfoCard.vue";
 import { getFollowingComms, getRecommendedComms } from "@/services/userService";
 import useHomeStore from "@/stores/home";
 import useGlobalStore from "@/stores/global";
-import SectionHeader from "@/components/common/SectionHeader.vue";
 import MyPosts from "@/components/home/MyPosts.vue";
 import { getMyPosts } from "@/services/userService";
 
@@ -29,7 +27,6 @@ export default {
         FollowingCard,
         RecommendedCard,
         MyInfoCard,
-        SectionHeader,
         MyPosts,
     },
     setup() {

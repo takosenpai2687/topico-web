@@ -22,10 +22,7 @@
         "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         "spoiler": true,
         "images": [
-            "/img/test-avatar.gif",
-            "/img/test-avatar.gif",
-            "/img/test-avatar.gif",
-            "/img/test-avatar.gif"
+            "/img/klee.gif"
         ],
         "likes": 996,
         "dislikes": 443,
