@@ -1,8 +1,8 @@
 <template>
     <div class="flex flex-row">
         <div class="content w-2/3">
-            <FollowingCard />
-            <RecommendedCard />
+            <FollowingCard v-if="homeStore.followingComms.length" />
+            <RecommendedCard v-if="homeStore.recommendedComms.length" />
             <SectionHeader class="px-4 py-1"># My Posts</SectionHeader>
             <MyPosts />
         </div>

@@ -1,5 +1,5 @@
 <template>
-    <canvas v-if="globalStore.showWaves" ref="canvas" class="wave-box" />
+    <canvas ref="canvas" class="wave-box" />
 </template>
 
 <script lang="ts">

@@ -5,58 +5,18 @@
         "avatar": "/img/genshin.png"
     },
     {
-        "id": 2,
-        "name": "Cat",
-        "avatar": "/img/test-avatar.gif"
-    },
-    {
         "id": 1,
-        "name": "Genshin Impact",
-        "avatar": "/img/genshin.png"
+        "name": "Demon Slayer",
+        "avatar": "/img/demon.png"
     },
     {
-        "id": 2,
+        "id": 3,
         "name": "Cat",
         "avatar": "/img/test-avatar.gif"
     },
     {
-        "id": 1,
-        "name": "Genshin Impact",
-        "avatar": "/img/genshin.png"
-    },
-    {
-        "id": 2,
-        "name": "Cat",
-        "avatar": "/img/test-avatar.gif"
-    },
-    {
-        "id": 1,
-        "name": "Genshin Impact",
-        "avatar": "/img/genshin.png"
-    },
-    {
-        "id": 2,
-        "name": "Cat",
-        "avatar": "/img/test-avatar.gif"
-    },
-    {
-        "id": 1,
-        "name": "Genshin Impact",
-        "avatar": "/img/genshin.png"
-    },
-    {
-        "id": 2,
-        "name": "Cat",
-        "avatar": "/img/test-avatar.gif"
-    },
-    {
-        "id": 1,
-        "name": "Genshin Impact",
-        "avatar": "/img/genshin.png"
-    },
-    {
-        "id": 2,
-        "name": "Cat",
-        "avatar": "/img/test-avatar.gif"
+        "id": 3,
+        "name": "CS:GO",
+        "avatar": "/img/csgo.png"
     }
 ]

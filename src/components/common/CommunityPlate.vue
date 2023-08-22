@@ -1,17 +1,24 @@
 <template>
-    <div class="tag p-2">
+    <RouterLink :to="`/community/${community.id}`" class="tag p-1">
         <img
             :src="community.avatar"
             :alt="community.name.charAt(0).toLocaleUpperCase()"
             :draggable="false"
         />
-        <p>{{ community.name }}</p>
-    </div>
+        <span>{{ community.name }}</span>
+    </RouterLink>
 </template>
 
 <script lang="ts">
+import { PropType } from "vue";
+
 export default {
-    props: ["community"],
+    props: {
+        community: {
+            type: Object as PropType<Community>,
+            required: true,
+        },
+    },
 };
 </script>
 
@@ -24,30 +31,32 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    user-select: none;
     transition: all 0.16s ease-out;
 
     img {
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
+        width: 3em;
+        height: 3em;
+        border-radius: 0.25em;
+        user-select: none;
     }
 
-    p {
+    span {
         display: block;
-        width: 160px;
+        width: 10em;
         font-size: 0.9em;
         line-height: 1.2em;
         font-weight: bold;
         margin-left: 0.5em;
         overflow: hidden;
         text-overflow: ellipsis;
+        text-underline-offset: 8px;
     }
 
     &:hover {
         cursor: pointer;
-        p {
+        span {
             color: #fff;
+            text-decoration: underline !important;
         }
         background-color: $primaryColor;
     }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TopicoPostCard
+        <MyPostCard
             v-for="(post, i) in homeStore.myPosts"
             :post="post"
             :delay="i * 0.1"
@@ -9,12 +9,12 @@
 </template>
 
 <script lang="ts">
-import TopicoPostCard from "@/components/common/TopicoPostCard.vue";
+import MyPostCard from "@/components/common/MyPostCard.vue";
 import useHomeStore from "@/stores/home";
 
 export default {
     components: {
-        TopicoPostCard,
+        MyPostCard,
     },
     setup() {
         const homeStore = useHomeStore();

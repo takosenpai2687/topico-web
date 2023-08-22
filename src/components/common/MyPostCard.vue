@@ -1,0 +1,132 @@
+<template>
+    <TopicoCard :delay="delay" class="card-wrapper">
+        <div class="flex flex-row justify-between items-center">
+            <RouterLink
+                :to="`/community/${post.community.id}/post/${post.id}`"
+                class="title text-2xl"
+                >{{ post.title }}</RouterLink
+            >
+            <p class="subtitle">
+                {{ `Posted ${timeAgo} ago` }}
+            </p>
+        </div>
+        <p>
+            {{ post.content }}
+        </p>
+        <div class="img-row py-2">
+            <div class="img-container" v-for="url in post.images">
+                <img
+                    :src="url"
+                    alt=""
+                    :draggable="false"
+                    :class="`${post.spoiler ? 'spoiler' : ''}`"
+                />
+            </div>
+        </div>
+        <div>
+            <PostButtonsTray
+                :likes="post.likes"
+                :dislikes="post.dislikes"
+                :comments="post.comments"
+            />
+        </div>
+    </TopicoCard>
+</template>
+
+<script lang="ts">
+import { PropType } from "vue";
+import TopicoCard from "@/components/common/TopicoCard.vue";
+import PostButtonsTray from "@/components/common/PostButtonsTray.vue";
+import { getTimeDiff } from "@/util/dates";
+
+export default {
+    components: { TopicoCard, PostButtonsTray },
+    props: {
+        post: {
+            type: Object as PropType<Post>,
+            required: true,
+        },
+        delay: {
+            type: Number,
+            required: false,
+        },
+    },
+    computed: {
+        timeAgo() {
+            return getTimeDiff(this.post.ctime, new Date());
+        },
+    },
+};
+</script>
+
+<style scoped lang="scss">
+.card-wrapper {
+    transition: all 0.16s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+
+    &:hover {
+        transform: scale(1.01);
+        cursor: pointer;
+        a.title {
+            text-decoration: underline;
+        }
+    }
+    a.title {
+        font-size: 1.4em;
+        line-height: 1.8em;
+    }
+    .subtitle {
+        font-style: italic;
+    }
+    .img-row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.5em;
+        .img-container {
+            width: 25%;
+            border-radius: 4px;
+            position: relative;
+            transition: all 0.2s ease-out;
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.02);
+                &::before {
+                    opacity: 0;
+                }
+            }
+            &::before {
+                content: "Spoiler";
+                opacity: 1;
+                border-radius: 4px;
+                position: absolute;
+                display: block;
+                top: 50%;
+                transition: all 0.2s ease-out;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 101%;
+                height: 101%;
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                background: rgba(255, 255, 255, 0.2);
+                color: white;
+                font-size: 1.2em;
+                text-align: center;
+                line-height: 1.5;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+            }
+            img {
+                height: 100%;
+                border-radius: 4px;
+            }
+        }
+    }
+}
+</style>
