@@ -14,7 +14,7 @@
             </div>
         </div>
         <CircleButton
-            :class="`${expanded? 'rotate-180': ''} mx-auto mt-2 -mb-2`"
+            :class="`${expanded ? 'rotate-180' : ''} mx-auto mt-2 -mb-2`"
             icon="fa-solid fa-angle-down"
             @click="() => (expanded = !expanded)"
             v-if="showMore"

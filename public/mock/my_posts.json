@@ -3,8 +3,8 @@
         "id": 123,
         "community": {
             "id": 1,
-            "name": "community1",
-            "description": "afafafa"
+            "name": "Genshin Impact",
+            "avatar": "/img/genshin.png"
         },
         "author": {
             "id": 1,
@@ -22,6 +22,43 @@
         "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         "spoiler": true,
         "images": [
+            "/img/klee.gif",
+            "/img/klee.gif",
+            "/img/klee.gif",
+            "/img/klee.gif"
+        ],
+        "likes": 996,
+        "dislikes": 443,
+        "comments": 233,
+        "ctime": "2023-08-21 00:00:05",
+        "utime": "2023-08-21 00:01:03"
+    },
+    {
+        "id": 123,
+        "community": {
+            "id": 1,
+            "name": "Genshin Impact",
+            "avatar": "/img/genshin.png"
+        },
+        "author": {
+            "id": 1,
+            "email": "afafa@gmail.com",
+            "nickName": "Tako Senpai",
+            "avatar": "/img/test-avatar.gif"
+        },
+        "tags": [
+            "tag1",
+            "tag2",
+            "tag3",
+            "tag4"
+        ],
+        "title": "This is a title",
+        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "spoiler": false,
+        "images": [
+            "/img/klee.gif",
+            "/img/klee.gif",
+            "/img/klee.gif",
             "/img/klee.gif"
         ],
         "likes": 996,

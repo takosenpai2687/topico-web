@@ -1,11 +1,26 @@
 <template>
     <TopicoCard :delay="delay" class="card-wrapper">
         <div class="flex flex-row justify-between items-center">
-            <RouterLink
-                :to="`/community/${post.community.id}/post/${post.id}`"
-                class="title text-2xl"
-                >{{ post.title }}</RouterLink
-            >
+            <div class="flex flex-row justify-start items-center gap-2">
+                <!-- Community Icon-->
+                <img
+                    class="community-avatar"
+                    :src="post.community.avatar"
+                    alt=""
+                />
+                <!-- Post Title -->
+                <RouterLink
+                    :to="`/community/${post.community.id}/post/${post.id}`"
+                    class="title text-2xl"
+                    >{{ post.title }}</RouterLink
+                >
+                <!-- Tags -->
+                <div
+                    class="tags-row flex flex-row justify-start items-center gap-1"
+                >
+                    <Tag v-for="tag in post.tags">{{ tag }}</Tag>
+                </div>
+            </div>
             <p class="subtitle">
                 {{ `Posted ${timeAgo} ago` }}
             </p>
@@ -38,11 +53,12 @@
 import { PropType } from "vue";
 import TopicoCard from "@/components/common/TopicoCard.vue";
 import PostButtonsTray from "@/components/common/PostButtonsTray.vue";
+import Tag from "@/components/common/Tag.vue";
 import { getTimeDiff } from "@/util/dates";
 import useHomeStore from "@/stores/home";
 
 export default {
-    components: { TopicoCard, PostButtonsTray },
+    components: { TopicoCard, PostButtonsTray, Tag },
     setup() {
         const homeStore = useHomeStore();
         return { homeStore };
@@ -136,6 +152,12 @@ export default {
                 border-radius: 4px;
             }
         }
+    }
+
+    .community-avatar {
+        height: 2em;
+        width: 2em;
+        border-radius: 1em;
     }
 }
 </style>

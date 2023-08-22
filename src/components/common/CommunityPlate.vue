@@ -6,6 +6,7 @@
             :draggable="false"
         />
         <span>{{ community.name }}</span>
+        <div v-if="community.level" class="level">{{ community.level }}</div>
     </RouterLink>
 </template>
 
@@ -32,10 +33,11 @@ export default {
     align-items: center;
     justify-content: flex-start;
     transition: all 0.16s ease-out;
+    position: relative;
 
     img {
-        width: 3em;
-        height: 3em;
+        width: 2em;
+        height: 2em;
         border-radius: 0.25em;
         user-select: none;
     }
@@ -43,7 +45,7 @@ export default {
     span {
         display: block;
         width: 10em;
-        font-size: 0.9em;
+        font-size: 0.8em;
         line-height: 1.2em;
         font-weight: bold;
         margin-left: 0.5em;
@@ -59,6 +61,23 @@ export default {
             text-decoration: underline !important;
         }
         background-color: $primaryColor;
+    }
+
+    .level {
+        position: absolute;
+        width: 2em;
+        height: 2em;
+        border-radius: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.8em;
+        color: #fff;
+        background-color: $primaryColor;
+        font-weight: bold;
+        top: 50%;
+        right: 0.5em;
+        transform: translateY(-50%);
     }
 }
 </style>
