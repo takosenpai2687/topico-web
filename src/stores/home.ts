@@ -7,6 +7,7 @@ const useHomeStore = defineStore("home", {
             recommendedComms: [] as Community[],
             myPosts: [] as Post[],
             showSpoilers: localStorage.getItem("showSpoilers") === "true",
+            myComments: [] as TopicoComment[],
         };
     },
     actions: {
@@ -29,6 +30,9 @@ const useHomeStore = defineStore("home", {
                 "showSpoilers",
                 JSON.stringify(this.showSpoilers)
             );
+        },
+        setMyComments(comments: TopicoComment[]) {
+            this.myComments = comments;
         },
     },
 });

@@ -21,3 +21,13 @@ export const getMyPosts = async (): Promise<Post[]> => {
         }))
     );
 };
+
+export const getMyComments = async (): Promise<TopicoComment[]> => {
+    return await axios.get("/mock/my_comments.json").then((r) =>
+        r.data.map((comment: TopicoComment) => ({
+            ...comment,
+            ctime: new Date(comment.ctime),
+            utime: new Date(comment.utime),
+        }))
+    );
+};

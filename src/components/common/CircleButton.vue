@@ -1,6 +1,7 @@
 <template>
     <div class="btn">
-        <font-awesome-icon :icon="icon" />
+        <font-awesome-icon v-if="icon" :icon="icon" />
+        <slot />
     </div>
 </template>
 
@@ -8,7 +9,7 @@
 export default {
     props: {
         icon: {
-            required: true,
+            required: false,
             type: String,
         },
     },
@@ -16,7 +17,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/theme.scss';
+@import "@/styles/theme.scss";
 .btn {
     width: 2.5em;
     height: 2.5em;
@@ -28,7 +29,7 @@ export default {
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
     border-radius: 1.25em;
     color: $primaryFontColor;
-    transition: .24s all ease-out;
+    transition: 0.24s all ease-out;
     &:hover {
         background-color: #eee;
         cursor: pointer;

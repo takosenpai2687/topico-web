@@ -16,6 +16,7 @@ export default {
 @import "@/styles/theme.scss";
 
 .btn-topico {
+    display: block;
     font-size: 1em;
     color: #fff;
     background-color: $primaryColor;

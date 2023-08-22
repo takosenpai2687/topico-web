@@ -1,7 +1,7 @@
 <template>
     <TopicoCard :delay="delay" class="card-wrapper">
         <div class="flex flex-row justify-between items-center">
-            <div class="flex flex-row justify-start items-center gap-2">
+            <div class="flex flex-row justify-start items-center gap-2 pb-2">
                 <!-- Community Icon-->
                 <img
                     class="community-avatar"
@@ -11,7 +11,7 @@
                 <!-- Post Title -->
                 <RouterLink
                     :to="`/community/${post.community.id}/post/${post.id}`"
-                    class="title text-2xl"
+                    class="text-xl"
                     >{{ post.title }}</RouterLink
                 >
                 <!-- Tags -->
@@ -41,9 +41,9 @@
         </div>
         <div>
             <PostButtonsTray
-                :likes="post.likes"
-                :dislikes="post.dislikes"
-                :comments="post.comments"
+                :likes="post.likes ?? 0"
+                :dislikes="post.dislikes ?? 0"
+                :comments="post.comments ?? 0"
             />
         </div>
     </TopicoCard>
@@ -84,20 +84,12 @@ export default {
 <style scoped lang="scss">
 .card-wrapper {
     transition: all 0.16s ease-out;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
 
     &:hover {
         transform: scale(1.01);
         a.title {
             text-decoration: underline;
         }
-    }
-    a.title {
-        font-size: 1.4em;
-        line-height: 1.8em;
     }
     .subtitle {
         font-style: italic;

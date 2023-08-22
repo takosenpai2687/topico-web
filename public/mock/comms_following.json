@@ -22,5 +22,53 @@
         "name": "Cat",
         "avatar": "/img/cat.gif",
         "level": 5
+    },
+    {
+        "id": 1,
+        "name": "Genshin Impact",
+        "avatar": "/img/genshin.png",
+        "level": 12
+    },
+    {
+        "id": 1,
+        "name": "Demon Slayer",
+        "avatar": "/img/demon.png",
+        "level": 11
+    },
+    {
+        "id": 3,
+        "name": "CS:GO",
+        "avatar": "/img/csgo.png",
+        "level": 7
+    },
+    {
+        "id": 4,
+        "name": "Cat",
+        "avatar": "/img/cat.gif",
+        "level": 5
+    },
+    {
+        "id": 1,
+        "name": "Genshin Impact",
+        "avatar": "/img/genshin.png",
+        "level": 12
+    },
+    {
+        "id": 1,
+        "name": "Demon Slayer",
+        "avatar": "/img/demon.png",
+        "level": 11
+    },
+    {
+        "id": 3,
+        "name": "CS:GO",
+        "avatar": "/img/csgo.png",
+        "level": 7
+    },
+    {
+        "id": 4,
+        "name": "Cat",
+        "avatar": "/img/cat.gif",
+        "level": 5
     }
 ]
