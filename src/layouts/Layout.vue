@@ -52,10 +52,10 @@ export default defineComponent({
 
 @media screen and (max-width: 1800px) {
     .topico-nav {
-        width: 20vw;
+        width: 20%;
     }
     .content {
-        padding-left: calc(20vw + 16px);
+        padding-left: calc(20% + 16px);
     }
 }
 
