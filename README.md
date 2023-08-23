@@ -29,6 +29,14 @@ https://topico-prod.netlify.app/
 
 - `npm run dev`
 
+### 4. VSCode 插件
+
+- Volar
+- Prettier
+- ESLint
+- JavaScript and TypeScript Nightly
+
+
 ## 代码提交规范
 
 永远从 `master` 上新建分支，在新分支上开发（vscode左下角，GitHub Desktop都有显示）。
