@@ -1,8 +1,8 @@
 <template>
     <div v-if="user" class="wrapper w-full h-full flex flex-row relative">
         <topico-nav-bar class="topico-nav h-full" />
-        <main class="content h-full p-4 z-10">
-            <router-view></router-view>
+        <main class="content-wrapper h-full p-4 z-10">
+            <div class="content"><router-view></router-view></div>
         </main>
         <wave v-if="globalStore.showWaves" class="z-0" />
     </div>
@@ -40,36 +40,46 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .wrapper {
-    max-width: 100vw;
-    min-width: 1200px;
     background-color: #fcfcfc;
     .topico-nav {
-        min-width: 240px;
+        position: fixed;
         z-index: 999;
+        min-width: 240px;
+        width: 15%;
     }
-    .content {
-        width: 100vw;
-        max-width: 1800px;
-        min-width: 1215px;
-        margin: auto;
-    }
-}
-
-@media screen and (max-width: 1800px) {
-    .topico-nav {
-        width: 20%;
-    }
-    .content {
-        padding-left: calc(20% + 16px);
+    .content-wrapper {
+        min-width: 1000px;
+        position: absolute;
+        .content {
+            margin: 0 auto;
+            width: 100%;
+            max-width: 75em;
+        }
     }
 }
 
-@media screen and (min-width: 1800px) {
-    .topico-nav {
-        width: 360px;
+// Small
+@media screen and (max-width: 1600px) {
+    .content-wrapper {
+        left: 240px;
+        width: calc(100% - 240px);
     }
-    .content {
-        padding-left: calc(360px + 16px);
+}
+
+// Medium
+@media screen and (min-width: 1600px) {
+    .content-wrapper {
+        left: 15%;
+        width: 85%;
+    }
+}
+
+// 1080P
+@media screen and (min-width: 1919px) {
+    .content-wrapper {
+        .content {
+            max-width: 1300px !important;
+        }
     }
 }
 </style>

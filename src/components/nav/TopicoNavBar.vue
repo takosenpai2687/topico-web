@@ -83,7 +83,6 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    position: fixed;
 
     .logo {
         height: 33%;

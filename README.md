@@ -20,25 +20,30 @@ https://topico-prod.netlify.app/
 
 ### 2. 安装依赖
 
-- `cd topico-web`
-- `npm ci`
+-   `cd topico-web`
+-   `npm ci`
 
 ### 3. 启动项目
 
-- （可选）在vscode中打开：`code .`
+-   （可选）在vscode中打开：`code .`
 
-- `npm run dev`
+-   `npm run dev`
 
 ### 4. VSCode 插件
 
-- Volar
-- Prettier
-- ESLint
-- JavaScript and TypeScript Nightly
-
+-   Volar
+-   Prettier
+-   ESLint
+-   JavaScript and TypeScript Nightly
 
 ## 代码提交规范
 
 永远从 `master` 上新建分支，在新分支上开发（vscode左下角，GitHub Desktop都有显示）。
 
 新分支自测无误后提交 PR 到 `master` 分支。
+
+## CSS
+
+样式永远采用 `em` 为基本单位。大屏下 `1em = 16px`, 小屏下 `1em = 14px`。
+
+只有 `box-shadow`, `border-radius`, `border` 可以用 `px`。

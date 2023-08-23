@@ -19,15 +19,15 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/theme.scss";
 .btn {
-    width: 2.5em;
-    height: 2.5em;
+    width: 2.2em;
+    height: 2.2em;
     display: flex;
     user-select: none;
     align-items: center;
     justify-content: center;
     background-color: #fff;
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 1.25em;
+    border-radius: 1.1em;
     color: $primaryFontColor;
     transition: 0.24s all ease-out;
     &:hover {
