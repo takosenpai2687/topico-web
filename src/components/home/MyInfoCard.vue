@@ -11,7 +11,7 @@
         <p class="nickName">{{ user.nickName }}</p>
         <p class="nickName">{{ user.nickName }}</p>
         <p class="nickName">{{ user.nickName }}</p>
-        <TopicoButton class="mx-auto px-8 py-2">Edit Profile</TopicoButton>
+        <TopicoButton class="mx-auto px-6 py-1">Edit Profile</TopicoButton>
     </TopicoTitleCard>
 </template>
 
@@ -36,16 +36,16 @@ export default {
 
     .avatar {
         img {
-            width: 64px;
-            height: 64px;
-            border-radius: 32px;
+            width: 4em;
+            height: 4em;
+            border-radius: 2em;
             margin: 0 auto;
             user-select: none;
         }
     }
 
     .nickName {
-        margin: 1em auto;
+        margin: .5em auto;
         text-align: center;
     }
 }
