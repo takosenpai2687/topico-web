@@ -1,13 +1,13 @@
 <template>
     <div class="flex flex-row">
         <div class="content w-2/3">
-            <FollowingCard />
-            <RecommendedCard />
-            <SectionHeader class="px-4 py-1"># My Posts</SectionHeader>
+            <FollowingCard v-if="homeStore.followingComms.length" />
+            <RecommendedCard v-if="homeStore.recommendedComms.length" />
             <MyPosts />
         </div>
         <div class="content w-1/3">
             <MyInfoCard />
+            <MyComments />
         </div>
     </div>
 </template>
@@ -16,11 +16,15 @@
 import FollowingCard from "@/components/home/FollowingCard.vue";
 import RecommendedCard from "@/components/home/RecommendedCard.vue";
 import MyInfoCard from "@/components/home/MyInfoCard.vue";
+import MyComments from "@/components/home/MyComments.vue";
 
-import { getFollowingComms, getRecommendedComms } from "@/services/userService";
+import {
+    getFollowingComms,
+    getMyComments,
+    getRecommendedComms,
+} from "@/services/userService";
 import useHomeStore from "@/stores/home";
 import useGlobalStore from "@/stores/global";
-import SectionHeader from "@/components/common/SectionHeader.vue";
 import MyPosts from "@/components/home/MyPosts.vue";
 import { getMyPosts } from "@/services/userService";
 
@@ -29,8 +33,8 @@ export default {
         FollowingCard,
         RecommendedCard,
         MyInfoCard,
-        SectionHeader,
         MyPosts,
+        MyComments,
     },
     setup() {
         const homeStore = useHomeStore();
@@ -51,6 +55,9 @@ export default {
         });
         getMyPosts().then((data) => {
             this.homeStore.setMyPosts(data);
+        });
+        getMyComments().then((data) => {
+            this.homeStore.setMyComments(data);
         });
     },
 };

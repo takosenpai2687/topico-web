@@ -3,4 +3,5 @@ declare type Community = {
     name: string;
     description?: string;
     avatar?: string;
+    level?: number;
 };

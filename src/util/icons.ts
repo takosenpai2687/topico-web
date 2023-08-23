@@ -8,9 +8,27 @@ import {
     faUser,
     faAngleDown,
     faAngleUp,
+    faThumbsUp,
+    faThumbsDown,
+    faComments,
+    faShareNodes,
+    faEye,
+    faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 
-library.add(faHouse, faMagnifyingGlass, faUser, faAngleDown, faAngleUp);
+library.add(
+    faHouse,
+    faMagnifyingGlass,
+    faUser,
+    faAngleDown,
+    faAngleUp,
+    faThumbsUp,
+    faThumbsDown,
+    faComments,
+    faShareNodes,
+    faEye,
+    faEyeSlash
+);
 
 export default FontAwesomeIcon;

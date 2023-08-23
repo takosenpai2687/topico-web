@@ -6,6 +6,8 @@ const useHomeStore = defineStore("home", {
             followingComms: [] as Community[],
             recommendedComms: [] as Community[],
             myPosts: [] as Post[],
+            showSpoilers: localStorage.getItem("showSpoilers") === "true",
+            myComments: [] as TopicoComment[],
         };
     },
     actions: {
@@ -17,6 +19,20 @@ const useHomeStore = defineStore("home", {
         },
         setMyPosts(posts: Post[]) {
             this.myPosts = posts;
+        },
+        setShowSpoilers(show: boolean) {
+            this.showSpoilers = show;
+            localStorage.setItem("showSpoilers", JSON.stringify(show));
+        },
+        toggleShowSpoilers() {
+            this.showSpoilers = !this.showSpoilers;
+            localStorage.setItem(
+                "showSpoilers",
+                JSON.stringify(this.showSpoilers)
+            );
+        },
+        setMyComments(comments: TopicoComment[]) {
+            this.myComments = comments;
         },
     },
 });

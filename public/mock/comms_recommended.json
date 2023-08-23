@@ -1,17 +1,17 @@
 [
     {
         "id": 1,
-        "name": "Genshin Impact",
-        "avatar": "/img/genshin.png"
+        "name": "Star Rail",
+        "avatar": "/img/star_rail.png"
     },
     {
         "id": 2,
-        "name": "Cat",
-        "avatar": "/img/test-avatar.gif"
+        "name": "League of Legends",
+        "avatar": "/img/lol.png"
     },
     {
         "id": 1,
-        "name": "Genshin Impact",
-        "avatar": "/img/genshin.png"
+        "name": "One Piece",
+        "avatar": "/img/luffy.jpg"
     }
 ]

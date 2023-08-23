@@ -4,15 +4,24 @@
             <img :src="user.avatar" :draggable="false" />
         </div>
         <p class="nickName">{{ user.nickName }}</p>
+        <p class="nickName">{{ user.nickName }}</p>
+        <p class="nickName">{{ user.nickName }}</p>
+        <p class="nickName">{{ user.nickName }}</p>
+        <p class="nickName">{{ user.nickName }}</p>
+        <p class="nickName">{{ user.nickName }}</p>
+        <p class="nickName">{{ user.nickName }}</p>
+        <p class="nickName">{{ user.nickName }}</p>
+        <TopicoButton class="mx-auto px-8 py-2">Edit Profile</TopicoButton>
     </TopicoTitleCard>
 </template>
 
 <script lang="ts">
 import { getUserFromLocalStorage } from "@/util/auth";
-import TopicoTitleCard from "../common/TopicoTitleCard.vue";
+import TopicoTitleCard from "@/components/common/TopicoTitleCard.vue";
+import TopicoButton from "@/components/common/TopicoButton.vue";
 
 export default {
-    components: { TopicoTitleCard },
+    components: { TopicoTitleCard, TopicoButton },
     computed: {
         user() {
             return getUserFromLocalStorage();

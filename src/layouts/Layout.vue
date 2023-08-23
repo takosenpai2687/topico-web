@@ -4,7 +4,7 @@
         <main class="content h-full p-4 z-10">
             <router-view></router-view>
         </main>
-        <wave class="z-0" />
+        <wave v-if="globalStore.showWaves" class="z-0" />
     </div>
 </template>
 
@@ -12,6 +12,7 @@
 import Wave from "@/components/common/Wave.vue";
 import TopicoNavBar from "@/components/nav/TopicoNavBar.vue";
 import { getUserInfo } from "@/services/userService";
+import useGlobalStore from "@/stores/global";
 import { setLocalStorage } from "@/util/auth";
 import { defineComponent } from "vue";
 
@@ -19,6 +20,10 @@ export default defineComponent({
     components: {
         TopicoNavBar,
         Wave,
+    },
+    setup() {
+        const globalStore = useGlobalStore();
+        return { globalStore };
     },
     data() {
         return {
@@ -52,10 +57,10 @@ export default defineComponent({
 
 @media screen and (max-width: 1800px) {
     .topico-nav {
-        width: 20vw;
+        width: 20%;
     }
     .content {
-        padding-left: calc(20vw + 16px);
+        padding-left: calc(20% + 16px);
     }
 }
 
