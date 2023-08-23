@@ -132,7 +132,6 @@ export default {
                     color: white;
                     font-size: 1.2em;
                     text-align: center;
-                    line-height: 1.5;
                     display: flex;
                     align-items: center;
                     justify-content: center;

@@ -1,12 +1,18 @@
 <template>
-    <div class="flex flex-row">Explore</div>
+    <div class="flex flex-row">
+        <!-- Search bar -->
+        <div class="w-full flex flex-row justify-start items-center">
+            <SearchBar class="my-10 mx-auto" />
+        </div>
+    </div>
 </template>
 
 <script lang="ts">
 import useGlobalStore from "@/stores/global";
+import SearchBar from "@/components/common/SearchBar.vue";
 
 export default {
-    components: {},
+    components: { SearchBar },
     setup() {
         const globalStore = useGlobalStore();
         return { globalStore };

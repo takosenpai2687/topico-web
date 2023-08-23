@@ -1,4 +1,4 @@
-@import './theme.scss';
+@import "./theme.scss";
 
 html {
     box-sizing: border-box;
@@ -69,4 +69,25 @@ img {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* font size */
+@media screen and (min-width: 1900px) {
+    html,
+    body {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1900px) {
+    html,
+    body {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 1200px) {
+    html,
+    body {
+        font-size: 13px;
+    }
 }

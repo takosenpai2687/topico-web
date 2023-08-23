@@ -3,7 +3,7 @@
         <img
             :src="user.avatar"
             :alt="profileAlt"
-            class="w-10 h-10 rounded-3xl"
+            class="w-8 h-8 rounded-3xl"
             :draggable="false"
         />
         <span class="nickname">{{ user.nickName }}</span>
@@ -33,9 +33,7 @@ export default {
 
 <style lang="scss" scoped>
 .nickname {
-    line-height: 40px;
-    font-size: 1.4em;
-    margin-left: 0.4em;
-    text-transform: capitalize;
+    font-size: 1.2em;
+    margin-left: 0.2em;
 }
 </style>

@@ -93,7 +93,7 @@ export default defineComponent({
         justify-content: center;
 
         img {
-            height: 176px;
+            height: 10em;
         }
     }
 

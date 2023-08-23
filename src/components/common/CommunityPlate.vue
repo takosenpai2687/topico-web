@@ -45,7 +45,7 @@ export default {
     span {
         display: block;
         width: 10em;
-        font-size: 0.8em;
+        font-size: 0.88em;
         line-height: 1.2em;
         font-weight: bold;
         margin-left: 0.5em;
