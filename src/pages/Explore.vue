@@ -132,6 +132,7 @@ export default {
             this.fetchTrending();
         },
         async fetchTrending() {
+            this.trending = [];
             await this.sortTypes[this.sortTypeIdx].fetchFn();
         },
         async fetchTrendingHot() {
