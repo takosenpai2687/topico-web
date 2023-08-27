@@ -47,6 +47,20 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "@/styles/theme.scss";
 
+@keyframes shake {
+    0% {
+        transform: translateX(0) rotate(0);
+    }
+
+    50% {
+        transform: translateX(2px) rotate(-2deg);
+    }
+
+    100% {
+        transform: translateX(-2px) rotate(2deg);
+    }
+}
+
 .history-tag {
     z-index: 1;
     user-select: none;
@@ -61,6 +75,10 @@ export default defineComponent({
         height: 100%;
         padding: .25em 1.8em;
         border-radius: 2em;
+    }
+
+    span.tag-editing {
+        animation: shake .3s linear infinite;
     }
 
     a {
