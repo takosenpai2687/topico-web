@@ -29,14 +29,14 @@
             </div>
             <!-- Trending Posts -->
             <div class="py-4">
-                <PostCard v-for="post in trending" :post="post" />
+                <PostCard v-for="(post, idx) in trending" :post="post" :delay="idx * DELAY" />
             </div>
         </div>
         <!-- Right Side -->
         <div class="w-1/4 h-full relative">
             <div class="fixed top-4">
                 <!-- Top Search -->
-                <TopicoTitleCard title="# Top Search">
+                <TopicoTitleCard title="# Top Search" :delay="0">
                     <ul class="px-2">
                         <li class="py-1 flex flex-row items-center justify-start gap-3"
                             v-for="(searchItem, idx) in topSearch">
@@ -47,7 +47,7 @@
                     </ul>
                 </TopicoTitleCard>
                 <!-- Top Communities -->
-                <TopicoTitleCard title="# Top Communities">
+                <TopicoTitleCard title="# Top Communities" :delay="DELAY">
                     <ul class="px-2">
                         <li v-for="(comm, idx) in topComms" class="py-2 flex flex-row items-center justify-start gap-3">
                             <span class="text-lg">{{ `${idx + 1}.` }}</span>
@@ -70,6 +70,8 @@ import CommunityPlate from "@/components/common/CommunityPlate.vue";
 import TopicoButton from "@/components/common/TopicoButton.vue";
 import PostCard from "@/components/common/PostCard.vue";
 import { getTopSearch, getTopComms, getTrendingHot, getTrendingNew } from "@/services/searchService";
+
+const DELAY = 0.14;
 
 export default {
     name: 'Explore',
@@ -112,7 +114,8 @@ export default {
                     name: "New",
                     fetchFn: this.fetchTrendingNew
                 }
-            ]
+            ],
+            DELAY
         };
     },
     methods: {
