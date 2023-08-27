@@ -12,8 +12,8 @@ export default {
 
 <style lang="scss" scoped>
 h1 {
-    font-size: 1.4rem;
     font-weight: bold;
-    line-height: 3rem;
+    font-size: 1.25em;
+    line-height: 1.5em;
 }
 </style>

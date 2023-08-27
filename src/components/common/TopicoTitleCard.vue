@@ -52,9 +52,10 @@ export default {
         @include card-shadow-rounded;
 
         .card-heading {
-            font-weight: bolder;
-            font-size: 1.4em;
-            line-height: 1.8em;
+            font-weight: bold;
+            font-size: 1.25em;
+            line-height: 1.5em;
         }
     }
-}</style>
+}
+</style>

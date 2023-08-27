@@ -33,25 +33,29 @@
             </div>
         </div>
         <!-- Right Side -->
-        <div class="w-1/4 h-full">
-            <!-- Top Search -->
-            <TopicoTitleCard title="# Top Search">
-                <ul>
-                    <li class="py-1 flex flex-row items-center justify-start gap-3" v-for="(searchItem, idx) in topSearch">
-                        <span class="text-lg">{{ `${idx + 1}.` }}</span>
-                        <RouterLink class="search-link text-lg" :to="`/explore/${searchItem}`">{{ searchItem }}</RouterLink>
-                    </li>
-                </ul>
-            </TopicoTitleCard>
-            <!-- Top Communities -->
-            <TopicoTitleCard title="# Top Communities">
-                <ul>
-                    <li v-for="(comm, idx) in topComms" class="py-2 flex flex-row items-center justify-start gap-3">
-                        <span class="text-lg">{{ `${idx + 1}.` }}</span>
-                        <CommunityPlate :community="comm" />
-                    </li>
-                </ul>
-            </TopicoTitleCard>
+        <div class="w-1/4 h-full relative">
+            <div class="fixed top-4">
+                <!-- Top Search -->
+                <TopicoTitleCard title="# Top Search">
+                    <ul class="px-2">
+                        <li class="py-1 flex flex-row items-center justify-start gap-3"
+                            v-for="(searchItem, idx) in topSearch">
+                            <span class="text-lg">{{ `${idx + 1}.` }}</span>
+                            <RouterLink class="search-link text-lg" :to="`/explore/${searchItem}`">{{ searchItem }}
+                            </RouterLink>
+                        </li>
+                    </ul>
+                </TopicoTitleCard>
+                <!-- Top Communities -->
+                <TopicoTitleCard title="# Top Communities">
+                    <ul class="px-2">
+                        <li v-for="(comm, idx) in topComms" class="py-2 flex flex-row items-center justify-start gap-3">
+                            <span class="text-lg">{{ `${idx + 1}.` }}</span>
+                            <CommunityPlate :community="comm" />
+                        </li>
+                    </ul>
+                </TopicoTitleCard>
+            </div>
         </div>
     </div>
 </template>
