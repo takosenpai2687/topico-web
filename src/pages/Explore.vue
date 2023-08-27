@@ -9,17 +9,20 @@
             <!-- Search History -->
             <SectionHeader class="text-center pb-1 select-none">
                 <span class="text-white mr-4"># Search History</span>
-                <font-awesome-icon class="fa-edit text-xl" color="#fff"
-                    :icon="`fa-solid ${editing ? 'fa-ban' : 'fa-pen-to-square'}`" @click="toggleEditing" />
+                <font-awesome-icon class="fa-edit text-xl" color="#fff" :icon="`fa-solid ${editing ? 'fa-ban' : 'fa-pen-to-square'
+                    }`" @click="toggleEditing" />
             </SectionHeader>
             <div class="flex flex-row items-center justify-center gap-4">
                 <SearchHistory v-if="searchHistory.length > 0" v-for="history in searchHistory" :history="history"
                     :editing="editing" @searchHistoryChange="loadSearchHistory" />
-                <p v-if="searchHistory.length === 0" class="text-lg text-white">None</p>
+                <p v-if="searchHistory.length === 0" class="text-lg text-white">
+                    None
+                </p>
             </div>
         </div>
         <!-- Right Side -->
         <div class="w-1/4 h-full">
+            <!-- Top Search -->
             <TopicoTitleCard title="# Top Search">
                 <ul>
                     <li class="py-1 flex flex-row items-center justify-start gap-3" v-for="(searchItem, idx) in topSearch">
@@ -28,7 +31,15 @@
                     </li>
                 </ul>
             </TopicoTitleCard>
-            <TopicoTitleCard title="# Top Communities"></TopicoTitleCard>
+            <!-- Top Communities -->
+            <TopicoTitleCard title="# Top Communities">
+                <ul>
+                    <li v-for="(comm, idx) in topComms" class="py-2 flex flex-row items-center justify-start gap-3">
+                        <span class="text-lg">{{ `${idx + 1}.` }}</span>
+                        <CommunityPlate :community="comm" />
+                    </li>
+                </ul>
+            </TopicoTitleCard>
         </div>
     </div>
 </template>
@@ -38,11 +49,18 @@ import useGlobalStore from "@/stores/global";
 import SearchBar from "@/components/explore/SearchBar.vue";
 import SearchHistory from "@/components/explore/SearchHistory.vue";
 import SectionHeader from "@/components/common/SectionHeader.vue";
-import TopicoTitleCard from '@/components/common/TopicoTitleCard.vue';
+import TopicoTitleCard from "@/components/common/TopicoTitleCard.vue";
+import CommunityPlate from "@/components/common/CommunityPlate.vue";
 import { getTopSearch, getTopComms } from "@/services/searchService";
 
 export default {
-    components: { SearchBar, SearchHistory, SectionHeader, TopicoTitleCard },
+    components: {
+        SearchBar,
+        SearchHistory,
+        SectionHeader,
+        TopicoTitleCard,
+        CommunityPlate,
+    },
     setup() {
         const globalStore = useGlobalStore();
         return { globalStore };
@@ -58,8 +76,10 @@ export default {
     },
     data() {
         return {
-            searchHistory: [] as string[], editing: false, topSearch: [] as string[],
-            topComms: [] as Community[]
+            searchHistory: [] as string[],
+            editing: false,
+            topSearch: [] as string[],
+            topComms: [] as Community[],
         };
     },
     methods: {
@@ -75,7 +95,7 @@ export default {
         async fetchData() {
             this.topSearch = await getTopSearch();
             this.topComms = await getTopComms();
-        }
+        },
     },
 };
 </script>

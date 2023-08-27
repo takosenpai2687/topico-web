@@ -5,5 +5,7 @@ export const getTopSearch = async (): Promise<string[]> => {
 };
 
 export const getTopComms = async (): Promise<Community[]> => {
-    return await axios.get("/mock/top_comms.json").then((r) => r.data);
+    return await axios
+        .get("/mock/top_comms.json")
+        .then((r) => r.data.slice(0, 5));
 };
