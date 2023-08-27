@@ -12,7 +12,7 @@ const FPS: number = 60;
 const STEP_SIZE: number = 30;
 const TRANSITION_TIME_MS: number = 160;
 const INTERVAL_MS: number = 1000 / FPS;
-const AMPLITUDE = 15;
+const AMPLITUDE = 12;
 
 export default defineComponent({
     name: 'Wave',

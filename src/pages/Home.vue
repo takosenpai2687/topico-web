@@ -59,7 +59,7 @@ export default {
         getMyComments().then((data) => {
             this.homeStore.setMyComments(data);
         });
-        this.globalStore.setWaterLevel(300);
+        this.globalStore.setWaterLevel(280);
     },
 };
 </script>

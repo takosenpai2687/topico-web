@@ -7,7 +7,7 @@
                 <SearchBar class="search my-10 mx-auto" />
             </div>
             <!-- Search History -->
-            <SectionHeader class="text-center pb-1 select-none">
+            <SectionHeader class="text-center pb-1 select-none mt-3 mb-4">
                 <span class="text-white mr-4"># Search History</span>
                 <font-awesome-icon class="fa-edit text-xl" color="#fff" :icon="`fa-solid ${editing ? 'fa-ban' : 'fa-pen-to-square'
                     }`" @click="toggleEditing" />
@@ -91,7 +91,7 @@ export default {
     created() {
         document.title = "Topico - Explore";
         this.globalStore.setShowWaves(true);
-        this.globalStore.setWaterLevel(240);
+        this.globalStore.setWaterLevel(300);
     },
     mounted() {
         this.loadSearchHistory();
