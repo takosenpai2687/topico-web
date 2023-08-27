@@ -2,7 +2,7 @@
     <form class="search-container" @submit="handleSubmit">
         <input type="text" class="search-input" placeholder="Search" v-model="searchTerm" @focus="expandSearchBar"
             @blur="collapseSearchBar" :class="{ expanded: isExpanded }" />
-        <button type="submit">
+        <button type="submit" @mousedown="handleSubmit">
             <font-awesome-icon icon="search" class="search-icon" />
         </button>
     </form>
