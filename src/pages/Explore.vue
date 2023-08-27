@@ -45,6 +45,7 @@
                             </RouterLink>
                         </li>
                     </ul>
+                    <font-awesome-icon class="fa-refresh" icon="fa-solid fa-rotate-right" @click="fetchTopSearch" />
                 </TopicoTitleCard>
                 <!-- Top Communities -->
                 <TopicoTitleCard title="# Top Communities" :delay="DELAY">
@@ -54,6 +55,7 @@
                             <CommunityPlate :community="comm" />
                         </li>
                     </ul>
+                    <font-awesome-icon class="fa-refresh" icon="fa-solid fa-rotate-right" @click="fetchTopComms" />
                 </TopicoTitleCard>
             </div>
         </div>
@@ -134,8 +136,8 @@ export default {
             this.fetchTrending();
         },
         async fetchData() {
-            this.topSearch = await getTopSearch();
-            this.topComms = await getTopComms();
+            this.fetchTopComms();
+            this.fetchTopSearch();
             this.fetchTrending();
         },
         async fetchTrending() {
@@ -143,10 +145,20 @@ export default {
             await this.sortTypes[this.sortTypeIdx].fetchFn();
         },
         async fetchTrendingHot() {
+            this.trending = [];
             this.trending = await getTrendingHot();
         },
         async fetchTrendingNew() {
+            this.trending = [];
             this.trending = await getTrendingNew();
+        },
+        async fetchTopSearch() {
+            this.topSearch = [];
+            this.topSearch = await getTopSearch();
+        },
+        async fetchTopComms() {
+            this.topComms = [];
+            this.topComms = await getTopComms();
         }
     },
 };
@@ -163,6 +175,20 @@ export default {
         transform: scale(1.05);
         cursor: pointer;
         color: #fee;
+    }
+}
+
+.fa-refresh {
+    color: $primaryFontColor;
+    transition: all 0.16s ease-out;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    font-size: 1.2em;
+
+    &:hover {
+        transform: scale(1.1);
+        cursor: pointer;
     }
 }
 

@@ -5,7 +5,7 @@
             <div class="content"><router-view></router-view></div>
             <!-- Back to top button -->
             <circle-button v-show="showBtnTop" class="btn-top" @click="handleClickTop">
-                <font-awesome-icon icon="fa-solid fa-angle-up" />
+                <font-awesome-icon color="#61666d" icon="fa-solid fa-angle-up" />
             </circle-button>
         </main>
         <wave v-if="globalStore.showWaves" class="z-0" />
