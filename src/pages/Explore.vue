@@ -19,6 +19,18 @@
                     None
                 </p>
             </div>
+            <!-- Trending -->
+            <SectionHeader class="text-white"># Trending</SectionHeader>
+            <!-- Trending Sorting Types -->
+            <div class="sorts flex flex-row items-center justify-start gap-3">
+                <TopicoButton class="btn-sort" :class="{ active: idx === sortTypeIdx }" v-for="(sortType, idx) in sortTypes"
+                    @click="() => handleSetSortType(idx)">{{ sortType.name }}
+                </TopicoButton>
+            </div>
+            <!-- Trending Posts -->
+            <div class="py-4">
+                <PostCard v-for="post in trending" :post="post" />
+            </div>
         </div>
         <!-- Right Side -->
         <div class="w-1/4 h-full">
@@ -51,7 +63,9 @@ import SearchHistory from "@/components/explore/SearchHistory.vue";
 import SectionHeader from "@/components/common/SectionHeader.vue";
 import TopicoTitleCard from "@/components/common/TopicoTitleCard.vue";
 import CommunityPlate from "@/components/common/CommunityPlate.vue";
-import { getTopSearch, getTopComms } from "@/services/searchService";
+import TopicoButton from "@/components/common/TopicoButton.vue";
+import PostCard from "@/components/common/PostCard.vue";
+import { getTopSearch, getTopComms, getTrendingHot, getTrendingNew } from "@/services/searchService";
 
 export default {
     components: {
@@ -60,6 +74,8 @@ export default {
         SectionHeader,
         TopicoTitleCard,
         CommunityPlate,
+        TopicoButton,
+        PostCard
     },
     setup() {
         const globalStore = useGlobalStore();
@@ -80,6 +96,18 @@ export default {
             editing: false,
             topSearch: [] as string[],
             topComms: [] as Community[],
+            trending: [] as Post[],
+            sortTypeIdx: 0,
+            sortTypes: [
+                {
+                    name: "Hot",
+                    fetchFn: this.fetchTrendingHot
+                },
+                {
+                    name: "New",
+                    fetchFn: this.fetchTrendingNew
+                }
+            ]
         };
     },
     methods: {
@@ -92,15 +120,32 @@ export default {
         toggleEditing() {
             this.editing = !!!this.editing;
         },
+        handleSetSortType(idx: number) {
+            if (idx === this.sortTypeIdx) return;
+            this.sortTypeIdx = idx;
+            this.fetchTrending();
+        },
         async fetchData() {
             this.topSearch = await getTopSearch();
             this.topComms = await getTopComms();
+            this.fetchTrending();
         },
+        async fetchTrending() {
+            await this.sortTypes[this.sortTypeIdx].fetchFn();
+        },
+        async fetchTrendingHot() {
+            this.trending = await getTrendingHot();
+        },
+        async fetchTrendingNew() {
+            this.trending = await getTrendingNew();
+        }
     },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/theme.scss";
+
 .fa-edit {
     transition: all 0.16s ease-out;
 
@@ -118,6 +163,18 @@ export default {
         text-decoration: underline;
         font-weight: bold;
         transform: scale(1.05);
+    }
+}
+
+.btn-sort {
+    background-color: #fff;
+    color: $primaryColor;
+
+    &.active {
+        background-color: $primaryColor;
+        color: #fff;
+        font-weight: bold;
+        cursor: inherit;
     }
 }
 </style>
