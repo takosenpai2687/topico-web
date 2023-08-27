@@ -68,6 +68,7 @@ import PostCard from "@/components/common/PostCard.vue";
 import { getTopSearch, getTopComms, getTrendingHot, getTrendingNew } from "@/services/searchService";
 
 export default {
+    name: 'Explore',
     components: {
         SearchBar,
         SearchHistory,

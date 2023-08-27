@@ -4,13 +4,8 @@
             <img src="@/assets/logo.webp" alt="" srcset="" :draggable="false" />
         </div>
         <div class="btn-group">
-            <TopicoNavButton
-                v-for="(route, i) in routes"
-                :text="route.text"
-                :to="route.to"
-                :icon="route.icon"
-                :active="i === activeIdx"
-            />
+            <TopicoNavButton v-for="(route, i) in routes" :text="route.text" :to="route.to" :icon="route.icon"
+                :active="i === activeIdx" />
         </div>
         <div class="user-row">
             <UserNameAvatar :user="user" />
@@ -43,6 +38,7 @@ const routes = [
 ];
 
 export default defineComponent({
+    name: 'TopicoNavBar',
     components: {
         TopicoNavButton,
         UserNameAvatar,

@@ -1,10 +1,7 @@
 <template>
     <div class="flex flex-row">
         <div class="content w-2/3">
-            <FollowingCard
-                v-if="homeStore.followingComms.length"
-                ref="followingCardRef"
-            />
+            <FollowingCard v-if="homeStore.followingComms.length" ref="followingCardRef" />
             <RecommendedCard v-if="homeStore.recommendedComms.length" />
             <MyPosts />
         </div>
@@ -32,6 +29,7 @@ import useGlobalStore from "@/stores/global";
 import useHomeStore from "@/stores/home";
 
 export default {
+    name: 'Home',
     components: {
         FollowingCard,
         RecommendedCard,

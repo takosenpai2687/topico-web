@@ -1,24 +1,14 @@
 <template>
     <TopicoTitleCard title="# Following" class="relative">
         <TopicoButton class="btn-checkin">Check in for all</TopicoButton>
-        <div
-            :class="`${
-                expanded ? 'overflow-y-visible' : 'max-h-14 overflow-y-hidden'
-            } pr-2  mt-1`"
-        >
+        <div :class="`${expanded ? 'overflow-y-visible' : 'max-h-14 overflow-y-hidden'
+            } pr-2  mt-1`">
             <div class="grid gap-4 p-1">
-                <CommunityPlate
-                    v-for="comm in homeStore.followingComms"
-                    :community="comm"
-                />
+                <CommunityPlate v-for="comm in homeStore.followingComms" :community="comm" />
             </div>
         </div>
-        <CircleButton
-            :class="`${expanded ? 'rotate-180' : ''} mx-auto mt-2 -mb-2`"
-            icon="fa-solid fa-angle-down"
-            @click="() => (expanded = !expanded)"
-            v-if="showMore"
-        />
+        <CircleButton :class="`${expanded ? 'rotate-180' : ''} mx-auto mt-2 -mb-2`" icon="fa-solid fa-angle-down"
+            @click="() => (expanded = !expanded)" v-if="showMore" />
     </TopicoTitleCard>
 </template>
 
@@ -30,6 +20,7 @@ import TopicoButton from "@/components/common/TopicoButton.vue";
 import useHomeStore from "@/stores/home";
 
 export default {
+    name: 'FollowingCard',
     components: {
         TopicoTitleCard,
         CommunityPlate,
@@ -82,6 +73,7 @@ export default {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
 @media screen and (min-width: 1600px) {
     .grid {
         grid-template-columns: repeat(4, 1fr);

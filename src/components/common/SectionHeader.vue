@@ -1,9 +1,13 @@
 <template>
-    <h1><slot /></h1>
+    <h1>
+        <slot />
+    </h1>
 </template>
 
 <script lang="ts">
-export default {};
+export default {
+    name: 'SectionHeader'
+};
 </script>
 
 <style lang="scss" scoped>

@@ -3,21 +3,12 @@
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-row justify-start items-center gap-2 pb-2">
                 <!-- Community Icon-->
-                <img
-                    class="community-avatar"
-                    :src="post.community.avatar"
-                    alt=""
-                />
+                <img class="community-avatar" :src="post.community.avatar" alt="" />
                 <!-- Post Title -->
-                <RouterLink
-                    :to="`/community/${post.community.id}/post/${post.id}`"
-                    class="text-xl"
-                    >{{ post.title }}</RouterLink
-                >
+                <RouterLink :to="`/community/${post.community.id}/post/${post.id}`" class="text-xl">{{ post.title }}
+                </RouterLink>
                 <!-- Tags -->
-                <div
-                    class="tags-row flex flex-row justify-start items-center gap-1"
-                >
+                <div class="tags-row flex flex-row justify-start items-center gap-1">
                     <Tag v-for="tag in post.tags">{{ tag }}</Tag>
                 </div>
             </div>
@@ -29,22 +20,13 @@
             {{ post.content }}
         </p>
         <div class="img-row py-2">
-            <div
-                class="img-container"
-                v-for="url in post.images"
-                :class="`${
-                    !homeStore.showSpoilers && post.spoiler ? 'spoiler' : ''
-                }`"
-            >
+            <div class="img-container" v-for="url in post.images" :class="`${!homeStore.showSpoilers && post.spoiler ? 'spoiler' : ''
+                }`">
                 <img :src="url" alt="" :draggable="false" />
             </div>
         </div>
         <div>
-            <PostButtonsTray
-                :likes="post.likes ?? 0"
-                :dislikes="post.dislikes ?? 0"
-                :comments="post.comments ?? 0"
-            />
+            <PostButtonsTray :likes="post.likes ?? 0" :dislikes="post.dislikes ?? 0" :comments="post.comments ?? 0" />
         </div>
     </TopicoCard>
 </template>
@@ -58,6 +40,7 @@ import { getTimeDiff } from "@/util/dates";
 import useHomeStore from "@/stores/home";
 
 export default {
+    name: 'MyPostCard',
     components: { TopicoCard, PostButtonsTray, Tag },
     setup() {
         const homeStore = useHomeStore();
@@ -87,33 +70,41 @@ export default {
 
     &:hover {
         transform: scale(1.01);
+
         a.title {
             text-decoration: underline;
         }
     }
+
     .subtitle {
         font-style: italic;
     }
+
     .img-row {
         display: flex;
         align-items: center;
         justify-content: flex-start;
         gap: 0.5em;
+
         .img-container {
             width: 25%;
             border-radius: 4px;
             position: relative;
             transition: all 0.2s ease-out;
+
             &:hover {
                 transform: scale(1.02);
+
                 &::before {
                     opacity: 0;
                 }
             }
+
             &.spoiler {
                 &:hover::before {
                     opacity: 0;
                 }
+
                 &::before {
                     content: "Spoiler";
                     opacity: 1;
@@ -138,6 +129,7 @@ export default {
                     pointer-events: none;
                 }
             }
+
             img {
                 height: 100%;
                 border-radius: 4px;

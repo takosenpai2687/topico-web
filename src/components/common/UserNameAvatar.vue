@@ -1,11 +1,6 @@
 <template>
     <div class="flex flex-row justify-center items-center gap-1">
-        <img
-            :src="user.avatar"
-            :alt="profileAlt"
-            class="w-8 h-8 rounded-3xl"
-            :draggable="false"
-        />
+        <img :src="user.avatar" :alt="profileAlt" class="w-8 h-8 rounded-3xl" :draggable="false" />
         <span class="nickname">{{ user.nickName }}</span>
     </div>
 </template>
@@ -14,6 +9,7 @@
 import { PropType } from "vue";
 
 export default {
+    name: "UserNameAvatar",
     props: {
         user: {
             type: Object as PropType<User>,

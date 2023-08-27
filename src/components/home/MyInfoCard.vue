@@ -21,6 +21,7 @@ import TopicoTitleCard from "@/components/common/TopicoTitleCard.vue";
 import TopicoButton from "@/components/common/TopicoButton.vue";
 
 export default {
+    name: 'MyInfoCard',
     components: { TopicoTitleCard, TopicoButton },
     computed: {
         user() {

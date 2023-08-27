@@ -6,9 +6,7 @@
 
 <script lang="ts">
 export default {
-    setup() {
-        return {};
-    },
+    name: 'TopicoButton'
 };
 </script>
 
@@ -21,12 +19,14 @@ export default {
     color: #fff;
     background-color: $primaryColor;
     border-radius: 20px;
+
     &:hover {
         background-color: $pink700;
         cursor: pointer;
         transform: scale(1.05);
         color: #fcfcfc;
     }
+
     transition: all 0.16s ease-out;
 }
 </style>

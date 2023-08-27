@@ -1,10 +1,6 @@
 <template>
     <RouterLink :to="`/community/${community.id}`" class="tag p-1">
-        <img
-            :src="community.avatar"
-            :alt="community.name.charAt(0).toLocaleUpperCase()"
-            :draggable="false"
-        />
+        <img :src="community.avatar" :alt="community.name.charAt(0).toLocaleUpperCase()" :draggable="false" />
         <span>{{ community.name }}</span>
         <div v-if="community.level" class="level">{{ community.level }}</div>
     </RouterLink>
@@ -14,6 +10,7 @@
 import { PropType } from "vue";
 
 export default {
+    name: 'CommunityPlate',
     props: {
         community: {
             type: Object as PropType<Community>,
@@ -56,10 +53,12 @@ export default {
 
     &:hover {
         cursor: pointer;
+
         span {
             color: #fff;
             text-decoration: underline !important;
         }
+
         background-color: $primaryColor;
     }
 

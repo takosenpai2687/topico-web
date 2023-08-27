@@ -2,18 +2,10 @@
     <div>
         <SectionHeader class="px-4 py-1 gap-4 select-none">
             <span># My Posts</span>
-            <font-awesome-icon
-                :icon="`fa-solid ${
-                    homeStore.showSpoilers ? 'fa-eye' : 'fa-eye-slash'
-                }`"
-                class="fa-eye ml-4"
-                @click="handleClickToggle"
-        /></SectionHeader>
-        <MyPostCard
-            v-for="(post, i) in homeStore.myPosts"
-            :post="post"
-            :delay="i * 0.1"
-        />
+            <font-awesome-icon :icon="`fa-solid ${homeStore.showSpoilers ? 'fa-eye' : 'fa-eye-slash'
+                }`" class="fa-eye ml-4" @click="handleClickToggle" />
+        </SectionHeader>
+        <MyPostCard v-for="(post, i) in homeStore.myPosts" :post="post" :delay="i * 0.1" />
     </div>
 </template>
 
@@ -23,6 +15,7 @@ import SectionHeader from "@/components/common/SectionHeader.vue";
 import useHomeStore from "@/stores/home";
 
 export default {
+    name: 'MyPosts',
     components: {
         MyPostCard,
         SectionHeader,
@@ -43,6 +36,7 @@ export default {
 .fa-eye {
     font-size: 0.9em;
     transition: all 0.16s ease-out;
+
     &:hover {
         cursor: pointer;
         transform: scale(1.1);

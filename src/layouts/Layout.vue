@@ -23,6 +23,7 @@ import { defineComponent } from "vue";
 import { throttle } from "lodash";
 
 export default defineComponent({
+    name: 'Layout',
     components: {
         TopicoNavBar,
         Wave,

@@ -8,6 +8,7 @@ import { defineComponent } from "vue";
 const MAX_HISTORY = 5;
 
 export default defineComponent({
+    name: 'SearchResult',
     setup() {
         return {};
     },

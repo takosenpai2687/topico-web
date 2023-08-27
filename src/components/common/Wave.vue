@@ -14,6 +14,7 @@ const TRANSITION_TIME_MS: number = 160;
 const INTERVAL_MS: number = 1000 / FPS;
 
 export default defineComponent({
+    name: 'Wave',
     setup() {
         const globalStore = useGlobalStore();
         const { waterLevel: storeWaterLevel } = storeToRefs(globalStore);

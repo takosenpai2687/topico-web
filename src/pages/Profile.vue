@@ -6,6 +6,7 @@
 import useGlobalStore from "@/stores/global";
 
 export default {
+    name: 'Profile',
     components: {},
     setup() {
         const globalStore = useGlobalStore();

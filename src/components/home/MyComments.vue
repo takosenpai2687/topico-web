@@ -3,39 +3,23 @@
         <SectionHeader class="px-4 py-1 gap-4 select-none">
             <span># My Comments</span>
         </SectionHeader>
-        <TopicoCard
-            v-for="(comment, i) in homeStore.myComments"
-            :delay="i * 0.1"
-            class="card-wrapper"
-        >
+        <TopicoCard v-for="(comment, i) in homeStore.myComments" :delay="i * 0.1" class="card-wrapper">
             <div class="flex flex-row justify-between items-center">
                 <div class="flex flex-row justify-start items-center gap-2">
                     <!-- Community Icon-->
-                    <img
-                        class="community-avatar"
-                        :src="comment.community.avatar"
-                        alt=""
-                    />
+                    <img class="community-avatar" :src="comment.community.avatar" alt="" />
                     <!-- Comment Community -->
-                    <RouterLink
-                        :to="`/community/${comment.community.id}/post/${comment.post.id}`"
-                        class="text-lg"
-                        >{{ comment.post.title }}</RouterLink
-                    >
+                    <RouterLink :to="`/community/${comment.community.id}/post/${comment.post.id}`" class="text-lg">{{
+                        comment.post.title }}</RouterLink>
                 </div>
                 <p class="subtitle">
                     {{ `Posted ${timeAgo(comment)} ago` }}
                 </p>
             </div>
-            <div
-                class="px-2 py-2 text-lg flex-row flex items-center justify-start"
-            >
-                <span v-if="comment.replyTo"
-                    >@{{ comment.replyTo?.nickName }}&nbsp;
+            <div class="px-2 py-2 text-lg flex-row flex items-center justify-start">
+                <span v-if="comment.replyTo">@{{ comment.replyTo?.nickName }}&nbsp;
                 </span>
-                <p
-                    class="leading-normal text-clip overflow-hidden whitespace-pre"
-                >
+                <p class="leading-normal text-clip overflow-hidden whitespace-pre">
                     {{ comment.content }}
                 </p>
             </div>
@@ -45,11 +29,7 @@
                 </div>
             </div>
             <div>
-                <PostButtonsTray
-                    :likes="comment.likes"
-                    :dislikes="comment.dislikes"
-                    :comments="comment.comments ?? 0"
-                />
+                <PostButtonsTray :likes="comment.likes" :dislikes="comment.dislikes" :comments="comment.comments ?? 0" />
             </div>
         </TopicoCard>
     </div>
@@ -63,6 +43,7 @@ import SectionHeader from "@/components/common/SectionHeader.vue";
 import PostButtonsTray from "@/components/common/PostButtonsTray.vue";
 
 export default {
+    name: 'MyComments',
     components: { TopicoCard, SectionHeader, PostButtonsTray },
     setup() {
         const homeStore = useHomeStore();
@@ -82,37 +63,46 @@ export default {
 
     &:hover {
         transform: scale(1.01);
+
         a.title {
             text-decoration: underline;
         }
     }
+
     a.title {
         font-size: 1.4em;
         line-height: 1.8em;
     }
+
     .subtitle {
         font-style: italic;
     }
+
     .img-row {
         display: flex;
         align-items: center;
         justify-content: flex-start;
         gap: 0.5em;
+
         .img-container {
             width: 25%;
             border-radius: 4px;
             position: relative;
             transition: all 0.2s ease-out;
+
             &:hover {
                 transform: scale(1.02);
+
                 &::before {
                     opacity: 0;
                 }
             }
+
             &.spoiler {
                 &:hover::before {
                     opacity: 0;
                 }
+
                 &::before {
                     content: "Spoiler";
                     opacity: 1;
@@ -138,6 +128,7 @@ export default {
                     pointer-events: none;
                 }
             }
+
             img {
                 height: 100%;
                 border-radius: 4px;

@@ -2,7 +2,9 @@
     <div class="card-wrapper p-2">
         <div class="card px-4 p-2" ref="card">
             <h2 class="card-heading" v-if="title">{{ title }}</h2>
-            <div class="card-content py-4"><slot /></div>
+            <div class="card-content py-4">
+                <slot />
+            </div>
         </div>
     </div>
 </template>
@@ -10,6 +12,7 @@
 <script lang="ts">
 import { gsap } from "gsap";
 export default {
+    name: 'TopicoTitleCard',
     props: {
         title: { type: String, required: false },
         delay: { type: Number, required: false },
@@ -42,6 +45,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/mixins.scss";
+
 .card-wrapper {
     .card {
         width: 100%;
@@ -53,5 +57,4 @@ export default {
             line-height: 1.8em;
         }
     }
-}
-</style>
+}</style>

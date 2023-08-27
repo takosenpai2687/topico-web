@@ -1,10 +1,6 @@
 <template>
-    <RouterLink
-        :class="`${hovered || active ? 'topico-btn hovered' : 'topico-btn'}`"
-        :to="to"
-        @mouseover="onHover"
-        @mouseleave="onLeave"
-        ><font-awesome-icon class="fa-icon" :icon="icon ?? ''" />{{ text }}
+    <RouterLink :class="`${hovered || active ? 'topico-btn hovered' : 'topico-btn'}`" :to="to" @mouseover="onHover"
+        @mouseleave="onLeave"><font-awesome-icon class="fa-icon" :icon="icon ?? ''" />{{ text }}
         <slot />
     </RouterLink>
 </template>
@@ -13,6 +9,7 @@
 import { RouterLink } from "vue-router";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 export default {
+    name: 'TopicoNavButton',
     props: {
         icon: {
             type: String,
@@ -50,6 +47,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/theme";
+
 .topico-btn {
     user-select: none;
     outline: none;
@@ -65,6 +63,7 @@ export default {
     background-color: #f5f5f5;
     width: 90%;
     transition: 0.1s all ease-out;
+
     .fa-icon {
         display: block;
         font-size: 0.8em;
@@ -79,9 +78,11 @@ export default {
     &.hovered {
         background-color: $primaryColor;
         color: #fff;
+
         .fa-icon {
             color: #fff !important;
-            svg > path {
+
+            svg>path {
                 color: #fff !important;
             }
         }

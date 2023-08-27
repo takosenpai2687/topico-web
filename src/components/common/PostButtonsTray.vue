@@ -27,6 +27,7 @@
 
 import { defineComponent } from "vue";
 export default defineComponent({
+    name: 'PostButtonsTray',
     props: {
         readOnly: {
             type: Boolean,
@@ -50,13 +51,15 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/styles/theme.scss";
+
 .tray {
     .tray-item span {
         font-size: 0.82em;
     }
+
     color: $primaryColor;
+
     .fa-icon {
         color: $primaryColor;
     }
-}
-</style>
+}</style>

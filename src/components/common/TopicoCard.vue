@@ -1,12 +1,15 @@
 <template>
     <div class="card-wrapper p-2">
-        <div class="card px-4 p-2" ref="card"><slot /></div>
+        <div class="card px-4 p-2" ref="card">
+            <slot />
+        </div>
     </div>
 </template>
 
 <script lang="ts">
 import { gsap } from "gsap";
 export default {
+    name: 'TopicoCard',
     props: {
         delay: {
             type: Number,
@@ -41,10 +44,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/mixins.scss";
+
 .card-wrapper {
     .card {
         width: 100%;
         @include card-shadow-rounded;
     }
-}
-</style>
+}</style>
