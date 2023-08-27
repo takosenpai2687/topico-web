@@ -20,9 +20,9 @@
                 </p>
             </div>
             <!-- Trending -->
-            <SectionHeader class="text-white py-4"># Trending</SectionHeader>
+            <SectionHeader class="text-white py-4 px-2"># Trending</SectionHeader>
             <!-- Trending Sorting Types -->
-            <div class="sorts flex flex-row items-center justify-start gap-3">
+            <div class="sorts flex flex-row items-center justify-start gap-3 px-2">
                 <TopicoButton class="btn-sort" :class="{ active: idx === sortTypeIdx }" v-for="(sortType, idx) in sortTypes"
                     @click="() => handleSetSortType(idx)">{{ sortType.name }}
                 </TopicoButton>
