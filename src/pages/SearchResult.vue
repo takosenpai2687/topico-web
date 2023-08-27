@@ -4,7 +4,7 @@
         <div class="w-3/4 h-full">
             <!-- Search bar -->
             <div class="w-full flex flex-row justify-start items-center pt-4 pb-1">
-                <SearchBar @searchHistoryChange="reloadSearchHistory" :placeholder="search" class="search my-10 mx-auto" />
+                <SearchBar @searchHistoryChange="reloadSearchHistory" class="search my-10 mx-auto" />
             </div>
             <!-- Search History -->
             <SectionHeader class="text-center pb-1 select-none mt-3 mb-4">

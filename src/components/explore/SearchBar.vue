@@ -1,7 +1,7 @@
 <template>
     <form class="search-container" @submit="handleSubmit">
-        <input type="text" class="search-input" :placeholder="placeholder ?? 'Search'" v-model="searchTerm"
-            @focus="expandSearchBar" @blur="collapseSearchBar" :class="{ expanded: isExpanded }" />
+        <input type="text" placeholder="Search" class="search-input" v-model="searchTerm" @focus="expandSearchBar"
+            @blur="collapseSearchBar" :class="{ expanded: isExpanded }" />
         <button type="submit" @mousedown="handleSubmit">
             <font-awesome-icon icon="search" class="search-icon" />
         </button>
@@ -15,12 +15,6 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
     name: 'SearchBar',
-    props: {
-        placeholder: {
-            type: String,
-            required: false
-        }
-    },
     components: {
         FontAwesomeIcon,
     },
@@ -29,6 +23,12 @@ export default defineComponent({
             isExpanded: false,
             searchTerm: ""
         };
+    },
+    mounted() {
+        const _searchTerm: string | undefined = this.$route.params.search;
+        if (_searchTerm) {
+            this.searchTerm = _searchTerm;
+        }
     },
     methods: {
         expandSearchBar() {
