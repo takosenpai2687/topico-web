@@ -146,6 +146,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/theme.scss";
+@import "@/styles/mixins.scss";
 
 .fa-edit {
     transition: all 0.16s ease-out;
@@ -168,6 +169,7 @@ export default {
 }
 
 .btn-sort {
+    @include card-shadow;
     background-color: #fff;
     color: $primaryColor;
 

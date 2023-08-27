@@ -46,6 +46,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/styles/theme.scss";
+@import "@/styles/mixins.scss";
 
 @keyframes shake {
     0% {
@@ -65,7 +66,6 @@ export default defineComponent({
     z-index: 1;
     user-select: none;
 
-
     a,
     span.tag-editing {
         display: block;
@@ -75,6 +75,8 @@ export default defineComponent({
         height: 100%;
         padding: .25em 1.8em;
         border-radius: 2em;
+
+        @include card-shadow;
     }
 
     span.tag-editing {
