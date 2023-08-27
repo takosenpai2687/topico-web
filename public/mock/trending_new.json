@@ -24,8 +24,8 @@
         "images": [
             "/img/klee.gif",
             "/img/klee.gif",
-            "/img/klee.gif",
-            "/img/klee.gif"
+            "/img/paimon.gif",
+            "/img/furina.png"
         ],
         "likes": 996,
         "dislikes": 443,
@@ -54,12 +54,12 @@
         ],
         "title": "New Post Title 2222222222",
         "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-        "spoiler": true,
+        "spoiler": false,
         "images": [
             "/img/klee.gif",
             "/img/klee.gif",
-            "/img/klee.gif",
-            "/img/klee.gif"
+            "/img/paimon.gif",
+            "/img/furina.png"
         ],
         "likes": 996,
         "dislikes": 443,
@@ -88,12 +88,12 @@
         ],
         "title": "New Post Title 3333333333",
         "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-        "spoiler": true,
+        "spoiler": false,
         "images": [
             "/img/klee.gif",
             "/img/klee.gif",
-            "/img/klee.gif",
-            "/img/klee.gif"
+            "/img/paimon.gif",
+            "/img/furina.png"
         ],
         "likes": 996,
         "dislikes": 443,
