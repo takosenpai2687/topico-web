@@ -85,7 +85,7 @@ export default {
     created() {
         document.title = "Topico - Explore";
         this.globalStore.setShowWaves(true);
-        this.globalStore.setWaterLevel(233);
+        this.globalStore.setWaterLevel(240);
     },
     mounted() {
         this.loadSearchHistory();

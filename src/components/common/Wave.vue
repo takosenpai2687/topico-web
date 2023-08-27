@@ -12,6 +12,7 @@ const FPS: number = 60;
 const STEP_SIZE: number = 30;
 const TRANSITION_TIME_MS: number = 160;
 const INTERVAL_MS: number = 1000 / FPS;
+const AMPLITUDE = 15;
 
 export default defineComponent({
     name: 'Wave',
@@ -93,7 +94,7 @@ export default defineComponent({
             ctx.beginPath();
             ctx.moveTo(0, this.waterLevel);
             for (let x = 0; x < width + STEP_SIZE; x += STEP_SIZE) {
-                const y = this.waterLevel + Math.sin(x / 80 + t) * 10;
+                const y = this.waterLevel + Math.sin(x / 80 + t) * AMPLITUDE;
                 ctx.lineTo(x, y);
             }
 
