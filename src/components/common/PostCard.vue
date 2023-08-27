@@ -27,7 +27,7 @@
             {{ post.content }}
         </p>
         <div class="img-row py-2">
-            <div class="img-container" v-for="url in post.images" :class="`${!homeStore.showSpoilers && post.spoiler ? 'spoiler' : ''
+            <div class="img-container" v-for="url in post.images" :class="`${!globalStore.showSpoilers && post.spoiler ? 'spoiler' : ''
                 }`">
                 <img :src="url" alt="" :draggable="false" />
             </div>
@@ -45,14 +45,14 @@ import PostButtonsTray from "@/components/common/PostButtonsTray.vue";
 import CommunityPlate from "@/components/common/CommunityPlate.vue";
 import Tag from "@/components/common/Tag.vue";
 import { getTimeDiff } from "@/util/dates";
-import useHomeStore from "@/stores/home";
+import useGlobalStore from "@/stores/global";
 
 export default {
     name: "PostCard",
     components: { TopicoCard, PostButtonsTray, Tag, CommunityPlate },
     setup() {
-        const homeStore = useHomeStore();
-        return { homeStore };
+        const globalStore = useGlobalStore();
+        return { globalStore };
     },
     props: {
         post: {

@@ -20,7 +20,11 @@
                 </p>
             </div>
             <!-- Trending -->
-            <SectionHeader class="text-white py-4 px-2"># Trending</SectionHeader>
+            <SectionHeader class="text-white py-4 px-2 flex flex-row items-center justify-start gap-3">
+                <span class="text-white"># Trending</span>
+                <font-awesome-icon :icon="`fa-solid ${globalStore.showSpoilers ? 'fa-eye' : 'fa-eye-slash'
+                    }`" class="fa-eye" @click="handleClickToggle" />
+            </SectionHeader>
             <!-- Trending Sorting Types -->
             <div class="sorts flex flex-row items-center justify-start gap-3 px-2">
                 <TopicoButton class="btn-sort" :class="{ active: idx === sortTypeIdx }" v-for="(sortType, idx) in sortTypes"
@@ -135,6 +139,7 @@ export default {
             this.sortTypeIdx = idx;
             this.fetchTrending();
         },
+        handleClickToggle() { this.globalStore.toggleShowSpoilers() },
         async fetchData() {
             this.fetchTopComms();
             this.fetchTopSearch();
@@ -199,6 +204,16 @@ export default {
         text-decoration: underline;
         font-weight: bold;
         transform: scale(1.05);
+    }
+}
+
+.fa-eye {
+    font-size: 0.9em;
+    transition: all 0.16s ease-out;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
     }
 }
 
