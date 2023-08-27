@@ -20,13 +20,13 @@
                 </p>
             </div>
             <!-- Trending -->
-            <SectionHeader class="text-white py-4 px-2 flex flex-row items-center justify-start gap-3">
+            <SectionHeader class="text-white py-4 px-2 flex flex-row items-center justify-start gap-3 select-none">
                 <span class="text-white"># Trending</span>
                 <font-awesome-icon :icon="`fa-solid ${globalStore.showSpoilers ? 'fa-eye' : 'fa-eye-slash'
                     }`" class="fa-eye" @click="handleClickToggle" />
             </SectionHeader>
             <!-- Trending Sorting Types -->
-            <div class="sorts flex flex-row items-center justify-start gap-3 px-2">
+            <div class="sorts flex flex-row items-center justify-start gap-3 px-2 select-none">
                 <TopicoButton class="btn-sort" :class="{ active: idx === sortTypeIdx }" v-for="(sortType, idx) in sortTypes"
                     @click="() => handleSetSortType(idx)">{{ sortType.name }}
                 </TopicoButton>
@@ -44,7 +44,7 @@
                     <ul class="px-2">
                         <li class="py-1 flex flex-row items-center justify-start gap-3"
                             v-for="(searchItem, idx) in topSearch">
-                            <span class="text-lg">{{ `${idx + 1}.` }}</span>
+                            <span class="text-lg select-none">{{ `${idx + 1}.` }}</span>
                             <RouterLink class="search-link text-lg" :to="`/explore/${searchItem}`">{{ searchItem }}
                             </RouterLink>
                         </li>
@@ -55,7 +55,7 @@
                 <TopicoTitleCard title="# Top Communities" :delay="DELAY">
                     <ul class="px-2">
                         <li v-for="(comm, idx) in topComms" class="py-2 flex flex-row items-center justify-start gap-3">
-                            <span class="text-lg">{{ `${idx + 1}.` }}</span>
+                            <span class="text-lg select-none">{{ `${idx + 1}.` }}</span>
                             <CommunityPlate :community="comm" />
                         </li>
                     </ul>
@@ -187,7 +187,7 @@ export default {
     color: $primaryFontColor;
     transition: all 0.16s ease-out;
     position: absolute;
-    top: 1em;
+    top: .8em;
     right: 1em;
     font-size: 1.2em;
 

@@ -1,7 +1,7 @@
 <template>
     <div class="card-wrapper p-2">
         <div class="card px-4 p-2" ref="card">
-            <h2 class="card-heading" v-if="title">{{ title }}</h2>
+            <h2 class="card-heading select-none" v-if="title">{{ title }}</h2>
             <div class="card-content py-4">
                 <slot />
             </div>

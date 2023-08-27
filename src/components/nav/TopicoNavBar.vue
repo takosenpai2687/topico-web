@@ -86,6 +86,7 @@ export default defineComponent({
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        user-select: none;
 
         img {
             height: 10em;
