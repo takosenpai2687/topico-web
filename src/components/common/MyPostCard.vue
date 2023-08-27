@@ -5,7 +5,7 @@
                 <!-- Community Icon-->
                 <img class="community-avatar" :src="post.community.avatar" alt="" />
                 <!-- Post Title -->
-                <RouterLink :to="`/community/${post.community.id}/post/${post.id}`" class="text-xl">{{ post.title }}
+                <RouterLink :to="`/community/${post.community.id}/post/${post.id}`" class="title text-xl">{{ post.title }}
                 </RouterLink>
                 <!-- Tags -->
                 <div class="tags-row flex flex-row justify-start items-center gap-1">
@@ -70,10 +70,11 @@ export default {
 
     &:hover {
         transform: scale(1.01);
+    }
 
-        a.title {
-            text-decoration: underline;
-        }
+    .title:hover {
+        text-decoration: underline;
+        font-weight: bold;
     }
 
     .subtitle {
@@ -87,16 +88,22 @@ export default {
         gap: 0.5em;
 
         .img-container {
-            width: 25%;
+            width: 12em;
+            height: 12em;
             border-radius: 4px;
             position: relative;
             transition: all 0.2s ease-out;
 
             &:hover {
-                transform: scale(1.02);
+                transform: scale(1.05);
 
                 &::before {
                     opacity: 0;
+                }
+
+                img {
+                    border-radius: 0;
+                    object-fit: contain;
                 }
             }
 
@@ -132,7 +139,9 @@ export default {
 
             img {
                 height: 100%;
-                border-radius: 4px;
+                width: 100%;
+                border-radius: .5em;
+                object-fit: cover;
             }
         }
     }
