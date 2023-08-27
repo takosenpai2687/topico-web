@@ -8,7 +8,8 @@
                 <font-awesome-icon color="#61666d" icon="fa-solid fa-angle-up" />
             </circle-button>
         </main>
-        <wave v-if="globalStore.showWaves" class="z-0" />
+        <wave v-if="globalStore.showWaves" class="wave" />
+        <div class="wave-cover"></div>
     </div>
 </template>
 
@@ -103,6 +104,19 @@ export default defineComponent({
             border-radius: 3em;
             font-size: 1.4em;
         }
+    }
+
+    .wave {
+        z-index: 0;
+    }
+
+    .wave-cover {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        background-color: inherit;
+        opacity: 0;
     }
 }
 
