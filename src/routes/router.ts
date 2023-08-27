@@ -7,9 +7,15 @@ import Explore from "@/pages/Explore.vue";
 import Profile from "@/pages/Profile.vue";
 import Community from "@/pages/Community.vue";
 import PostVue from "@/pages/Post.vue";
+import SearchResultVue from "@/pages/SearchResult.vue";
 
 const routes = [
     { path: "/", component: Home, meta: { layout: LayoutVue } },
+    {
+        path: "/explore/:search",
+        component: SearchResultVue,
+        meta: { layout: LayoutVue },
+    },
     { path: "/explore", component: Explore, meta: { layout: LayoutVue } },
     { path: "/profile", component: Profile, meta: { layout: LayoutVue } },
     {

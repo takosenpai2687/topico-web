@@ -14,6 +14,9 @@ import {
     faShareNodes,
     faEye,
     faEyeSlash,
+    faPenToSquare,
+    faXmark,
+    faBan,
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 
@@ -28,7 +31,10 @@ library.add(
     faComments,
     faShareNodes,
     faEye,
-    faEyeSlash
+    faEyeSlash,
+    faPenToSquare,
+    faXmark,
+    faBan
 );
 
 export default FontAwesomeIcon;

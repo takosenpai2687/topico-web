@@ -1,5 +1,5 @@
 <template>
-    <div class="search-container">
+    <form class="search-container" @submit="handleSubmit">
         <input
             type="text"
             class="search-input"
@@ -9,8 +9,10 @@
             @blur="collapseSearchBar"
             :class="{ expanded: isExpanded }"
         />
-        <font-awesome-icon icon="search" class="search-icon" />
-    </div>
+        <button type="submit">
+            <font-awesome-icon icon="search" class="search-icon" />
+        </button>
+    </form>
 </template>
 
 <script lang="ts">
@@ -35,6 +37,12 @@ export default defineComponent({
         collapseSearchBar() {
             this.isExpanded = false;
         },
+        handleSubmit(e: any) {
+            e.preventDefault();
+            const search = this.searchTerm.trim();
+            if (search.length === 0) return;
+            this.$router.push("/explore/" + search);
+        },
     },
     computed: {
         searchIcon() {
@@ -44,23 +52,29 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/styles/theme.scss";
+
+$initial-width: 20em;
+$expanded-width: 28em;
 .search-container {
     display: flex;
     align-items: center;
     border: 1px solid #ccc;
     border-radius: 2em;
     background: white;
-    padding: 0.3em 1em;
+    padding: 0.5em 1em;
+    color: $primaryFontColor;
+    margin: 0 auto;
 
     .search-input {
         border: none;
         outline: none;
         background: transparent;
-        width: 14em;
+        width: $initial-width;
         transition: all 0.2s ease;
         &.expanded {
-            width: 16em;
+            width: $expanded-width;
         }
     }
     .search-icon {
