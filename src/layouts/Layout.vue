@@ -100,8 +100,8 @@ export default defineComponent({
             bottom: 3em;
             right: 3em;
             z-index: 999;
-            padding: 1.4em;
             border-radius: 3em;
+            font-size: 1.4em;
         }
     }
 }
