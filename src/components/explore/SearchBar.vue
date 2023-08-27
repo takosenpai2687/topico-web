@@ -25,7 +25,7 @@ export default defineComponent({
         };
     },
     mounted() {
-        const _searchTerm: string | undefined = this.$route.params.search;
+        const _searchTerm: string | undefined = this.$route.params.search as string | undefined;
         if (_searchTerm) {
             this.searchTerm = _searchTerm;
         }
