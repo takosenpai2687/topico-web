@@ -120,6 +120,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/styles/theme.scss";
+
 .wave-box {
     position: fixed;
     top: 0;
