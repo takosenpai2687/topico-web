@@ -16,9 +16,21 @@ export const getTopComms = async (): Promise<Community[]> => {
 };
 
 export const getTrendingHot = async (): Promise<Post[]> => {
-    return await axios.get("/mock/trending_hot.json").then((r) => r.data);
+    return await axios.get("/mock/trending_hot.json").then((r) =>
+        r.data.map((post: Post) => ({
+            ...post,
+            ctime: new Date(post.ctime),
+            utime: new Date(post.utime),
+        }))
+    );
 };
 
 export const getTrendingNew = async (): Promise<Post[]> => {
-    return await axios.get("/mock/trending_new.json").then((r) => r.data);
+    return await axios.get("/mock/trending_new.json").then((r) =>
+        r.data.map((post: Post) => ({
+            ...post,
+            ctime: new Date(post.ctime),
+            utime: new Date(post.utime),
+        }))
+    );
 };
