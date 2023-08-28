@@ -1,7 +1,7 @@
 <template>
-    <div class="flex flex-row justify-between items-start">
+    <div class="wrapper justify-between items-start">
         <!-- Left Side -->
-        <div class="w-3/4 h-full">
+        <div class="content-main">
             <!-- Search bar -->
             <div class="w-full flex flex-row justify-start items-center pt-4 pb-1">
                 <SearchBar class="search my-10 mx-auto" />
@@ -37,8 +37,8 @@
             </div>
         </div>
         <!-- Right Side -->
-        <div class="w-1/4 h-full relative">
-            <div class="fixed top-4">
+        <div class="content-side">
+            <div class="content-side-inner">
                 <!-- Top Search -->
                 <TopicoTitleCard title="# Top Search" :delay="0">
                     <ul class="px-2">
@@ -227,6 +227,51 @@ export default {
         color: #fff;
         font-weight: bold;
         cursor: inherit;
+    }
+}
+
+// PC
+@media screen and (min-width: $mobile-width) {
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+
+        .content-main {
+            width: 75%;
+            height: 100%;
+        }
+
+        .content-side {
+            width: 25%;
+            position: relative;
+
+            .content-side-inner {
+                position: fixed;
+                top: 1em;
+            }
+        }
+    }
+
+
+}
+
+// Mobile
+@media screen and (max-width: $mobile-width) {
+    .wrapper {
+        display: flex;
+
+        height: 100%;
+        flex-direction: column;
+
+        .content-main {
+            width: 100%;
+        }
+
+        .content-side {
+            width: 100%;
+
+            .content-side-inner {}
+        }
     }
 }
 </style>

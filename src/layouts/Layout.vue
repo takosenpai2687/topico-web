@@ -1,7 +1,7 @@
 <template>
     <div v-if="user" class="wrapper w-full h-full flex flex-row relative overflow-y-hidden">
         <topico-nav-bar class="topico-nav h-full" />
-        <main class="content-wrapper h-full p-4 z-10 overflow-y-auto relative" ref="main">
+        <main class="content-wrapper h-full z-10 overflow-y-auto relative" ref="main">
             <div class="content"><router-view></router-view></div>
             <!-- Back to top button -->
             <circle-button v-show="showBtnTop" class="btn-top" @click="handleClickTop">
@@ -10,6 +10,18 @@
         </main>
         <wave v-if="globalStore.showWaves" class="wave" />
         <div class="wave-cover"></div>
+    </div>
+
+    <!-- Mobile -->
+    <div v-if="user" class="wrapper-m w-full h-full  overflow-y-hidden">
+        <main class="content-wrapper h-full z-10 overflow-y-auto " ref="main">
+            <div class="content"><router-view></router-view></div>
+            <!-- Back to top button -->
+            <circle-button v-show="showBtnTop" class="btn-top" @click="handleClickTop">
+                <font-awesome-icon color="#61666d" icon="fa-solid fa-angle-up" />
+            </circle-button>
+        </main>
+        <topico-nav-bar class="topico-nav h-full" />
     </div>
 </template>
 
@@ -21,7 +33,7 @@ import { getUserInfo } from "@/services/userService";
 import useGlobalStore from "@/stores/global";
 import { setLocalStorage } from "@/util/auth";
 import { defineComponent } from "vue";
-import { throttle } from "lodash";
+import { debounce, throttle } from "lodash";
 
 export default defineComponent({
     name: 'Layout',
@@ -38,7 +50,8 @@ export default defineComponent({
         return {
             user: undefined as User | undefined,
             showBtnTop: false,
-            throttledOnScroll: throttle(this.checkScroll as any, 100)
+            throttledOnScroll: throttle(this.checkScroll as any, 100),
+            onResizeDebounced: debounce(this.onResize as any, 100)
         };
     },
     async mounted() {
@@ -50,6 +63,8 @@ export default defineComponent({
             if (container) {
                 container.addEventListener("scroll", this.throttledOnScroll);
             }
+            window.addEventListener("resize", this.onResizeDebounced);
+            this.onResize();
         })
     },
     methods: {
@@ -63,20 +78,27 @@ export default defineComponent({
             if (!main) return;
             const scrollTop = main.scrollTop;
             this.showBtnTop = scrollTop > 0;
-        }
+        },
+        onResize() {
+            this.globalStore.setIsWide(window.innerWidth >= 1600);
+            this.globalStore.setIsMobile(window.innerWidth < 1240);
+        },
     },
     beforeDestroy() {
         const container: any = this.$refs.main;
         if (container) {
             container.removeEventListener("scroll", this.throttledOnScroll);
         }
+        window.removeEventListener("resize", this.onResizeDebounced);
     }
 });
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins.scss';
+@import '@/styles/theme.scss';
+
 .wrapper {
-    background-color: #fcfcfc;
     max-height: 100vh;
 
     .topico-nav {
@@ -96,14 +118,7 @@ export default defineComponent({
             max-width: 75em;
         }
 
-        .btn-top {
-            position: fixed;
-            bottom: 3em;
-            right: 3em;
-            z-index: 999;
-            border-radius: 3em;
-            font-size: 1.4em;
-        }
+
     }
 
     .wave {
@@ -121,7 +136,7 @@ export default defineComponent({
 }
 
 // Small
-@media screen and (max-width: 1600px) {
+@media screen and (min-width: $mobile-width) and (max-width: 1600px) {
     .content-wrapper {
         left: 240px;
         width: calc(100% - 240px);
@@ -142,6 +157,66 @@ export default defineComponent({
         .content {
             max-width: 1300px !important;
         }
+    }
+}
+
+// Mobile
+@media screen and (max-width: $mobile-width) {
+    $nav-height: 5em;
+
+    .wrapper {
+        display: none;
+    }
+
+    .wrapper-m {
+        display: block;
+        background-color: $primaryColor;
+
+        .content-wrapper {
+            height: calc(100vh - $nav-height);
+            padding: .5em;
+
+            .content {
+                display: block;
+            }
+        }
+
+        .btn-top {
+            position: fixed;
+            bottom: 5em;
+            right: 1em;
+            z-index: 999;
+            border-radius: 3em;
+            font-size: 1.4em;
+        }
+
+        .topico-nav {
+            height: $nav-height;
+        }
+    }
+}
+
+// PC
+@media screen and (min-width: $mobile-width) {
+    .wrapper {
+        display: block;
+
+        .content-wrapper {
+            padding: 1em;
+        }
+
+        .btn-top {
+            position: fixed;
+            bottom: 3em;
+            right: 3em;
+            z-index: 999;
+            border-radius: 3em;
+            font-size: 1.4em;
+        }
+    }
+
+    .wrapper-m {
+        display: none;
     }
 }
 </style>

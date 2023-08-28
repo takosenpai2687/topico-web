@@ -1,6 +1,6 @@
 <template>
     <TopicoCard :delay="delay" class="card-wrapper">
-        <div class="flex flex-row justify-between items-center">
+        <div class="title-row">
             <div class="flex flex-row justify-start items-center gap-2 mb-2">
                 <!-- User Avatar-->
                 <img class="user-avatar" :src="post.author.avatar" alt="" />
@@ -73,6 +73,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/styles/mixins.scss";
+@import "@/styles/theme.scss";
+
 .card-wrapper {
     transition: all 0.16s ease-out;
 
@@ -84,10 +87,6 @@ export default {
         }
     }
 
-    .subtitle {
-        font-style: italic;
-    }
-
     .img-row {
         display: flex;
         align-items: center;
@@ -95,8 +94,6 @@ export default {
         gap: 0.5em;
 
         .img-container {
-            width: 12em;
-            height: 12em;
             border-radius: 4px;
             position: relative;
             transition: all 0.2s ease-out;
@@ -168,6 +165,42 @@ export default {
             text-decoration: underline;
             font-weight: bold;
         }
+    }
+}
+
+// PC
+@media screen and (min-width: $mobile-width) {
+    .title-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .img-container {
+        width: 11em;
+        height: 11em;
+    }
+}
+
+// Mobile
+@media screen and (max-width: $mobile-width) {
+    .img-container {
+        width: 7em;
+        height: 7em;
+    }
+
+    .title-row {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .subtitle {
+        position: absolute;
+        bottom: .4em;
+        right: .4em;
     }
 }
 </style>

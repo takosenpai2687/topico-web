@@ -1,11 +1,11 @@
 <template>
-    <div class="flex flex-row">
-        <div class="content w-2/3">
-            <FollowingCard v-if="homeStore.followingComms.length" ref="followingCardRef" />
-            <RecommendedCard v-if="homeStore.recommendedComms.length" />
+    <div class="wrapper flex">
+        <div class="content content-main">
+            <CommsCard v-if="followingComms.length" title="# Subscribed" :comms="followingComms" checkin />
+            <CommsCard v-if="recommendedComms.length" title="# Recommended" :comms="recommendedComms" />
             <MyPosts />
         </div>
-        <div class="content w-1/3">
+        <div class="content content-side">
             <MyInfoCard />
             <MyComments />
         </div>
@@ -13,10 +13,9 @@
 </template>
 
 <script lang="ts">
-import FollowingCard from "@/components/home/FollowingCard.vue";
 import MyComments from "@/components/home/MyComments.vue";
 import MyInfoCard from "@/components/home/MyInfoCard.vue";
-import RecommendedCard from "@/components/home/RecommendedCard.vue";
+import CommsCard from '@/components/common/CommsCard.vue';
 
 import MyPosts from "@/components/home/MyPosts.vue";
 import {
@@ -31,16 +30,21 @@ import useHomeStore from "@/stores/home";
 export default {
     name: 'Home',
     components: {
-        FollowingCard,
-        RecommendedCard,
         MyInfoCard,
         MyPosts,
         MyComments,
+        CommsCard
     },
     setup() {
         const homeStore = useHomeStore();
         const globalStore = useGlobalStore();
         return { homeStore, globalStore };
+    },
+    data() {
+        return {
+            followingComms: [] as Community[],
+            recommendedComms: [] as Community[]
+        }
     },
     created() {
         document.title = "Topico - Home";
@@ -48,10 +52,10 @@ export default {
     },
     mounted() {
         getFollowingComms().then((data) => {
-            this.homeStore.setFollowingComms(data);
+            this.followingComms = data;
         });
         getRecommendedComms().then((data) => {
-            this.homeStore.setRecommendedComms(data);
+            this.recommendedComms = data;
         });
         getMyPosts().then((data) => {
             this.homeStore.setMyPosts(data);
@@ -64,4 +68,31 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import "@/styles/mixins.scss";
+
+
+// PC
+@media screen and (min-width: $mobile-width) {
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+
+        .content-main {
+            width: 66.66667%;
+        }
+
+        .content-side {
+            width: 33.33333%;
+        }
+    }
+}
+
+// Mobile
+@media screen and (max-width: $mobile-width) {
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+}
+</style>

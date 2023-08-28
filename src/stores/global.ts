@@ -6,6 +6,8 @@ const useGlobalStore = defineStore("global", {
             waterLevel: 0,
             showWaves: true,
             showSpoilers: localStorage.getItem("showSpoilers") === "true",
+            isWide: false,
+            isMobile: false,
         };
     },
     actions: {
@@ -26,6 +28,12 @@ const useGlobalStore = defineStore("global", {
                 "showSpoilers",
                 JSON.stringify(this.showSpoilers)
             );
+        },
+        setIsWide(isWide: boolean) {
+            this.isWide = isWide;
+        },
+        setIsMobile(isMobile: boolean) {
+            this.isMobile = isMobile;
         },
     },
 });

@@ -1,4 +1,5 @@
 @import "./theme.scss";
+@import "./mixins.scss";
 
 html {
     box-sizing: border-box;
@@ -27,6 +28,10 @@ li {
     color: $primaryFontColor;
 }
 
+a {
+    text-decoration: none;
+}
+
 body,
 h1,
 h2,
@@ -51,25 +56,28 @@ img {
     max-width: 100%;
     height: auto;
 }
-::-webkit-scrollbar {
-    width: 10px;
-}
-/* Track */
-::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-}
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 5px;
-    backdrop-filter: blur(4px);
-}
+@media screen and (min-width: $mobile-width) {
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.9);
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 5px;
+        backdrop-filter: blur(4px);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0, 0, 0, 0.9);
+    }
 }
 
 /* font size */

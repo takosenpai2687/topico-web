@@ -1,12 +1,15 @@
 <template>
     <TopicoCard :delay="delay" class="card-wrapper">
         <div class="flex flex-row justify-between items-center">
-            <div class="flex flex-row justify-start items-center gap-2 pb-2">
-                <!-- Community Icon-->
-                <img class="community-avatar" :src="post.community.avatar" alt="" />
-                <!-- Post Title -->
-                <RouterLink :to="`/community/${post.community.id}/post/${post.id}`" class="title text-xl">{{ post.title }}
-                </RouterLink>
+            <div class="title-row gap-2 pb-2">
+                <div class="flex flex-row justify-start items-center gap-2">
+                    <!-- Community Icon-->
+                    <img class="community-avatar" :src="post.community.avatar" alt="" />
+                    <!-- Post Title -->
+                    <RouterLink :to="`/community/${post.community.id}/post/${post.id}`" class="title text-xl">{{ post.title
+                    }}
+                    </RouterLink>
+                </div>
                 <!-- Tags -->
                 <div class="tags-row flex flex-row justify-start items-center gap-1">
                     <Tag v-for="tag in post.tags">{{ tag }}</Tag>
@@ -65,6 +68,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/styles/mixins.scss";
+@import "@/styles/theme.scss";
+
 .card-wrapper {
     transition: all 0.16s ease-out;
 
@@ -88,8 +94,6 @@ export default {
         gap: 0.5em;
 
         .img-container {
-            width: 12em;
-            height: 12em;
             border-radius: 4px;
             position: relative;
             transition: all 0.2s ease-out;
@@ -150,6 +154,44 @@ export default {
         height: 2em;
         width: 2em;
         border-radius: 1em;
+    }
+}
+
+
+
+// PC
+@media screen and (min-width: $mobile-width) {
+    .title-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .img-container {
+        width: 11em;
+        height: 11em;
+    }
+}
+
+// Mobile
+@media screen and (max-width: $mobile-width) {
+    .title-row {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .subtitle {
+        position: absolute;
+        top: .7em;
+        right: 1em;
+    }
+
+    .img-container {
+        width: 7em;
+        height: 7em;
     }
 }
 </style>

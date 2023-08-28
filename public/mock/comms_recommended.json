@@ -13,5 +13,20 @@
         "id": 1,
         "name": "One Piece",
         "avatar": "/img/luffy.jpg"
+    },
+    {
+        "id": 1,
+        "name": "Star Rail",
+        "avatar": "/img/star_rail.png"
+    },
+    {
+        "id": 2,
+        "name": "League of Legends",
+        "avatar": "/img/lol.png"
+    },
+    {
+        "id": 1,
+        "name": "One Piece",
+        "avatar": "/img/luffy.jpg"
     }
 ]

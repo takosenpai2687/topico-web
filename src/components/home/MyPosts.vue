@@ -35,6 +35,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/mixins.scss";
+@import "@/styles/theme.scss";
+
 .fa-eye {
     font-size: 0.9em;
     transition: all 0.16s ease-out;
@@ -42,6 +45,24 @@ export default {
     &:hover {
         cursor: pointer;
         transform: scale(1.1);
+    }
+}
+
+// PC
+@media screen and (min-width: $mobile-width) {
+
+    span,
+    .fa-eye {
+        color: $primaryFontColor;
+    }
+}
+
+// Mobile
+@media screen and (max-width: $mobile-width) {
+
+    span,
+    .fa-eye {
+        color: #fff;
     }
 }
 </style>

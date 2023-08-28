@@ -83,7 +83,10 @@ export default {
 
         &.hovered {
             background-color: $primaryColor;
-            color: #fff;
+
+            span {
+                color: #fff;
+            }
 
             .fa-icon {
                 color: #fff !important;
@@ -111,12 +114,14 @@ export default {
         align-items: center;
         line-height: 3em;
         background-color: transparent;
-        width: 90%;
         transition: 0.1s all ease-out;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         .fa-icon {
             display: block;
-            font-size: 0.8em;
+            font-size: 1.2em;
             text-align: right;
             margin-right: 0.5em;
         }

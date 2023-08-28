@@ -58,6 +58,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/mixins.scss";
+@import "@/styles/theme.scss";
+
 .card-wrapper {
     transition: all 0.16s ease-out;
 
@@ -140,6 +143,23 @@ export default {
         height: 2em;
         width: 2em;
         border-radius: 1em;
+    }
+}
+
+
+// PC
+@media screen and (min-width: $mobile-width) {
+
+    span {
+        color: $primaryFontColor;
+    }
+}
+
+// Mobile
+@media screen and (max-width: $mobile-width) {
+
+    span {
+        color: #fff;
     }
 }
 </style>

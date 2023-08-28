@@ -126,19 +126,29 @@ export default defineComponent({
 @media screen and (max-width: $mobile-width) {
     .nav-wrapper {
         flex-direction: row;
+        padding: 0 !important;
 
         .logo {
             display: none;
         }
 
         .btn-group {
-            height: 2em;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
             gap: 1em;
             width: 100%;
+            height: 100%;
+            padding: 1em;
+
+            a {
+                display: flex;
+                height: 100%;
+                width: 33%;
+                justify-content: center;
+                align-items: center;
+            }
         }
 
         .user-row {
