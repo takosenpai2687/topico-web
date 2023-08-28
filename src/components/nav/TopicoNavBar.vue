@@ -76,39 +76,74 @@ export default defineComponent({
 .nav-wrapper {
     @include card-shadow;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: space-between;
 
-    .logo {
-        height: 33%;
+    .btn-group {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        user-select: none;
+    }
+}
 
-        img {
-            height: 10em;
+// PC
+@media screen and (min-width: $mobile-width) {
+    .nav-wrapper {
+        flex-direction: column;
+
+        .logo {
+            height: 33%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+
+            img {
+                height: 10em;
+            }
+        }
+
+        .btn-group {
+            height: 33%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1em;
+            width: 100%;
+        }
+
+        .user-row {
+            height: 33%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
         }
     }
+}
 
-    .btn-group {
-        height: 33%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1em;
-        width: 100%;
-    }
+// Mobile
+@media screen and (max-width: $mobile-width) {
+    .nav-wrapper {
+        flex-direction: row;
 
-    .user-row {
-        height: 33%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
+        .logo {
+            display: none;
+        }
+
+        .btn-group {
+            height: 2em;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1em;
+            width: 100%;
+        }
+
+        .user-row {
+            display: none;
+        }
     }
 }
 </style>

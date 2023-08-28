@@ -1,7 +1,8 @@
 <template>
     <RouterLink :class="`${hovered || active ? 'topico-btn hovered' : 'topico-btn'}`" :to="to" @mouseover="onHover"
-        @mouseleave="onLeave"><font-awesome-icon class="fa-icon" :icon="icon ?? ''" />{{ text }}
-        <slot />
+        @mouseleave="onLeave">
+        <font-awesome-icon class="fa-icon" :icon="icon ?? ''" />
+        <span>{{ text }}</span>
     </RouterLink>
 </template>
 
@@ -47,45 +48,99 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/theme";
+@import "@/styles/mixins.scss";
 
-.topico-btn {
-    user-select: none;
-    outline: none;
-    border: none;
-    border-radius: 4px;
-    font-size: 1.1em;
-    font-weight: bold;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    line-height: 3em;
-    background-color: #f5f5f5;
-    width: 90%;
-    transition: 0.1s all ease-out;
 
-    .fa-icon {
-        display: block;
-        font-size: 0.8em;
-        text-align: right;
-        margin-right: 0.5em;
-    }
 
-    a {
-        text-align: left;
-    }
-
-    &.hovered {
-        background-color: $primaryColor;
-        color: #fff;
+// PC
+@media screen and (min-width: $mobile-width) {
+    .topico-btn {
+        user-select: none;
+        outline: none;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.1em;
+        font-weight: bold;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 3em;
+        background-color: #f5f5f5;
+        width: 90%;
+        transition: 0.1s all ease-out;
 
         .fa-icon {
-            color: #fff !important;
+            display: block;
+            font-size: 0.8em;
+            text-align: right;
+            margin-right: 0.5em;
+        }
 
-            svg>path {
+        a {
+            text-align: left;
+        }
+
+        &.hovered {
+            background-color: $primaryColor;
+            color: #fff;
+
+            .fa-icon {
                 color: #fff !important;
+
+                svg>path {
+                    color: #fff !important;
+                }
             }
         }
+    }
+}
+
+// Mobile
+@media screen and (max-width: $mobile-width) {
+    .topico-btn {
+        user-select: none;
+        outline: none;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.1em;
+        font-weight: bold;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 3em;
+        background-color: transparent;
+        width: 90%;
+        transition: 0.1s all ease-out;
+
+        .fa-icon {
+            display: block;
+            font-size: 0.8em;
+            text-align: right;
+            margin-right: 0.5em;
+        }
+
+        a {
+            text-align: left;
+        }
+
+        &.hovered {
+            color: $primaryColor;
+            background-color: $primaryColor;
+
+            .fa-icon {
+                color: #fff !important;
+
+                svg>path {
+                    color: #fff !important;
+                }
+            }
+        }
+    }
+
+    span {
+        display: none;
     }
 }
 </style>
