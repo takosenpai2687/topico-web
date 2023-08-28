@@ -14,14 +14,14 @@
 
     <!-- Mobile -->
     <div v-if="user" class="wrapper-m w-full h-full  overflow-y-hidden">
-        <main class="content-wrapper h-full z-10 overflow-y-auto " ref="main">
+        <main class="content-wrapper z-10 overflow-y-auto " ref="main">
             <div class="content"><router-view></router-view></div>
             <!-- Back to top button -->
             <circle-button v-show="showBtnTop" class="btn-top" @click="handleClickTop">
                 <font-awesome-icon color="#61666d" icon="fa-solid fa-angle-up" />
             </circle-button>
         </main>
-        <topico-nav-bar class="topico-nav h-full" />
+        <topico-nav-bar class="topico-nav" />
     </div>
 </template>
 
@@ -191,6 +191,10 @@ export default defineComponent({
         }
 
         .topico-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             height: $nav-height;
         }
     }
