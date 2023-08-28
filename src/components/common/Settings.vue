@@ -79,6 +79,11 @@ export default defineComponent({
 }
 
 .colors {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2em;
+    padding: 1em 0;
+
     .color-icon {
         width: 3em;
         height: 3em;

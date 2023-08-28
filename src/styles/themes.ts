@@ -9,7 +9,6 @@ const themes = {
     $yellow600: "#FDD835",
     $amber600: "#FFB300",
     $orange600: "#FB8C00",
-    $deeporange600: "#F4511E",
 };
 
 export const DEFAULT_COLOR = themes["$pinkBZ"];
