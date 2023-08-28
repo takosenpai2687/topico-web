@@ -140,7 +140,7 @@ export default defineComponent({
             width: 100%;
             height: 100%;
             gap: 0.3em;
-            padding: 0.3em;
+            padding: 0.6em;
 
             a {
                 display: flex;
