@@ -13,7 +13,9 @@
         <!-- Colors -->
         <div class="row colors flex flex-row items-center justify-start pb-4">
             <div v-for="color in colors" :style="{ backgroundColor: color }" class="color-icon"
-                :class="{ active: color === primaryColor }" @click="setColor(color)"></div>
+                :class="{ active: color === primaryColor }" @click="setColor(color)">
+                <font-awesome-icon v-if="globalStore.primaryColor === color" class="text-white" icon="fa-solid fa-check" />
+            </div>
         </div>
         <!-- Button Save -->
         <div class="row flex flex-row items-center justify-center">
@@ -59,7 +61,6 @@ export default defineComponent({
             // PrimaryColor
             const root = document.documentElement;
             if (root) {
-                root.style.setProperty('--primary-color', DEFAULT_COLOR);
                 localStorage.setItem('primaryColor', this.primaryColor);
                 this.globalStore.setPrimaryColor(this.primaryColor);
             }
@@ -91,6 +92,11 @@ export default defineComponent({
         border: 3px solid #fff;
         box-shadow: 0 0 8px 1px rgba(0, 0, 0, .3);
         transition: all 0.2s ease-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
 
         &:hover,
         &.active {

@@ -20,6 +20,7 @@ import {
     faRotateRight,
     faGear,
     faGears,
+    faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 
@@ -40,7 +41,8 @@ library.add(
     faBan,
     faRotateRight,
     faGear,
-    faGears
+    faGears,
+    faCheck
 );
 
 export default FontAwesomeIcon;
