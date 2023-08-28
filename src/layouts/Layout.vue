@@ -127,8 +127,8 @@ export default defineComponent({
         width: 100%;
         height: 100%;
         position: fixed;
-        z-index: 1;
-        background-color: inherit;
+        z-index: 2;
+        background-color: #fff;
         opacity: 0;
     }
 }
