@@ -35,8 +35,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/mixins.scss";
-@import "@/styles/theme.scss";
+@import "@/styles/mixins.scss"; 
 
 .fa-eye {
     font-size: 0.9em;
@@ -53,7 +52,7 @@ export default {
 
     span,
     .fa-eye {
-        color: $primaryFontColor;
+        color: var(--primary-font-color);
     }
 }
 

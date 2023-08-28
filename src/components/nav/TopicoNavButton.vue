@@ -46,8 +46,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "@/styles/theme";
+<style lang="scss" scoped> 
 @import "@/styles/mixins.scss";
 
 
@@ -82,7 +81,7 @@ export default {
         }
 
         &.hovered {
-            background-color: $primaryColor;
+            background-color: var(--primary-color);
 
             span {
                 color: #fff;
@@ -131,8 +130,8 @@ export default {
         }
 
         &.hovered {
-            color: $primaryColor;
-            background-color: $primaryColor;
+            color: var(--primary-color);
+            background-color: var(--primary-color);
 
             .fa-icon {
                 color: #fff !important;

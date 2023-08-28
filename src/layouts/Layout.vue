@@ -10,10 +10,14 @@
         </main>
         <wave v-if="globalStore.showWaves" class="wave" />
         <div class="wave-cover"></div>
+        <!-- Settings Modal -->
+        <Modal title="Settings" :show="globalStore.showSettings" @modalClose="() => globalStore.setShowSettings(false)">
+            <Settings />
+        </Modal>
     </div>
 
     <!-- Mobile -->
-    <div v-if="user" class="wrapper-m w-full h-full">
+    <div v-if="user" class="wrapper-m w-full h-full relative">
         <main class="content-wrapper z-10">
             <div class="content"><router-view></router-view></div>
             <!-- Back to top button -->
@@ -22,6 +26,10 @@
             </circle-button>
         </main>
         <topico-nav-bar class="topico-nav" />
+        <!-- Settings Modal -->
+        <Modal title="Settings" :show="globalStore.showSettings" @modalClose="() => globalStore.setShowSettings(false)">
+            <Settings />
+        </Modal>
     </div>
 </template>
 
@@ -34,13 +42,18 @@ import useGlobalStore from "@/stores/global";
 import { setLocalStorage } from "@/util/auth";
 import { defineComponent } from "vue";
 import { debounce, throttle } from "lodash";
+import { DEFAULT_COLOR } from '@/styles/themes';
+import Modal from "@/components/common/Modal.vue";
+import Settings from '@/components/common/Settings.vue';
 
 export default defineComponent({
     name: 'Layout',
     components: {
         TopicoNavBar,
         Wave,
-        CircleButton
+        CircleButton,
+        Modal,
+        Settings
     },
     setup() {
         const globalStore = useGlobalStore();
@@ -54,7 +67,7 @@ export default defineComponent({
             onResizeDebounced: debounce(this.onResize as any, 100)
         };
     },
-    async mounted() {
+    async created() {
         const user = await getUserInfo();
         setLocalStorage(user);
         this.user = user;
@@ -65,7 +78,11 @@ export default defineComponent({
             }
             window.addEventListener("resize", this.onResizeDebounced);
             this.onResize();
-        })
+            this.setTheme();
+        });
+        this.$watch(() => this.globalStore.primaryColor, (_newVal, _oldVal) => {
+            this.setTheme();
+        });
     },
     methods: {
         handleClickTop() {
@@ -81,6 +98,16 @@ export default defineComponent({
             this.globalStore.setIsWide(window.innerWidth >= 1600);
             this.globalStore.setIsMobile(window.innerWidth < 1240);
         },
+        setTheme() {
+            const root = document.documentElement;
+            const preferredColor = localStorage.getItem('primaryColor');
+            if (!preferredColor) {
+                root.style.setProperty('--primary-color', DEFAULT_COLOR);
+                localStorage.setItem('primaryColor', DEFAULT_COLOR);
+            } else {
+                root.style.setProperty('--primary-color', preferredColor);
+            }
+        }
     },
     beforeDestroy() {
         const body = document.body;
@@ -94,7 +121,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import '@/styles/mixins.scss';
-@import '@/styles/theme.scss';
 
 .wrapper {
     max-height: 100vh;
@@ -168,7 +194,7 @@ export default defineComponent({
 
     .wrapper-m {
         display: block;
-        background-color: $primaryColor;
+        background-color: var(--primary-color);
 
         .content-wrapper {
             height: calc(100vh - $nav-height);

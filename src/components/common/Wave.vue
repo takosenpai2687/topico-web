@@ -7,6 +7,7 @@ import useGlobalStore from "@/stores/global";
 import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
 import { debounce } from "lodash";
+import { DEFAULT_COLOR } from "@/styles/themes";
 
 const FPS: number = 60;
 const STEP_SIZE: number = 30;
@@ -30,6 +31,7 @@ export default defineComponent({
             waterLevel: 0,
             targetLevel: 0,
             debouncedOnResize: debounce(this.onResize as any, 100),
+            primaryRGB: {}
         };
     },
     mounted() {
@@ -38,6 +40,11 @@ export default defineComponent({
             window.addEventListener("resize", this.debouncedOnResize);
         });
         this.onWaterChange(0, this.storeWaterLevel);
+        this.primaryRGB = this.getPrimaryRGB();
+        // Watch theme change
+        this.$watch(() => this.globalStore.primaryColor, (_n, _o) => {
+            this.primaryRGB = this.getPrimaryRGB();
+        });
     },
     beforeDestroy() {
         window.removeEventListener("resize", this.debouncedOnResize);
@@ -102,7 +109,7 @@ export default defineComponent({
             ctx.lineTo(0, 0);
             ctx.closePath();
 
-            ctx.fillStyle = `rgba(251, 114, 153, ${opacity})`;
+            ctx.fillStyle = `rgba(${this.primaryRGB.r},${this.primaryRGB.g},${this.primaryRGB.b}, ${opacity})`;
             ctx.fill();
         },
         onWaterChange(oldValue: number, newValue: number) {
@@ -111,6 +118,17 @@ export default defineComponent({
             this.stepSize =
                 (newValue - oldValue) / (TRANSITION_TIME_MS / INTERVAL_MS);
         },
+        hexToRGB(hex: string) {
+            let r = parseInt(hex.slice(1, 3), 16),
+                g = parseInt(hex.slice(3, 5), 16),
+                b = parseInt(hex.slice(5, 7), 16);
+            return { r, g, b };
+        },
+        getPrimaryRGB() {
+            const hex = this.globalStore.primaryColor;
+            const rgb = this.hexToRGB(hex);
+            return rgb;
+        }
     },
     watch: {
         storeWaterLevel(newValue, oldValue) {
@@ -120,17 +138,14 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-@import "@/styles/theme.scss";
-
-.wave-box {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: #fcfcfc;
-}
+<style lang="scss" scoped> .wave-box {
+     position: fixed;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     right: 0;
+     width: 100%;
+     height: 100vh;
+     background-color: #fcfcfc;
+ }
 </style>

@@ -49,17 +49,15 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-@import "@/styles/theme.scss";
+<style lang="scss" scoped> .tray {
+     .tray-item span {
+         font-size: 0.82em;
+     }
 
-.tray {
-    .tray-item span {
-        font-size: 0.82em;
-    }
+     color: var(--primary-color);
 
-    color: $primaryColor;
-
-    .fa-icon {
-        color: $primaryColor;
-    }
-}</style>
+     .fa-icon {
+         color: var(--primary-color);
+     }
+ }
+</style>

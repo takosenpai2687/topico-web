@@ -7,7 +7,7 @@
 
 <script lang="ts">
 export default {
-    name: 'CircleButton',
+    name: "CircleButton",
     props: {
         icon: {
             required: false,
@@ -18,8 +18,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/theme.scss";
-
 .btn {
     width: 2.2em;
     height: 2.2em;
@@ -30,7 +28,7 @@ export default {
     background-color: #fff;
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
     border-radius: 1.1em;
-    color: $primaryFontColor;
+    color: var(--primary-font-color);
     transition: 0.24s all ease-out;
 
     &:hover {

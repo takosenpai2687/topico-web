@@ -18,6 +18,8 @@ import {
     faXmark,
     faBan,
     faRotateRight,
+    faGear,
+    faGears,
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 
@@ -36,7 +38,9 @@ library.add(
     faPenToSquare,
     faXmark,
     faBan,
-    faRotateRight
+    faRotateRight,
+    faGear,
+    faGears
 );
 
 export default FontAwesomeIcon;

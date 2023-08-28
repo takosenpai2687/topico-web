@@ -56,8 +56,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-@import "@/styles/theme.scss";
+<style lang="scss" scoped> 
 
 $initial-width: 20em;
 $expanded-width: 28em;
@@ -69,7 +68,7 @@ $expanded-width: 28em;
     border-radius: 2em;
     background: white;
     padding: 0.5em 1em;
-    color: $primaryFontColor;
+    color: var(--primary-font-color);
     margin: 0 auto;
 
     .search-input {

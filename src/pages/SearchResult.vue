@@ -160,51 +160,49 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-@import "@/styles/theme.scss";
-@import "@/styles/mixins.scss";
+<style lang="scss" scoped> @import "@/styles/mixins.scss";
 
-.fa-edit {
-    transition: all 0.16s ease-out;
+ .fa-edit {
+     transition: all 0.16s ease-out;
 
-    &:hover {
-        transform: scale(1.05);
-        cursor: pointer;
-        color: #fee;
-    }
-}
+     &:hover {
+         transform: scale(1.05);
+         cursor: pointer;
+         color: #fee;
+     }
+ }
 
-.fa-refresh {
-    color: $primaryFontColor;
-    transition: all 0.16s ease-out;
-    position: absolute;
-    top: .8em;
-    right: 1em;
-    font-size: 1.2em;
+ .fa-refresh {
+     color: var(--primary-font-color);
+     transition: all 0.16s ease-out;
+     position: absolute;
+     top: .8em;
+     right: 1em;
+     font-size: 1.2em;
 
-    &:hover {
-        transform: scale(1.1);
-        cursor: pointer;
-    }
-}
+     &:hover {
+         transform: scale(1.1);
+         cursor: pointer;
+     }
+ }
 
-.search-link {
-    transition: all 0.16s ease-out;
+ .search-link {
+     transition: all 0.16s ease-out;
 
-    &:hover {
-        text-decoration: underline;
-        font-weight: bold;
-        transform: scale(1.05);
-    }
-}
+     &:hover {
+         text-decoration: underline;
+         font-weight: bold;
+         transform: scale(1.05);
+     }
+ }
 
-.fa-eye {
-    font-size: 0.9em;
-    transition: all 0.16s ease-out;
+ .fa-eye {
+     font-size: 0.9em;
+     transition: all 0.16s ease-out;
 
-    &:hover {
-        cursor: pointer;
-        transform: scale(1.1);
-    }
-}
+     &:hover {
+         cursor: pointer;
+         transform: scale(1.1);
+     }
+ }
 </style>

@@ -22,7 +22,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/mixins";
-@import "@/styles/theme";
 
 .tag {
     @include card-shadow-rounded;
@@ -59,7 +58,7 @@ export default {
             text-decoration: underline !important;
         }
 
-        background-color: $primaryColor;
+        background-color: var(--primary-color);
     }
 
     .level {
@@ -72,7 +71,7 @@ export default {
         align-items: center;
         font-size: 0.8em;
         color: #fff;
-        background-color: $primaryColor;
+        background-color: var(--primary-color);
         font-weight: bold;
         top: 50%;
         right: 0.5em;

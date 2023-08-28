@@ -1,5 +1,7 @@
-@import "./theme.scss";
-@import "./mixins.scss";
+:root {
+    --primary-color: #fb7299;
+    --primary-font-color: #61666d;
+}
 
 html {
     box-sizing: border-box;
@@ -30,7 +32,7 @@ h6,
 a,
 li {
     box-sizing: border-box;
-    color: $primaryFontColor;
+    color: var(--primary-font-color);
 }
 
 a {

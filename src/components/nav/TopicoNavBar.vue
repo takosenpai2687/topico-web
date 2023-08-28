@@ -6,9 +6,15 @@
         <div class="btn-group">
             <TopicoNavButton v-for="(route, i) in routes" :text="route.text" :to="route.to" :icon="route.icon"
                 :active="i === activeIdx" />
+            <font-awesome-icon icon="fa-solid fa-gear" class="fa-settings-mb"
+                @click="() => globalStore.setShowSettings(true)" />
         </div>
-        <div class="user-row">
-            <UserNameAvatar :user="user" />
+        <div class="user-ctrl">
+            <div class="user-row">
+                <UserNameAvatar :user="user" />
+                <font-awesome-icon icon="fa-solid fa-gear" class="fa-settings"
+                    @click="() => globalStore.setShowSettings(true)" />
+            </div>
         </div>
     </div>
 </template>
@@ -16,7 +22,9 @@
 <script lang="ts">
 import UserNameAvatar from "@/components/common/UserNameAvatar.vue";
 import TopicoNavButton from "@/components/nav/TopicoNavButton.vue";
+import useGlobalStore from "@/stores/global";
 import { getUserFromLocalStorage } from "@/util/auth";
+import _ from "lodash";
 import { defineComponent } from "vue";
 
 const routes = [
@@ -42,6 +50,10 @@ export default defineComponent({
     components: {
         TopicoNavButton,
         UserNameAvatar,
+    },
+    setup() {
+        const globalStore = useGlobalStore();
+        return { globalStore };
     },
     computed: {
         user: function () {
@@ -110,14 +122,38 @@ export default defineComponent({
             justify-content: center;
             gap: 1em;
             width: 100%;
+
+            .fa-settings-mb {
+                display: none;
+            }
         }
 
-        .user-row {
+        .user-ctrl {
             height: 33%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-end;
+
+            .user-row {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1em;
+
+                .fa-settings {
+                    display: block;
+                    font-size: 1.3em;
+                    color: var(--primary-font-color);
+                    transition: all 0.2s ease-out;
+
+                    &:hover {
+                        transform: scale(1.1);
+                        cursor: pointer;
+                        color: var(--primary-color);
+                    }
+                }
+            }
         }
     }
 }
@@ -142,17 +178,35 @@ export default defineComponent({
             gap: 0.3em;
             padding: 0.6em;
 
+            .fa-settings-mb {
+                width: 25%;
+                font-size: 1.5em;
+                display: block;
+                color: var(--primary-font-color);
+                transition: all 0.2s ease-out;
+
+                &:hover {
+                    transform: scale(1.1);
+                    cursor: pointer;
+                    color: var(--primary-color);
+                }
+            }
+
             a {
                 display: flex;
                 height: 100%;
-                width: 33%;
+                width: 25%;
                 justify-content: center;
                 align-items: center;
             }
         }
 
-        .user-row {
+        .user-ctrl {
             display: none;
+
+            .fa-settings {
+                display: none;
+            }
         }
     }
 }

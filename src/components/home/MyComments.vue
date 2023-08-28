@@ -58,8 +58,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/mixins.scss";
-@import "@/styles/theme.scss";
+@import "@/styles/mixins.scss"; 
 
 .card-wrapper {
     transition: all 0.16s ease-out;
@@ -151,7 +150,7 @@ export default {
 @media screen and (min-width: $mobile-width) {
 
     span {
-        color: $primaryFontColor;
+        color: var(--primary-font-color);
     }
 }
 

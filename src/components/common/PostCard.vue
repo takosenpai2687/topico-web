@@ -73,8 +73,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/mixins.scss";
-@import "@/styles/theme.scss";
+@import "@/styles/mixins.scss"; 
 
 .card-wrapper {
     transition: all 0.16s ease-out;

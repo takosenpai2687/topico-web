@@ -169,8 +169,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "@/styles/theme.scss";
+<style lang="scss" scoped> 
 @import "@/styles/mixins.scss";
 
 .fa-edit {
@@ -184,7 +183,7 @@ export default {
 }
 
 .fa-refresh {
-    color: $primaryFontColor;
+    color: var(--primary-font-color);
     transition: all 0.16s ease-out;
     position: absolute;
     top: .8em;
@@ -220,10 +219,10 @@ export default {
 .btn-sort {
     @include card-shadow;
     background-color: #fff;
-    color: $primaryColor;
+    color: var(--primary-color);
 
     &.active {
-        background-color: $primaryColor;
+        background-color: var(--primary-color);
         color: #fff;
         font-weight: bold;
         cursor: inherit;

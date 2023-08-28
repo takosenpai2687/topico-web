@@ -10,11 +10,9 @@ import { defineComponent } from "vue";
 export default defineComponent({ name: 'Tag' });
 </script>
 
-<style scoped lang="scss">
-@import "@/styles/theme.scss";
-
+<style scoped lang="scss"> 
 .tag {
-    background-color: $primaryColor;
+    background-color: var(--primary-color);
     padding: 0.1em 1em;
     border-radius: 3em;
     color: #fff;

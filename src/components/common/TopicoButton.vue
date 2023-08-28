@@ -10,23 +10,20 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "@/styles/theme.scss";
+<style lang="scss" scoped> .btn-topico {
+     display: block;
+     font-size: 1em;
+     color: #fff;
+     background-color: var(--primary-color);
+     border-radius: 20px;
 
-.btn-topico {
-    display: block;
-    font-size: 1em;
-    color: #fff;
-    background-color: $primaryColor;
-    border-radius: 20px;
+     &:hover {
+         background-color: var(--primary-color);
+         cursor: pointer;
+         transform: scale(1.05);
+         color: #fcfcfc;
+     }
 
-    &:hover {
-        background-color: $pink700;
-        cursor: pointer;
-        transform: scale(1.05);
-        color: #fcfcfc;
-    }
-
-    transition: all 0.16s ease-out;
-}
+     transition: all 0.16s ease-out;
+ }
 </style>

@@ -44,8 +44,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-@import "@/styles/theme.scss";
+<style lang="scss" scoped> 
 @import "@/styles/mixins.scss";
 
 @keyframes shake {
@@ -70,7 +69,7 @@ export default defineComponent({
     span.tag-editing {
         display: block;
         background-color: #fff;
-        color: $primaryFontColor;
+        color: var(--primary-font-color);
         width: 100%;
         height: 100%;
         padding: .25em 1.8em;
@@ -87,7 +86,7 @@ export default defineComponent({
         transition: all 0.16s ease-out;
 
         &:hover {
-            background-color: $primaryColor;
+            background-color: var(--primary-color);
             cursor: pointer;
             transform: scale(1.1);
             color: #fff;
@@ -104,15 +103,15 @@ export default defineComponent({
         border-radius: 2em;
         font-weight: bold;
         background-color: #fff;
-        color: $primaryColor;
-        outline: 1px solid $primaryColor;
+        color: var(--primary-color);
+        outline: 1px solid var(--primary-color);
         width: 1.3em;
         height: 1.3em;
 
         &:hover {
             cursor: pointer;
             transform: scale(1.1);
-            background-color: $primaryColor;
+            background-color: var(--primary-color);
             color: #fff;
         }
     }
