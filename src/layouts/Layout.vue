@@ -1,7 +1,7 @@
 <template>
-    <div v-if="user" class="wrapper w-full h-full flex flex-row relative overflow-y-hidden">
+    <div v-if="user" class="wrapper w-full h-full flex flex-row relative">
         <topico-nav-bar class="topico-nav h-full" />
-        <main class="content-wrapper h-full z-10 overflow-y-auto relative" ref="main">
+        <main class="content-wrapper h-full z-10  relative">
             <div class="content"><router-view></router-view></div>
             <!-- Back to top button -->
             <circle-button v-show="showBtnTop" class="btn-top" @click="handleClickTop">
@@ -13,8 +13,8 @@
     </div>
 
     <!-- Mobile -->
-    <div v-if="user" class="wrapper-m w-full h-full  overflow-y-hidden">
-        <main class="content-wrapper z-10 overflow-y-auto " ref="main">
+    <div v-if="user" class="wrapper-m w-full h-full">
+        <main class="content-wrapper z-10">
             <div class="content"><router-view></router-view></div>
             <!-- Back to top button -->
             <circle-button v-show="showBtnTop" class="btn-top" @click="handleClickTop">
@@ -59,9 +59,9 @@ export default defineComponent({
         setLocalStorage(user);
         this.user = user;
         this.$nextTick(() => {
-            const container: any = this.$refs.main;
-            if (container) {
-                container.addEventListener("scroll", this.throttledOnScroll);
+            const body = document.body;
+            if (body) {
+                body.addEventListener("scroll", this.throttledOnScroll);
             }
             window.addEventListener("resize", this.onResizeDebounced);
             this.onResize();
@@ -69,14 +69,12 @@ export default defineComponent({
     },
     methods: {
         handleClickTop() {
-            const main: any = this.$refs.main;
-            if (!main) return;
-            main.scrollTo({ top: 0, behavior: 'smooth' });
+            const body = document.body;
+            if (!body) return;
+            body.scrollTo({ top: 0, behavior: 'smooth' });
         },
         checkScroll() {
-            const main: any = this.$refs.main;
-            if (!main) return;
-            const scrollTop = main.scrollTop;
+            const scrollTop = document.body.scrollTop;
             this.showBtnTop = scrollTop > 0;
         },
         onResize() {
@@ -85,9 +83,9 @@ export default defineComponent({
         },
     },
     beforeDestroy() {
-        const container: any = this.$refs.main;
-        if (container) {
-            container.removeEventListener("scroll", this.throttledOnScroll);
+        const body = document.body;
+        if (body) {
+            body.removeEventListener("scroll", this.throttledOnScroll);
         }
         window.removeEventListener("resize", this.onResizeDebounced);
     }
