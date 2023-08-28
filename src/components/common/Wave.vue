@@ -7,7 +7,6 @@ import useGlobalStore from "@/stores/global";
 import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
 import { debounce } from "lodash";
-import { DEFAULT_COLOR } from "@/styles/themes";
 
 const FPS: number = 60;
 const STEP_SIZE: number = 30;
@@ -31,7 +30,7 @@ export default defineComponent({
             waterLevel: 0,
             targetLevel: 0,
             debouncedOnResize: debounce(this.onResize as any, 100),
-            primaryRGB: {}
+            primaryRGB: { r: 0, g: 0, b: 0 }
         };
     },
     mounted() {

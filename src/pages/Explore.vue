@@ -77,7 +77,8 @@ import TopicoButton from "@/components/common/TopicoButton.vue";
 import PostCard from "@/components/common/PostCard.vue";
 import { getTopSearch, getTopComms, getTrendingHot, getTrendingNew } from "@/services/searchService";
 
-const DELAY = 0.14;
+import { DELAY, } from '@/config/config';
+
 
 export default {
     name: 'Explore',
@@ -169,108 +170,107 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped> 
-@import "@/styles/mixins.scss";
+<style lang="scss" scoped> @import "@/styles/mixins.scss";
 
-.fa-edit {
-    transition: all 0.16s ease-out;
+ .fa-edit {
+     transition: all 0.16s ease-out;
 
-    &:hover {
-        transform: scale(1.05);
-        cursor: pointer;
-        color: #fee;
-    }
-}
+     &:hover {
+         transform: scale(1.05);
+         cursor: pointer;
+         color: #fee;
+     }
+ }
 
-.fa-refresh {
-    color: var(--primary-font-color);
-    transition: all 0.16s ease-out;
-    position: absolute;
-    top: .8em;
-    right: 1em;
-    font-size: 1.2em;
+ .fa-refresh {
+     color: var(--primary-font-color);
+     transition: all 0.16s ease-out;
+     position: absolute;
+     top: .8em;
+     right: 1em;
+     font-size: 1.2em;
 
-    &:hover {
-        transform: scale(1.1);
-        cursor: pointer;
-    }
-}
+     &:hover {
+         transform: scale(1.1);
+         cursor: pointer;
+     }
+ }
 
-.search-link {
-    transition: all 0.16s ease-out;
+ .search-link {
+     transition: all 0.16s ease-out;
 
-    &:hover {
-        text-decoration: underline;
-        font-weight: bold;
-        transform: scale(1.05);
-    }
-}
+     &:hover {
+         text-decoration: underline;
+         font-weight: bold;
+         transform: scale(1.05);
+     }
+ }
 
-.fa-eye {
-    font-size: 0.9em;
-    transition: all 0.16s ease-out;
+ .fa-eye {
+     font-size: 0.9em;
+     transition: all 0.16s ease-out;
 
-    &:hover {
-        cursor: pointer;
-        transform: scale(1.1);
-    }
-}
+     &:hover {
+         cursor: pointer;
+         transform: scale(1.1);
+     }
+ }
 
-.btn-sort {
-    @include card-shadow;
-    background-color: #fff;
-    color: var(--primary-color);
+ .btn-sort {
+     @include card-shadow;
+     background-color: #fff;
+     color: var(--primary-color);
 
-    &.active {
-        background-color: var(--primary-color);
-        color: #fff;
-        font-weight: bold;
-        cursor: inherit;
-    }
-}
+     &.active {
+         background-color: var(--primary-color);
+         color: #fff;
+         font-weight: bold;
+         cursor: inherit;
+     }
+ }
 
-// PC
-@media screen and (min-width: $mobile-width) {
-    .wrapper {
-        display: flex;
-        flex-direction: row;
+ // PC
+ @media screen and (min-width: $mobile-width) {
+     .wrapper {
+         display: flex;
+         flex-direction: row;
 
-        .content-main {
-            width: 75%;
-            height: 100%;
-        }
+         .content-main {
+             width: 75%;
+             height: 100%;
+         }
 
-        .content-side {
-            width: 25%;
-            position: relative;
+         .content-side {
+             width: 25%;
+             position: relative;
 
-            .content-side-inner {
-                position: fixed;
-                top: 1em;
-            }
-        }
-    }
+             .content-side-inner {
+                 position: fixed;
+                 top: 1em;
+             }
+         }
+     }
 
 
-}
+ }
 
-// Mobile
-@media screen and (max-width: $mobile-width) {
-    .wrapper {
-        display: flex;
+ // Mobile
+ @media screen and (max-width: $mobile-width) {
+     .wrapper {
+         display: flex;
 
-        height: 100%;
-        flex-direction: column;
+         height: 100%;
+         flex-direction: column;
 
-        .content-main {
-            width: 100%;
-        }
+         .content-main {
+             width: 100%;
+         }
 
-        .content-side {
-            width: 100%;
+         .content-side {
+             width: 100%;
 
-            .content-side-inner {}
-        }
-    }
-}
+             .content-side-inner {}
+         }
+     }
+ }
 </style>

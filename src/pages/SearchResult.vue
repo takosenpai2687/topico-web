@@ -61,10 +61,8 @@ import CommunityPlate from "@/components/common/CommunityPlate.vue";
 import TopicoButton from "@/components/common/TopicoButton.vue";
 import PostCard from "@/components/common/PostCard.vue";
 import useGlobalStore from "@/stores/global";
+import { DELAY, MAX_HISTORY } from '@/config/config';
 
-
-const MAX_HISTORY = 5;
-const DELAY = 0.2;
 
 export default defineComponent({
     name: 'SearchResult',
