@@ -39,10 +39,10 @@ export default defineComponent({
             window.addEventListener("resize", this.debouncedOnResize);
         });
         this.onWaterChange(0, this.storeWaterLevel);
-        this.primaryRGB = this.getPrimaryRGB();
+        this.setColor();
         // Watch theme change
         this.$watch(() => this.globalStore.primaryColor, (_n, _o) => {
-            this.primaryRGB = this.getPrimaryRGB();
+            this.setColor();
         });
     },
     beforeDestroy() {
@@ -127,6 +127,9 @@ export default defineComponent({
             const hex = this.globalStore.primaryColor;
             const rgb = this.hexToRGB(hex);
             return rgb;
+        },
+        setColor() {
+            this.primaryRGB = this.getPrimaryRGB();
         }
     },
     watch: {
