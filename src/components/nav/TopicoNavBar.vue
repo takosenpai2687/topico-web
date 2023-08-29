@@ -1,7 +1,8 @@
 <template>
     <div class="nav-wrapper px-4 py-4">
         <div class="logo">
-            <img src="@/assets/logo.webp" alt="" srcset="" :draggable="false" />
+            <font-awesome-icon class="logo-icon" icon="fa-brands fa-cloudversify" />
+            <h1 class="logo-text">Topico</h1>
         </div>
         <div class="btn-group">
             <TopicoNavButton v-for="(route, i) in routes" :text="route.text" :to="route.to" :icon="route.icon"
@@ -108,9 +109,18 @@ export default defineComponent({
             align-items: center;
             justify-content: center;
             user-select: none;
+            color: var(--primary-color);
 
-            img {
-                height: 10em;
+            .logo-icon {
+                font-size: 4.2em;
+                color: inherit;
+            }
+
+            .logo-text {
+                font-family: righteous;
+                font-size: 3.6em;
+                color: inherit;
+                margin-top: -.2em;
             }
         }
 

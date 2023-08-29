@@ -1,4 +1,5 @@
 @import "@fontsource/roboto/index.css";
+@import "@fontsource/righteous/index.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

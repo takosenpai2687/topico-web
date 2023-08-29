@@ -22,7 +22,7 @@ import {
     faGears,
     faCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import {} from "@fortawesome/free-regular-svg-icons";
+import { faCloudversify } from "@fortawesome/free-brands-svg-icons";
 
 library.add(
     faHouse,
@@ -42,7 +42,8 @@ library.add(
     faRotateRight,
     faGear,
     faGears,
-    faCheck
+    faCheck,
+    faCloudversify
 );
 
 export default FontAwesomeIcon;
