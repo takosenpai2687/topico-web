@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class="px-4">
         <!-- Show Spoilers -->
         <div class="row mb-4">
-            <span>Show Spoilers: </span>
+            <span class="text-lg">Show Spoilers: </span>
             <Switch v-model="showSpoilers" class="switch relative inline-flex h-6 w-11 items-center rounded-full"
-                :style="{ 'background-color': showSpoilers ? globalStore.primaryColor : '#ddd' }">
+                :style="{ 'background-color': showSpoilers ? globalStore.primaryColor : '#ddd', 'transform': 'scale(1.1)' }">
                 <span class="sr-only">Enable notifications</span>
                 <span :class="showSpoilers ? 'translate-x-6' : 'translate-x-1'"
                     class="inline-block h-4 w-4 transform rounded-full bg-white transition" />
@@ -18,7 +18,7 @@
             </div>
         </div>
         <!-- Button Save -->
-        <div class="row flex flex-row items-center justify-center">
+        <div class="row flex flex-row items-center justify-center my-2">
             <TopicoButton @click="handleSave">Save</TopicoButton>
         </div>
     </div>
@@ -78,6 +78,7 @@ export default defineComponent({
     justify-content: center;
     gap: 1em;
 }
+
 
 .colors {
     display: grid;
