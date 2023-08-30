@@ -58,12 +58,9 @@ export default defineComponent({
             // Spoilers
             this.globalStore.setShowSpoilers(this.showSpoilers);
             localStorage.setItem('showSpoilers', JSON.stringify(this.showSpoilers));
-            // PrimaryColor
-            const root = document.documentElement;
-            if (root) {
-                localStorage.setItem('primaryColor', this.primaryColor);
-                this.globalStore.setPrimaryColor(this.primaryColor);
-            }
+            // PrimaryColor 
+            localStorage.setItem('primaryColor', this.primaryColor);
+            this.globalStore.setPrimaryColor(this.primaryColor);
             this.globalStore.setShowSettings(false);
         }
     }
