@@ -188,13 +188,21 @@ export default defineComponent({
 @media screen and (max-width: $mobile-width) {
     $nav-height: 5em;
 
+    :global(html, body) {
+        background-attachment: fixed;
+        background-color: var(--primary-color);
+    }
+
+    :global(html) {
+        padding-bottom: $nav-height + 1em;
+    }
+
     .wrapper {
         display: none;
     }
 
     .wrapper-m {
         display: block;
-        background-color: var(--primary-color);
 
         .content-wrapper {
             height: calc(100vh - $nav-height);
