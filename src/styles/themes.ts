@@ -1,14 +1,14 @@
 const themes = {
-    $red500: "#F44336",
+    $red400: "#EF5350",
     $pinkBZ: "#fb7299",
-    $purple400: "#AB47BC",
-    $blue600: "#1e88e5",
-    $green600: "#43A047",
-    $lightgreen600: "#7CB342",
-    $lime600: "#C0CA33",
-    $yellow600: "#FDD835",
-    $amber600: "#FFB300",
-    $orange600: "#FB8C00",
+    $purple300: "#BA68C8",
+    $blue400: "#42A5F5",
+    $green400: "#66BB6A",
+    $lightgreen500: "#8BC34A",
+    $lime500: "#CDDC39",
+    $yellow500: "#FFEB3B",
+    $amber400: "#FFCA28",
+    $orange400: "#FFA726",
 };
 
 export const DEFAULT_COLOR = themes["$pinkBZ"];

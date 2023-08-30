@@ -106,6 +106,8 @@ export default defineComponent({
             height: 33%;
             display: flex;
             flex-direction: column;
+            font-weight: bold;
+            letter-spacing: .05em;
             align-items: center;
             justify-content: center;
             user-select: none;

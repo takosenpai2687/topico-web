@@ -19,7 +19,7 @@
         </div>
         <!-- Button Save -->
         <div class="row flex flex-row items-center justify-center my-2">
-            <TopicoButton @click="handleSave">Save</TopicoButton>
+            <TopicoButton class="btn-save" @click="handleSave">Save</TopicoButton>
         </div>
     </div>
 </template>
@@ -76,6 +76,13 @@ export default defineComponent({
     gap: 1em;
 }
 
+.btn-save {
+    font-size: 1.2em;
+    padding: .25em 1.5em;
+    &:hover {
+        font-weight: bold;
+    }
+}
 
 .colors {
     display: grid;
