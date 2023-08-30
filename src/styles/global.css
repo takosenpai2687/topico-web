@@ -1,5 +1,3 @@
-
-
 :root {
     --primary-color: #fb7299;
     --primary-font-color: #61666d;
@@ -11,6 +9,10 @@ html {
     font-family: "Roboto";
     cursor: url("/img/genshin-cursor.webp"), auto;
     overflow-y: hidden;
+}
+
+* {
+    text-shadow: 0 0 1px #6663;
 }
 
 body {
