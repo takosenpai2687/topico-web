@@ -90,7 +90,7 @@ export default defineComponent({
 
             if (
                 Math.abs(this.waterLevel - this.targetLevel) <
-                Math.abs(this.stepSize * 1.5)
+                Math.abs(this.stepSize * 2)
             ) {
                 this.transition = false;
                 this.targetLevel = 0;
