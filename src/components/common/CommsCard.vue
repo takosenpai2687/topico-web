@@ -1,10 +1,11 @@
 <template>
     <TopicoTitleCard :title="title" class="relative">
         <TopicoButton v-if="checkin" class="btn-checkin">Check in for all</TopicoButton>
-        <div :class="`${expanded ? 'overflow-y-visible' : 'max-h-14 overflow-y-hidden'
+        <div :class="`${expanded ? 'overflow-y-visible' : 'max-h-12 overflow-y-hidden'
             } pr-2  mt-1`">
-            <div class="grid gap-4 p-1">
-                <CommunityPlate v-for="comm in comms" :community="comm" />
+            <div class="flex flex-row flex-wrap justify-between gap-x-3 gap-y-4 ">
+                <CommunityPlate :class="`${globalStore.isMobile ? 'w-1/3' : 'w-1/4'} grow`" v-for="comm in  comms "
+                    :community="comm" />
             </div>
         </div>
         <CircleButton :class="`${expanded ? 'rotate-180' : ''} mx-auto mt-2 -mb-2`" icon="fa-solid fa-angle-down"
@@ -51,13 +52,8 @@ export default defineComponent({
     },
     computed: {
         showMore: function () {
-            const { isWide, isMobile } = this.globalStore;
-            const showMoreWide: boolean =
-                isWide && this.comms.length > 4;
-            const showMoreNarrow: boolean =
-                !isWide && !isMobile && this.comms.length > 3;
-            const showMoreMobile: boolean = !isWide && isMobile && this.comms.length > 2;
-            return showMoreWide || showMoreNarrow || showMoreMobile;
+            const THRESHOLD = this.globalStore.isMobile ? 2 : 3;
+            return this.comms.length > THRESHOLD;
         },
     }
 })
@@ -74,24 +70,24 @@ export default defineComponent({
     user-select: none;
 }
 
-// Mobile
-@media screen and (max-width: $mobile-width) {
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+// // Mobile
+// @media screen and (max-width: $mobile-width) {
+//     .grid {
+//         grid-template-columns: repeat(2, 1fr);
+//     }
+// }
 
-// PC Narrow
-@media screen and (max-width: $wide-width) and (min-width: $mobile-width) {
-    .grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
+// // PC Narrow
+// @media screen and (max-width: $wide-width) and (min-width: $mobile-width) {
+//     .grid {
+//         grid-template-columns: repeat(3, 1fr);
+//     }
+// }
 
-// PC Wide
-@media screen and (min-width: $wide-width) {
-    .grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
+// // PC Wide
+// @media screen and (min-width: $wide-width) {
+//     .grid {
+//         grid-template-columns: repeat(4, 1fr);
+//     }
+// }
 </style>
