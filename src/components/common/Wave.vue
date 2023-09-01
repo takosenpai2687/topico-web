@@ -4,13 +4,12 @@
 
 <script lang="ts">
 import useGlobalStore from "@/stores/global";
+import { debounce } from "lodash";
 import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
-import { debounce } from "lodash";
 
 const FPS: number = 60;
 const STEP_SIZE: number = 30;
-const TRANSITION_TIME_MS: number = 160;
 const INTERVAL_MS: number = 1000 / FPS;
 const AMPLITUDE = 12;
 
@@ -25,10 +24,7 @@ export default defineComponent({
         return {
             ctx: null as CanvasRenderingContext2D | null,
             time: 0,
-            transition: false,
-            stepSize: 0,
             waterLevel: 0,
-            targetLevel: 0,
             debouncedOnResize: debounce(this.onResize as any, 100),
             primaryRGB: { r: 0, g: 0, b: 0 }
         };
@@ -38,7 +34,7 @@ export default defineComponent({
         this.$nextTick(() => {
             window.addEventListener("resize", this.debouncedOnResize);
         });
-        this.onWaterChange(0, this.storeWaterLevel);
+        this.onWaterChange(this.storeWaterLevel);
         this.setColor();
         // Watch theme change
         this.$watch(() => this.globalStore.primaryColor, (_n, _o) => {
@@ -83,19 +79,6 @@ export default defineComponent({
             if (!ctx) return;
             const width = ctx.canvas.width;
 
-            // Transition
-            if (this.transition) {
-                this.waterLevel += this.stepSize;
-            }
-
-            if (
-                Math.abs(this.waterLevel - this.targetLevel) <
-                Math.abs(this.stepSize * 2)
-            ) {
-                this.transition = false;
-                this.targetLevel = 0;
-                this.stepSize = 0;
-            }
 
             ctx.beginPath();
             ctx.moveTo(0, this.waterLevel);
@@ -111,11 +94,8 @@ export default defineComponent({
             ctx.fillStyle = `rgba(${this.primaryRGB.r},${this.primaryRGB.g},${this.primaryRGB.b}, ${opacity})`;
             ctx.fill();
         },
-        onWaterChange(oldValue: number, newValue: number) {
-            this.transition = true;
-            this.targetLevel = newValue;
-            this.stepSize =
-                (newValue - oldValue) / (TRANSITION_TIME_MS / INTERVAL_MS);
+        onWaterChange(newValue: number) {
+            this.waterLevel = newValue;
         },
         hexToRGB(hex: string) {
             let r = parseInt(hex.slice(1, 3), 16),
@@ -133,8 +113,8 @@ export default defineComponent({
         }
     },
     watch: {
-        storeWaterLevel(newValue, oldValue) {
-            this.onWaterChange(oldValue, newValue);
+        storeWaterLevel(newValue, _oldValue) {
+            this.onWaterChange(newValue);
         },
     },
 });
