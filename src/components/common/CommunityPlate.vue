@@ -30,12 +30,14 @@ export default {
     justify-content: flex-start;
     transition: all 0.16s ease-out;
     position: relative;
+    overflow: hidden;
 
     img {
         width: 2em;
         height: 2em;
         border-radius: 0.25em;
         user-select: none;
+        transition: all 0.16s ease-out;
     }
 
     span {
@@ -52,6 +54,10 @@ export default {
 
     &:hover {
         cursor: pointer;
+
+        img {
+            transform: scale(1.2);
+        }
 
         span {
             color: #fff;
