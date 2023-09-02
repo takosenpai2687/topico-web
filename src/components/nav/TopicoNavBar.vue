@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-wrapper px-4 py-4">
+    <nav class="nav-wrapper px-4 py-4">
         <div class="logo">
             <font-awesome-icon class="logo-icon" icon="fa-brands fa-cloudversify" />
             <h1 class="logo-text">Topico</h1>
@@ -17,7 +17,7 @@
                     @click="() => globalStore.setShowSettings(true)" />
             </div>
         </div>
-    </div>
+    </nav>
 </template>
 
 <script lang="ts">
