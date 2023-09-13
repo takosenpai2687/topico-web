@@ -1,27 +1,52 @@
 <template>
-    <button class="btn-topico py-1 px-4">
+    <button :disabled="disabled" class="btn-topico py-2 px-6" :style="{ backgroundColor }">
         <slot />
     </button>
 </template>
 
 <script lang="ts">
 export default {
-    name: 'TopicoButton'
+    name: 'TopicoButton',
+    props: {
+        disabled: {
+            type: Boolean,
+            default: false,
+            required: false
+        },
+        color: {
+            type: String,
+            required: false
+        }
+    },
+    computed: {
+        backgroundColor: function () {
+            if (this.disabled) return '#bbb';
+            return this.color ?? 'var(--primary-color)';
+        }
+    }
 };
 </script>
 
 <style lang="scss" scoped> .btn-topico {
      display: block;
-     font-size: 1em;
+     font-size: 1.1em;
+     line-height: 1.2em;
      color: #fff;
-     background-color: var(--primary-color);
-     border-radius: 20px;
+     border-radius: 2em;
+     letter-spacing: .1em;
 
-     &:hover {
-         background-color: var(--primary-color);
+     &:hover:not(:disabled) {
          cursor: pointer;
          transform: scale(1.05);
          color: #fcfcfc;
+     }
+
+     &:disabled {
+         background-color: #bbb;
+
+         &:hover {
+             cursor: not-allowed;
+         }
      }
 
      transition: all 0.16s ease-out;

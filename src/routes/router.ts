@@ -8,25 +8,45 @@ import Profile from "@/pages/Profile.vue";
 import Community from "@/pages/Community.vue";
 import PostVue from "@/pages/Post.vue";
 import SearchResultVue from "@/pages/SearchResult.vue";
+import LoginVue from "@/pages/Login.vue";
 
 const routes = [
-    { path: "/", component: Home, meta: { layout: LayoutVue } },
     {
-        path: "/explore/:search",
-        component: SearchResultVue,
-        meta: { layout: LayoutVue },
-    },
-    { path: "/explore", component: Explore, meta: { layout: LayoutVue } },
-    { path: "/profile", component: Profile, meta: { layout: LayoutVue } },
-    {
-        path: "/community/:cid/post/:pid",
-        component: PostVue,
-        meta: { layout: LayoutVue },
+        path: "/login",
+        component: LoginVue,
     },
     {
-        path: "/community/:id",
-        component: Community,
-        meta: { layout: LayoutVue },
+        path: "/",
+        component: LayoutVue,
+        children: [
+            { path: "/", component: Home },
+            {
+                path: "/login",
+                component: LoginVue,
+            },
+            {
+                path: "/explore/:search",
+                component: SearchResultVue,
+            },
+            {
+                path: "/explore",
+                component: Explore,
+                meta: { layout: LayoutVue },
+            },
+            {
+                path: "/profile",
+                component: Profile,
+                meta: { layout: LayoutVue },
+            },
+            {
+                path: "/community/:cid/post/:pid",
+                component: PostVue,
+            },
+            {
+                path: "/community/:id",
+                component: Community,
+            },
+        ],
     },
 ];
 
