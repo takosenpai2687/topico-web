@@ -5,6 +5,14 @@ import { getUserInfo } from "@/services/userService";
 const LOGIN = ROOT + "/api/v1/auth/login";
 const SIGN_UP = ROOT + "/api/v1/auth/signup";
 
+export const reloadAuthHeader = () => {
+    const token: string | null = localStorage.getItem("token");
+    if (!token) {
+        logout();
+    }
+    axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem('token')}`;
+}
+
 export const login = async (loginDto: LoginDto): Promise<User> => {
     const { email, password } = loginDto;
     const loginRes = await axios

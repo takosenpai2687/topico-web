@@ -44,7 +44,7 @@ import { debounce, throttle } from "lodash";
 import { DEFAULT_COLOR } from '@/styles/themes';
 import Modal from "@/components/common/Modal.vue";
 import Settings from '@/components/common/Settings.vue';
-import { logout } from "@/services/authService";
+import { logout, reloadAuthHeader } from "@/services/authService";
 import { useMessage } from 'naive-ui';
 
 export default defineComponent({
@@ -71,6 +71,7 @@ export default defineComponent({
     },
     async created() {
         try {
+            reloadAuthHeader();
             const user: User = await getUserInfo();
             this.user = user;
         } catch (err: any) {
