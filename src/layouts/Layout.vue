@@ -39,12 +39,13 @@ import TopicoNavBar from "@/components/nav/TopicoNavBar.vue";
 import CircleButton from "@/components/common/CircleButton.vue";
 import { getUserInfo } from "@/services/userService";
 import useGlobalStore from "@/stores/global";
-import { setLocalStorage } from "@/util/auth";
 import { defineComponent } from "vue";
 import { debounce, throttle } from "lodash";
 import { DEFAULT_COLOR } from '@/styles/themes';
 import Modal from "@/components/common/Modal.vue";
 import Settings from '@/components/common/Settings.vue';
+import { logout } from "@/services/authService";
+import { useMessage } from 'naive-ui';
 
 export default defineComponent({
     name: 'Layout',
@@ -57,7 +58,8 @@ export default defineComponent({
     },
     setup() {
         const globalStore = useGlobalStore();
-        return { globalStore };
+        const message = useMessage();
+        return { globalStore, message };
     },
     data() {
         return {
@@ -68,9 +70,15 @@ export default defineComponent({
         };
     },
     async created() {
-        const user = await getUserInfo();
-        setLocalStorage(user);
-        this.user = user;
+        try {
+            const user: User = await getUserInfo();
+            this.user = user;
+        } catch (err: any) {
+            this.message.error(err.message);
+            logout();
+            this.$router.push('/login?redirect=' + this.$route.path);
+            return;
+        }
         this.$nextTick(() => {
             const body = document.body;
             if (body) {

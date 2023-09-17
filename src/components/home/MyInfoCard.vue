@@ -16,16 +16,20 @@
 </template>
 
 <script lang="ts">
-import { getUserFromLocalStorage } from "@/util/auth";
 import TopicoTitleCard from "@/components/common/TopicoTitleCard.vue";
 import TopicoButton from "@/components/common/TopicoButton.vue";
+import useGlobalStore from "@/stores/global";
 
 export default {
     name: 'MyInfoCard',
     components: { TopicoTitleCard, TopicoButton },
+    setup() {
+        const globalStore = useGlobalStore();
+        return { globalStore };
+    },
     computed: {
         user() {
-            return getUserFromLocalStorage();
+            return this.globalStore.user
         },
     },
 };

@@ -10,14 +10,20 @@
                 <!-- Left side login form -->
                 <div class="login flex flex-col h-full justify-center items-center">
                     <div class="flex flex-col w-4/5 justify-between gap-4">
-                        <n-form>
-                            <n-form-item label="Email" :validation-status="inputValidationStatus" :feedback="inputFeedback">
-                                <n-input :disabled="isSignup" v-model:value="email" clearable />
+                        <n-form ref="loginFormRef" :model="loginFormValue" :rules="loginRules">
+                            <!-- Email -->
+                            <n-form-item label="Email" path="email">
+                                <n-input :disabled="isSignup" v-model:value="loginFormValue.email" clearable
+                                    placeholder="Email" />
                             </n-form-item>
-                            <n-input :disabled="isSignup" v-model:value="password" type="password" placeholder="Password"
-                                class="input" />
+                            <!-- Password -->
+                            <n-form-item label="Password" path="password">
+                                <n-input :disabled="isSignup" v-model:value="loginFormValue.password" type="password"
+                                    placeholder="Password" class="input" />
+                            </n-form-item>
+                            <!-- Buttons -->
                             <div class="flex flex-row justify-evenly items-center py-4 gap-2">
-                                <TopicoButton class="w-1/2" :disabled="isSignup">Login</TopicoButton>
+                                <TopicoButton class="w-1/2" :disabled="isSignup" @click="handleLogin">Login</TopicoButton>
                                 <TopicoButton class="w-1/2" color="#333" @click="handleClickSignup">Signup</TopicoButton>
                             </div>
                         </n-form>
@@ -26,18 +32,33 @@
                 <!-- Right side signup form -->
                 <div class="signup flex flex-col h-full justify-center items-center" :class="isSignup ? 'expanded' : ''">
                     <div class="flex flex-col w-4/5 justify-between gap-4">
-                        <n-input :disabled="!isSignup" v-model:value="newEmail" type="text" placeholder="Email"
-                            class="input" />
-                        <n-input :disabled="!isSignup" v-model:value="newNickName" type="text" placeholder="Nickname"
-                            class="input" />
-                        <n-input :disabled="!isSignup" v-model:value="newPassword" type="password" placeholder="Password"
-                            class="input" />
-                        <n-input :disabled="!isSignup" v-model:value="confirmPassword" type="password"
-                            placeholder="Confirm Password" />
-                        <div class="flex flex-row justify-evenly items-center py-4">
-                            <TopicoButton class="w-full" color="#333" @click="handleClickSignup">Join for free
-                            </TopicoButton>
-                        </div>
+                        <n-form ref="signupFormRef" :model="signupFormValue" :rules="signupRules">
+                            <!-- Email -->
+                            <n-form-item label="Email" path="email">
+                                <n-input :disabled="!isSignup" v-model:value="signupFormValue.email" clearable
+                                    placeholder="Email" />
+                            </n-form-item>
+                            <!-- Nickname -->
+                            <n-form-item label="Nickname" path="nickName">
+                                <n-input :disabled="!isSignup" v-model:value="signupFormValue.nickName" clearable
+                                    placeholder="Nickname" />
+                            </n-form-item>
+                            <!-- Password -->
+                            <n-form-item label="Password" path="password">
+                                <n-input :disabled="!isSignup" v-model:value="signupFormValue.password" type="password"
+                                    placeholder="Password" class="input" />
+                            </n-form-item>
+                            <!-- Confirm Password -->
+                            <n-form-item label="Password" path="confirmPassword" :validation-status="confirmPwdStatus"
+                                :feedback="confirmPwdFeedback">
+                                <n-input :disabled="!isSignup" v-model:value="signupFormValue.confirmPassword"
+                                    type="password" placeholder="Confirm Password" class="input" />
+                            </n-form-item>
+                            <div class="flex flex-row justify-evenly items-center py-4">
+                                <TopicoButton class="w-full" color="#333" @click="handleSignup">Join for free
+                                </TopicoButton>
+                            </div>
+                        </n-form>
                     </div>
                 </div>
             </div>
@@ -47,19 +68,100 @@
 
 <script lang="ts">
 import useGlobalStore from '@/stores/global';
-import { defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import Wave from '@/components/common/Wave.vue';
-import { NInput, NFormItem, NForm } from 'naive-ui';
+import { NInput, NFormItem, NForm, FormInst, useMessage, FormItemRule } from 'naive-ui';
 import TopicoButton from '@/components/common/TopicoButton.vue';
+import { login, signup } from '@/services/authService';
+
+const emailValidator = (_rule: FormItemRule, value: string) => {
+    if (value.trim().length === 0) {
+        return new Error('Email is required');
+    }
+    if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/i.test(value)) {
+        return new Error('Email is invalid');
+    }
+    return true;
+}
 
 export default defineComponent({
     name: 'Login',
     components: {
-        Wave, NInput, TopicoButton, NFormItem
+        Wave, NInput, TopicoButton, NFormItem, NForm
     },
     setup() {
         const globalStore = useGlobalStore();
-        return { globalStore };
+        const message = useMessage();
+        // Login form
+        const loginFormRef = ref<FormInst | null>(null);
+        const loginFormValue = ref({
+            email: '',
+            password: ''
+        });
+        const loginRules = {
+            email: {
+                required: true,
+                trigger: ['input', 'blur'],
+                validator: emailValidator,
+            },
+            password: {
+                required: true,
+                message: 'please enter password',
+                trigger: ['input', 'blur']
+            }
+        };
+
+        // Signup form
+        const signupFormRef = ref<FormInst | null>(null);
+        const signupFormValue = ref({
+            email: '',
+            nickName: '',
+            password: '',
+            confirmPassword: ''
+        });
+        const signupRules = {
+            email: {
+                required: true,
+                validator: emailValidator,
+                trigger: ['input', 'blur']
+            },
+            password: {
+                required: true,
+                validator: (_rule: FormItemRule, value: string) => {
+                    if (value.length === 0) {
+                        return new Error('Password is required');
+                    }
+                    if (value.length < 6 || value.length > 16) {
+                        return new Error('Password should be between 6 and 16 characters inclusive');
+                    }
+                    return true;
+                },
+                trigger: ['input', 'blur']
+            },
+            nickName: {
+                required: true,
+                message: 'please enter nickname',
+                trigger: ['input', 'blur']
+            }
+        };
+
+        const confirmPwdFeedback = computed(() => {
+            if (signupFormValue.value.confirmPassword !== signupFormValue.value.password) {
+                return 'passwords are not the same';
+            }
+            return '';
+        });
+        const confirmPwdStatus = computed(() => {
+            if (signupFormValue.value.confirmPassword !== signupFormValue.value.password) {
+                return 'error';
+            }
+            return 'success';
+        });
+        return {
+            globalStore, loginFormRef, loginFormValue, loginRules,
+            signupFormRef, signupFormValue, signupRules,
+            confirmPwdFeedback, confirmPwdStatus, message
+        };
     },
     mounted() {
         this.globalStore.setShowWaves(true);
@@ -67,28 +169,46 @@ export default defineComponent({
     },
     data() {
         return {
-            email: '',
-            password: '',
             isSignup: false,
-            newEmail: '',
-            newNickName: '',
-            newPassword: '',
-            confirmPassword: ''
+        }
+    },
+    computed: {
+        redirect(): string {
+            return (this.$route.query.redirect ?? '/') as string;
         }
     },
     methods: {
-        handleClickSignup() {
-            if (this.isSignup) {
-                this.isSignup = false;
-                this.newEmail = '';
-                this.newNickName = '';
-                this.newPassword = '';
-                this.confirmPassword = '';
-            } else {
-                this.isSignup = true;
-                this.email = '';
-                this.password = '';
-            }
+        handleClickSignup(e: MouseEvent) {
+            e.preventDefault();
+            this.isSignup = !this.isSignup;
+        },
+        handleLogin(e: MouseEvent) {
+            e.preventDefault();
+            this.loginFormRef?.validate(async errs => {
+                if (errs && !!errs.length) this.message.error('login failed');
+                // try {
+                    const user: User = await login(this.loginFormValue);
+                    this.globalStore.setUser(user);
+                    this.message.success('Login success, logged in as ' + user.nickName);
+                    this.redirect && this.$router.push(this.redirect);    // redirect to previous page
+                // } catch (err: any) {
+                //     this.message.error(err.message);
+                // }
+            })
+        },
+        handleSignup(e: MouseEvent) {
+            e.preventDefault();
+            this.signupFormRef?.validate(async errs => {
+                if (errs && !!errs.length) this.message.error('signup failed');
+                try {
+                    const user: User = await signup(this.signupFormValue);
+                    this.globalStore.setUser(user);
+                    this.message.success('signup success, logged in as ' + user.nickName);
+                    this.redirect && this.$router.push(this.redirect);    // redirect to previous page
+                } catch (err: any) {
+                    this.message.error(err.message);
+                }
+            })
         }
     }
 })
@@ -96,7 +216,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 $form-width: 20em;
-$form-height: 22em;
+$form-height: 30em;
 
 .container {
     border-radius: 1em;

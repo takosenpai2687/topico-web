@@ -11,6 +11,7 @@ const useGlobalStore = defineStore("global", {
             isMobile: false,
             showSettings: false,
             primaryColor: localStorage.getItem("primaryColor") ?? DEFAULT_COLOR,
+            user: JSON.parse(localStorage.getItem("user") ?? "null"),
         };
     },
     actions: {
@@ -44,6 +45,10 @@ const useGlobalStore = defineStore("global", {
         setPrimaryColor(color: string) {
             this.primaryColor = color;
         },
+        setUser(user: User) {
+            this.user = user;
+            localStorage.setItem("user", JSON.stringify(user));
+        }
     },
 });
 

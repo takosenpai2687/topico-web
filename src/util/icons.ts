@@ -21,6 +21,7 @@ import {
     faGear,
     faGears,
     faCheck,
+    faRightFromBracket
 } from "@fortawesome/free-solid-svg-icons";
 import { faCloudversify } from "@fortawesome/free-brands-svg-icons";
 
@@ -43,7 +44,8 @@ library.add(
     faGear,
     faGears,
     faCheck,
-    faCloudversify
+    faCloudversify,
+    faRightFromBracket
 );
 
 export default FontAwesomeIcon;

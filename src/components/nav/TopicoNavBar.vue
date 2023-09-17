@@ -15,6 +15,7 @@
                 <UserNameAvatar :user="user" />
                 <font-awesome-icon icon="fa-solid fa-gear" class="fa-settings"
                     @click="() => globalStore.setShowSettings(true)" />
+                <font-awesome-icon icon="fa-solid fa-right-from-bracket" class="fa-settings" @click="handleLogout" />
             </div>
         </div>
     </nav>
@@ -23,9 +24,10 @@
 <script lang="ts">
 import UserNameAvatar from "@/components/common/UserNameAvatar.vue";
 import TopicoNavButton from "@/components/nav/TopicoNavButton.vue";
+import { logout } from "@/services/authService";
 import useGlobalStore from "@/stores/global";
-import { getUserFromLocalStorage } from "@/util/auth";
 import _ from "lodash";
+import { useMessage } from "naive-ui";
 import { defineComponent } from "vue";
 
 const routes = [
@@ -54,11 +56,12 @@ export default defineComponent({
     },
     setup() {
         const globalStore = useGlobalStore();
-        return { globalStore };
+        const message = useMessage();
+        return { globalStore, message };
     },
     computed: {
         user: function () {
-            return getUserFromLocalStorage();
+            return this.globalStore.user;
         },
     },
     data() {
@@ -80,6 +83,13 @@ export default defineComponent({
             });
         },
     },
+    methods: {
+        handleLogout() {
+            this.message.success("Logged out successfully");
+            logout();
+            this.$router.push("/login");
+        }
+    }
 });
 </script>
 
