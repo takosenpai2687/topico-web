@@ -7,11 +7,9 @@ const SIGN_UP = ROOT + "/api/v1/auth/signup";
 
 export const login = async (loginDto: LoginDto): Promise<User> => {
     const { email, password } = loginDto;
-    const loginRes: CommonResponse<LoginVO> = await axios
+    const loginRes = await axios
         .post(LOGIN, { email, password }, { withCredentials: true })
         .then((r) => r.data);
-    if (loginRes.code !== HttpStatusCode.Ok || !loginRes.data?.token?.length)
-        throw new Error(loginRes.message);
     axios.defaults.headers.common["Authorization"] = `Bearer ${loginRes.data.token}`;
     localStorage.setItem("token", loginRes.data.token);
     localStorage.setItem("email", loginRes.data.email);

@@ -185,21 +185,31 @@ export default defineComponent({
         handleLogin(e: MouseEvent) {
             e.preventDefault();
             this.loginFormRef?.validate(async errs => {
-                if (errs && !!errs.length) this.message.error('login failed');
-                // try {
+                if (errs && !!errs.length) {
+                    this.message.error('login failed');
+                    return;
+                }
+                try {
                     const user: User = await login(this.loginFormValue);
                     this.globalStore.setUser(user);
                     this.message.success('Login success, logged in as ' + user.nickName);
                     this.redirect && this.$router.push(this.redirect);    // redirect to previous page
-                // } catch (err: any) {
-                //     this.message.error(err.message);
-                // }
+                } catch (err: any) {
+                    let msg;
+                    if (err?.request?.status === 403) msg = 'Incorrect email or password';
+                    else if (err?.request?.status === 500) msg = 'Internal server error';
+                    else msg = err.message;
+                    this.message.error(msg);
+                }
             })
         },
         handleSignup(e: MouseEvent) {
             e.preventDefault();
             this.signupFormRef?.validate(async errs => {
-                if (errs && !!errs.length) this.message.error('signup failed');
+                if (errs && !!errs.length) {
+                    this.message.error('signup failed');
+                    return;
+                }
                 try {
                     const user: User = await signup(this.signupFormValue);
                     this.globalStore.setUser(user);
