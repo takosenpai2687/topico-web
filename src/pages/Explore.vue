@@ -218,12 +218,12 @@ export default {
 
  .btn-sort {
      @include card-shadow;
-     background-color: #fff;
-     color: var(--primary-color);
+     background-color: #fff !important;
+     color: var(--primary-color) !important;
 
      &.active {
-         background-color: var(--primary-color);
-         color: #fff;
+         background-color: var(--primary-color) !important;
+         color: #fff !important;
          font-weight: bold;
          cursor: inherit;
      }
