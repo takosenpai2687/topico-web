@@ -18,6 +18,7 @@ export const login = async (loginDto: LoginDto): Promise<User> => {
     const loginRes = await axios
         .post(LOGIN, { email, password }, { withCredentials: true })
         .then((r) => r.data);
+    if (loginRes.code !== HttpStatusCode.Ok || !loginRes.data) throw new Error(loginRes.message);
     axios.defaults.headers.common["Authorization"] = `Bearer ${loginRes.data.token}`;
     localStorage.setItem("token", loginRes.data.token);
     localStorage.setItem("email", loginRes.data.email);
