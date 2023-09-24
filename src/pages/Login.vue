@@ -265,13 +265,13 @@ $form-height: 30em;
     .signup {
         width: 0;
         height: 0;
-        transform: scaleX(0);
+        transform: scale3d(0, 0, 0);
         transition: transform 0.2s ease-out;
 
         &.expanded {
             width: $form-width;
             height: $form-height;
-            transform: scaleX(1);
+            transform: scale3d(1, 1, 1);
             border-left: 2px solid #f0f0f0 !important;
         }
     }
