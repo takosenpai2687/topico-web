@@ -18,16 +18,16 @@ export const getUserInfo = async (): Promise<User> => {
 };
 
 export const getFollowingComms = async (): Promise<Community[]> => {
-    return await axios.get("/mock/comms_following.json").then((r) => r.data);
+    return await axios.get("/api/v1/home/communities_following").then((r) => r.data.data);
 };
 
 export const getRecommendedComms = async (): Promise<Community[]> => {
-    return await axios.get("/mock/comms_recommended.json").then((r) => r.data);
+    return await axios.get("/api/v1/home/communities_recommended").then((r) => r.data.data);
 };
 
 export const getMyPosts = async (): Promise<Post[]> => {
-    return await axios.get("/mock/my_posts.json").then((r) =>
-        r.data.map((post: Post) => ({
+    return await axios.get("/api/v1/home/my_posts").then((r) =>
+        r.data.data.map((post: Post) => ({
             ...post,
             ctime: new Date(post.ctime),
             utime: new Date(post.utime),
@@ -36,8 +36,8 @@ export const getMyPosts = async (): Promise<Post[]> => {
 };
 
 export const getMyComments = async (): Promise<TopicoComment[]> => {
-    return await axios.get("/mock/my_comments.json").then((r) =>
-        r.data.map((comment: TopicoComment) => ({
+    return await axios.get("/api/v1/home/my_comments").then((r) =>
+        r.data.data.map((comment: TopicoComment) => ({
             ...comment,
             ctime: new Date(comment.ctime),
             utime: new Date(comment.utime),
