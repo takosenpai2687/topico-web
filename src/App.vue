@@ -1,17 +1,19 @@
 <template>
     <div id="app">
         <NMessageProvider>
-            <router-view />
+            <NDialogProvider>
+                <router-view />
+            </NDialogProvider>
         </NMessageProvider>
     </div>
 </template>
 
 <script lang="ts">
 import Layout from "@/layouts/Layout.vue";
-import { NMessageProvider } from "naive-ui";
+import { NMessageProvider, NDialogProvider } from "naive-ui";
 
 export default {
-    components: { Layout, NMessageProvider },
+    components: { Layout, NMessageProvider, NDialogProvider },
 };
 </script>
 

@@ -29,3 +29,13 @@ declare type PostDetail = {
     dislikes: number;
     comments: any[];
 };
+
+
+declare type CreatePostDto = {
+    communityId: number,
+    title: string,
+    content: string,
+    spoiler: boolean,
+    images: number[],
+    tags: string,
+};

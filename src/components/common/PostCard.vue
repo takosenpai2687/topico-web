@@ -3,7 +3,7 @@
         <div class="title-row">
             <div class="flex flex-row justify-start items-center gap-2 mb-2">
                 <!-- User Avatar-->
-                <img class="user-avatar" :src="post.author.avatar" alt="" />
+                <img class="user-avatar" :src="post.author?.avatar" alt="" />
                 <!-- User Name -->
                 <span class="user-name text-lg">{{ post.author.nickName }}</span>
                 <!-- Time -->
@@ -27,9 +27,9 @@
             {{ post.content }}
         </p>
         <div class="img-row py-2">
-            <div class="img-container" v-for="url in post.images" :class="`${!globalStore.showSpoilers && post.spoiler ? 'spoiler' : ''
+            <div class="img-container" v-for="imgId in post.images" :class="`${!globalStore.showSpoilers && post.spoiler ? 'spoiler' : ''
                 }`">
-                <img :src="url" alt="" :draggable="false" />
+                <img :src="`/api/v1/images/${imgId}`" alt="" :draggable="false" />
             </div>
         </div>
         <div>
@@ -73,7 +73,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/mixins.scss"; 
+@import "@/styles/mixins.scss";
 
 .card-wrapper {
     transition: all 0.16s ease-out;

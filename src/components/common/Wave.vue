@@ -17,8 +17,10 @@ export default defineComponent({
     name: 'Wave',
     setup() {
         const globalStore = useGlobalStore();
-        const { waterLevel: storeWaterLevel } = storeToRefs(globalStore);
-        return { globalStore, storeWaterLevel };
+        const { waterLevel: storeWaterLevel, showBanner } = storeToRefs(globalStore);
+        const bannerImg = new Image();
+        bannerImg.src = globalStore.banner;
+        return { globalStore, storeWaterLevel, showBanner, bannerImg };
     },
     data() {
         return {
@@ -39,6 +41,10 @@ export default defineComponent({
         // Watch theme change
         this.$watch(() => this.globalStore.primaryColor, (_n, _o) => {
             this.setColor();
+        });
+        // Watch banner change
+        this.$watch(() => this.globalStore.banner, (_n, _o) => {
+            this.bannerImg.src = _n;
         });
     },
     beforeDestroy() {
@@ -63,13 +69,17 @@ export default defineComponent({
             this.time += 1 / FPS;
             const { ctx } = this;
             if (!ctx) return;
-            const width = ctx.canvas.width;
-            const height = ctx.canvas.height;
-            ctx.clearRect(0, 0, width, height);
+            const { width, height } = ctx.canvas;
+            if (this.showBanner) {
+                ctx.drawImage(this.bannerImg, 0, 0, width, height);
+            } else {
+                ctx.fillStyle = `rgba(${this.primaryRGB.r},${this.primaryRGB.g},${this.primaryRGB.b}, 0.8)`;
+                ctx.fillRect(0, 0, width, height);
+            }
             ctx.imageSmoothingEnabled = true;
-            this.renderWave(this.time, 0.6);
-            this.renderWave(this.time + 5, 0.2);
-            this.renderWave(this.time + 10, 0.2);
+            this.renderWave(this.time, 0.8);
+            this.renderWave(this.time + 5, 0.6);
+            this.renderWave(this.time + 10, 0.6);
             setTimeout(() => {
                 requestAnimationFrame(this.render);
             }, INTERVAL_MS);
@@ -77,7 +87,7 @@ export default defineComponent({
         renderWave(t: number, opacity: number) {
             const { ctx } = this;
             if (!ctx) return;
-            const width = ctx.canvas.width;
+            const { width, height } = ctx.canvas;
 
 
             ctx.beginPath();
@@ -87,11 +97,11 @@ export default defineComponent({
                 ctx.lineTo(x, y);
             }
 
-            ctx.lineTo(width, 0);
-            ctx.lineTo(0, 0);
+            ctx.lineTo(width, height);
+            ctx.lineTo(0, height);
             ctx.closePath();
 
-            ctx.fillStyle = `rgba(${this.primaryRGB.r},${this.primaryRGB.g},${this.primaryRGB.b}, ${opacity})`;
+            ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
             ctx.fill();
         },
         onWaterChange(newValue: number) {

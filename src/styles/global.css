@@ -34,6 +34,7 @@ h4,
 h5,
 h6,
 a,
+strong,
 li {
     box-sizing: border-box;
     color: var(--primary-font-color);

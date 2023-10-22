@@ -6,6 +6,8 @@ const useGlobalStore = defineStore("global", {
         return {
             waterLevel: 0,
             showWaves: true,
+            showBanner: false,
+            banner: "",
             showSpoilers: localStorage.getItem("showSpoilers") === "true",
             isWide: false,
             isMobile: false,
@@ -48,6 +50,12 @@ const useGlobalStore = defineStore("global", {
         setUser(user: User) {
             this.user = user;
             localStorage.setItem("user", JSON.stringify(user));
+        },
+        setShowBanner(show: boolean) {
+            this.showBanner = show;
+        },
+        setBanner(banner: string) {
+            this.banner = banner;
         }
     },
 });
