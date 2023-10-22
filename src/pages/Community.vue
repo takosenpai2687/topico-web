@@ -174,7 +174,6 @@ export default {
             getUserCommunity(this.communityId!).then(uc => {
                 this.userCommunity = uc;
                 this.isFollowed = this.userCommunity !== null;
-                console.log(this.userCommunity);
             });
             this.fetchTrending();
         },
