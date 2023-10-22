@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-row justify-center items-center gap-1">
-        <img :src="user.avatar" :alt="profileAlt" class="w-8 h-8 rounded-3xl" :draggable="false" />
+        <img :src="avatarUrl" :alt="profileAlt" class="w-8 h-8 rounded-3xl" :draggable="false" />
         <span class="nickname">{{ user.nickName }}</span>
     </div>
 </template>
@@ -23,6 +23,9 @@ export default {
         profileAlt: function () {
             return (this.user.nickName ?? "").charAt(0);
         },
+        avatarUrl () {
+            return `/api/v1/images/${this.user.avatar}`
+        }
     },
 };
 </script>
