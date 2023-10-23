@@ -20,7 +20,7 @@ export const getTrendingNew = async (communityId: number, page: number, size: nu
 };
 
 export const createPost = async (postDto: CreatePostDto): Promise<any> => {
-    return await axios.post(`/api/v1/posts`, postDto).then((r) => r.data.data);
+    return await axios.post(`/api/v1/posts`, postDto).then((r) => r.data);
 };
 
 export const getUserCommunity = async (communityId: number): Promise<UserCommunity | null> => {
