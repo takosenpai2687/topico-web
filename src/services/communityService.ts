@@ -47,3 +47,10 @@ export const checkin = async (communityId: number): Promise<any> => {
     return await axios.post(`/api/v1/communities/checkin/${communityId}`).then((r) => r.data.data);
 };
 
+export const checkinForAll = async (): Promise<any> => {
+    return await axios.post(`/api/v1/home/checkin`).then((r) => r.data);
+};
+
+export const getMyLevel = async (communityId: number): Promise<number> => {
+    return await axios.get(`/api/v1/communities/level/${communityId}`).then((r) => r.data.data);
+}

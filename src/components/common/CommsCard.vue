@@ -1,11 +1,11 @@
 <template>
     <TopicoTitleCard :title="title" class="relative">
-        <TopicoButton v-if="checkin" class="btn-checkin">Check in for all</TopicoButton>
+        <TopicoButton v-if="checkin" class="btn-checkin" @click="handleCheckinForAll">Check in for all</TopicoButton>
         <div :class="`${expanded ? 'overflow-y-visible' : 'max-h-12 overflow-y-hidden'
             } pr-2  mt-1`">
-            <div class="flex flex-row flex-wrap justify-between gap-x-3 gap-y-4 ">
-                <CommunityPlate :class="`${globalStore.isMobile ? 'w-1/3' : 'w-1/4'} grow`" v-for="comm in  comms "
-                    :community="comm" />
+            <div class="comms-flex flex flex-row flex-wrap justify-between gap-x-3 gap-y-4 ">
+                <CommunityPlate :class="`${globalStore.isMobile ? 'w-1/3' : 'w-1/4'} grow flex-item`"
+                    v-for="comm in  comms " :community="comm" />
             </div>
         </div>
         <CircleButton :class="`${expanded ? 'rotate-180' : ''} mx-auto mt-2 -mb-2`" icon="fa-solid fa-angle-down"
@@ -20,6 +20,8 @@ import TopicoTitleCard from "@/components/common/TopicoTitleCard.vue";
 import TopicoButton from "@/components/common/TopicoButton.vue";
 import { PropType, defineComponent } from "vue";
 import useGlobalStore from "@/stores/global";
+import { checkinForAll } from "@/services/communityService";
+import { useMessage } from "naive-ui";
 
 export default defineComponent({
     name: 'CommsCard',
@@ -45,7 +47,8 @@ export default defineComponent({
     },
     setup() {
         const globalStore = useGlobalStore();
-        return { globalStore };
+        const message = useMessage();
+        return { globalStore, message };
     },
     data() {
         return { expanded: false };
@@ -55,6 +58,13 @@ export default defineComponent({
             const THRESHOLD = this.globalStore.isMobile ? 2 : 3;
             return this.comms.length > THRESHOLD;
         },
+    },
+    methods: {
+        async handleCheckinForAll(e: MouseEvent) {
+            e.stopPropagation();
+            const res = await checkinForAll();
+            this.message.success(res.message);
+        }
     }
 })
 </script>
@@ -68,6 +78,16 @@ export default defineComponent({
     right: 1em;
     font-size: 0.95em;
     user-select: none;
+}
+
+.comms-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .flex-item {
+        flex: 0 0 30%;
+    }
 }
 
 // // Mobile

@@ -167,7 +167,7 @@ export default {
             getCommunityById(this.communityId!).then(c => {
                 this.community = c;
                 this.globalStore.setShowBanner(this.community.banner !== null);
-                this.globalStore.setWaterLevel((window.innerHeight ?? 800) * 0.382);
+                this.globalStore.setWaterLevel((window.innerHeight ?? 400) * 0.382);
                 this.globalStore.setBanner(`/api/v1/images/${this.community.banner}`);
                 document.title = `Topico - ${this.community.name}`;
                 console.log(this.globalStore.waterLevel)

@@ -1,12 +1,13 @@
 <template>
     <RouterLink :to="`/community/${community.id}`" class="tag p-1">
-        <img :src="community.avatar" :alt="community.name.charAt(0).toLocaleUpperCase()" :draggable="false" />
+        <img :src="avatar" :alt="community.name.charAt(0).toLocaleUpperCase()" :draggable="false" />
         <span>{{ community.name }}</span>
-        <div v-if="community.level" class="level">{{ community.level }}</div>
+        <div v-if="level > 0" class="level">{{ level }}</div>
     </RouterLink>
 </template>
 
 <script lang="ts">
+import { getMyLevel } from "@/services/communityService";
 import { PropType } from "vue";
 
 export default {
@@ -17,6 +18,19 @@ export default {
             required: true,
         },
     },
+    data() {
+        return { level: 0 }
+    },
+    computed: {
+        avatar() {
+            return `/api/v1/images/${this.community.avatar}`;
+        }
+    },
+    async created() {
+        await getMyLevel(this.community.id).then((_level) => {
+            this.level = _level;
+        });
+    }
 };
 </script>
 
@@ -50,6 +64,7 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
         text-underline-offset: 8px;
+        white-space: nowrap;
     }
 
     &:hover {
