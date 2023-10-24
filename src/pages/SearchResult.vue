@@ -1,5 +1,5 @@
 <template>
-    <div class="justify-between items-start">
+    <div class="flex flex-row justify-between items-start">
         <!-- Left Side -->
         <div class="content-main">
             <!-- Search bar -->
@@ -19,6 +19,7 @@
                     None
                 </p>
             </div>
+
         </div>
         <!-- Right Side -->
         <div class="content-side">
@@ -51,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import { getTopComms, getTopSearch } from "@/services/searchService";
+import { getTopComms, getTopSearch, searchKeyword } from "@/services/searchService";
 import { defineComponent } from "vue";
 import SearchBar from "@/components/explore/SearchBar.vue";
 import SearchHistory from "@/components/explore/SearchHistory.vue";
@@ -86,6 +87,10 @@ export default defineComponent({
             searchHistory: [] as string[],
             topSearch: [] as string[],
             topComms: [] as Community[],
+            comms: [] as Community[],
+            sortBy: "MOST_LIKES" as "MOST_LIKES" | "NEWEST",
+            posts: [] as Post[],
+            page: 1,
             DELAY
         };
     },
@@ -113,7 +118,14 @@ export default defineComponent({
             this.editing = !!!this.editing;
         },
         async fetchData() {
-            // TODO: Request API
+            const keyword = this.search;
+            if (!keyword || keyword.length === 0) {
+                this.$router.push("/explore");
+            }
+            searchKeyword(keyword, this.page, 10, this.sortBy).then(searchResult => {
+                this.comms = searchResult.communities;
+                this.posts = searchResult.posts.data;
+            });
             this.fetchTopSearch();
             this.fetchTopComms();
         },

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import ROOT from "./root";
+import { parseFromUTC } from "@/util/dates";
 
 const GET_USER_BY_EMAIL = (email: string) => ROOT + "/api/v1/users/" + email;
 
@@ -27,10 +28,10 @@ export const getRecommendedComms = async (): Promise<Community[]> => {
 
 export const getMyPosts = async (): Promise<Post[]> => {
     return await axios.get("/api/v1/home/my_posts").then((r) =>
-        r.data.data.data.map((post: Post) => ({
+        r.data.data.data.map((post: any) => ({
             ...post,
-            ctime: new Date(post.ctime),
-            utime: new Date(post.utime),
+            ctime: parseFromUTC(post.ctime),
+            utime: parseFromUTC(post.utime),
             tags: JSON.parse(post.tags ?? "[]"),
         }))
     );
@@ -38,10 +39,16 @@ export const getMyPosts = async (): Promise<Post[]> => {
 
 export const getMyComments = async (): Promise<TopicoComment[]> => {
     return await axios.get("/api/v1/home/my_comments").then((r) =>
-        r.data.data.data.map((comment: TopicoComment) => ({
+        r.data.data.data.map((comment: any) => ({
             ...comment,
-            ctime: new Date(comment.ctime),
-            utime: new Date(comment.utime),
+            ctime: parseFromUTC(comment.ctime),
+            utime: parseFromUTC(comment.utime),
         }))
     );
+};
+
+export const updateUser = async (updateUserDto: UpdateUserDto): Promise<User> => {
+    const res = await axios.put("/api/v1/users", updateUserDto).then((r) => r.data);
+    if (res.code !== axios.HttpStatusCode.Ok) throw new Error(res.message);
+    return res.data;
 };

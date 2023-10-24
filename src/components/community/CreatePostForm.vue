@@ -156,7 +156,7 @@ export default defineComponent({
         },
         handleSubmit(e: MouseEvent) {
             e.preventDefault();
-            this.formRef?.validate((errors) => {
+            this.formRef?.validate(async (errors) => {
                 if (!errors) {
                     // Upload
                     const post: CreatePostDto = {
@@ -167,7 +167,7 @@ export default defineComponent({
                         tags: JSON.stringify(this.tags),
                         spoiler: this.spoiler
                     };
-                    const res = createPost(post);
+                    await createPost(post);
                     this.message.success('Success!');
                     this.$router.go(0);
                 } else {

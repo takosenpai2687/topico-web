@@ -17,6 +17,7 @@
 import TopicoTitleCard from "@/components/common/TopicoTitleCard.vue";
 import TopicoButton from "@/components/common/TopicoButton.vue";
 import useGlobalStore from "@/stores/global";
+import { parseFromUTC } from "@/util/dates";
 
 const GENDER_MAP: any = {
     "NOT_KNOWN": "Unknown",
@@ -52,7 +53,7 @@ export default {
             return ROLE_MAP[this.user.role];
         },
         cakeDay() {
-            return new Date(Date.parse(this.user.ctime)).toLocaleDateString();
+            return parseFromUTC(this.user.ctime).toLocaleDateString();
         }
     },
 };

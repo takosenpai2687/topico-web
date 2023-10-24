@@ -3,7 +3,7 @@
         <div class="title-row">
             <div class="flex flex-row justify-start items-center gap-2 mb-2">
                 <!-- User Avatar-->
-                <img class="user-avatar" :src="post.author?.avatar" alt="" />
+                <img class="user-avatar" :src="userAvatar" alt="" />
                 <!-- User Name -->
                 <span class="user-name text-lg">{{ post.author.nickName }}</span>
                 <!-- Time -->
@@ -23,7 +23,7 @@
         <div class="tags-row flex flex-row justify-start items-center gap-1 pb-2">
             <Tag v-for="tag in post.tags">{{ tag }}</Tag>
         </div>
-        <p>
+        <p class="post-content">
             {{ post.content }}
         </p>
         <div class="img-row py-2">
@@ -68,6 +68,9 @@ export default {
         timeAgo() {
             return getTimeDiff(this.post.ctime, new Date());
         },
+        userAvatar() {
+            return `/api/v1/images/${this.post.author.avatar}`;
+        }
     },
 };
 </script>
@@ -84,6 +87,12 @@ export default {
         a.title {
             text-decoration: underline;
         }
+    }
+
+    .post-content {
+        overflow-wrap: break-word;
+        white-space: normal;
+        width: 100%;
     }
 
     .img-row {

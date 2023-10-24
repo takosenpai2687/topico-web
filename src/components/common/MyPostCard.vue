@@ -19,7 +19,7 @@
                 {{ `Posted ${timeAgo} ago` }}
             </p>
         </div>
-        <p>
+        <p class="post-content">
             {{ post.content }}
         </p>
         <div class="img-row py-2">
@@ -61,6 +61,7 @@ export default {
     },
     computed: {
         timeAgo() {
+            console.log(`post ctime: ${this.post.ctime}`);
             return getTimeDiff(this.post.ctime, new Date());
         },
         commAvatar() {
@@ -78,6 +79,12 @@ export default {
 
     &:hover {
         transform: scale(1.01);
+    }
+
+    .post-content {
+        overflow-wrap: break-word;
+        white-space: normal;
+        width: 100%;
     }
 
     .title:hover {

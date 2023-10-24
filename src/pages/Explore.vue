@@ -43,7 +43,7 @@
                 <TopicoTitleCard title="# Top Search" :delay="0">
                     <ul class="px-2">
                         <li class="py-1 flex flex-row items-center justify-start gap-3"
-                            v-for="(searchItem, idx) in topSearch">
+                            v-for="(searchItem, idx) in Object.keys(topSearch)">
                             <span class="text-lg select-none">{{ `${idx + 1}.` }}</span>
                             <RouterLink class="search-link text-lg" :to="`/explore/${searchItem}`">{{ searchItem }}
                             </RouterLink>
@@ -108,7 +108,7 @@ export default {
         return {
             searchHistory: [] as string[],
             editing: false,
-            topSearch: [] as string[],
+            topSearch: {} as Object,
             topComms: [] as Community[],
             trending: [] as Post[],
             sortTypeIdx: 0,
@@ -122,6 +122,8 @@ export default {
                     fetchFn: this.fetchTrendingNew
                 }
             ],
+            page: 1,
+            total: 0,
             DELAY
         };
     },
@@ -152,14 +154,20 @@ export default {
         },
         async fetchTrendingHot() {
             this.trending = [];
-            this.trending = await getTrendingHot();
+            getTrendingHot(this.page).then(pager => {
+                this.trending = pager.data;
+                this.total = pager.total;
+            });
         },
         async fetchTrendingNew() {
             this.trending = [];
-            this.trending = await getTrendingNew();
+            getTrendingNew(this.page).then(pager => {
+                this.trending = pager.data;
+                this.total = pager.total;
+            });
         },
         async fetchTopSearch() {
-            this.topSearch = [];
+            this.topSearch = {};
             this.topSearch = await getTopSearch();
         },
         async fetchTopComms() {

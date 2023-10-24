@@ -97,6 +97,7 @@ import PostCard from "@/components/common/PostCard.vue";
 import SectionHeader from "@/components/common/SectionHeader.vue";
 import { useDialog, useMessage, NDialog, NProgress } from "naive-ui";
 import UserNameAvatar from "@/components/common/UserNameAvatar.vue";
+import { parseFromUTC } from "@/util/dates";
 
 export default {
     name: 'Community',
@@ -140,11 +141,11 @@ export default {
     },
     computed: {
         communityCDate() {
-            return new Date(Date.parse(this.community?.ctime!) ?? 0).toLocaleDateString();
+            return parseFromUTC(this.community?.ctime).toLocaleDateString();
         },
         joinDate() {
             if (!this.isFollowed || !this.userCommunity) return "N/A";
-            return new Date(Date.parse(this.userCommunity.ctime)).toLocaleDateString();
+            return parseFromUTC(this.userCommunity.ctime).toLocaleDateString();
         },
         expPercentage() {
             if (!this.userCommunity) return 0;

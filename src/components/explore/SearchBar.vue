@@ -41,7 +41,7 @@ export default defineComponent({
             e.preventDefault();
             const search = this.searchTerm.trim();
             if (search.length === 0) {
-                this.$router.push('/explore');
+                return;
             } else {
                 this.$router.push("/explore/" + search);
             }
@@ -56,37 +56,35 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped> 
+<style lang="scss" scoped> $initial-width: 20em;
+ $expanded-width: 28em;
 
-$initial-width: 20em;
-$expanded-width: 28em;
+ .search-container {
+     display: flex;
+     align-items: center;
+     border: 1px solid #ccc;
+     border-radius: 2em;
+     background: white;
+     padding: 0.5em 1em;
+     color: var(--primary-font-color);
+     margin: 0 auto;
 
-.search-container {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 2em;
-    background: white;
-    padding: 0.5em 1em;
-    color: var(--primary-font-color);
-    margin: 0 auto;
+     .search-input {
+         border: none;
+         outline: none;
+         background: transparent;
+         width: $initial-width;
+         transition: all 0.2s ease;
 
-    .search-input {
-        border: none;
-        outline: none;
-        background: transparent;
-        width: $initial-width;
-        transition: all 0.2s ease;
+         &.expanded {
+             width: $expanded-width;
+         }
+     }
 
-        &.expanded {
-            width: $expanded-width;
-        }
-    }
-
-    .search-icon {
-        margin-left: 10px;
-        color: #555;
-        cursor: pointer;
-    }
-}
+     .search-icon {
+         margin-left: 10px;
+         color: #555;
+         cursor: pointer;
+     }
+ }
 </style>

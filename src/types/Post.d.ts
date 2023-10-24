@@ -2,7 +2,7 @@ declare type Post = {
     id: number;
     community: Community;
     author: User;
-    tags?: string;
+    tags?: string[];
     title: string;
     spoiler?: boolean;
     content?: string;
