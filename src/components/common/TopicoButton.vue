@@ -37,8 +37,10 @@ export default {
 
      &:hover:not(:disabled) {
          cursor: pointer;
-         transform: scale(1.05);
+         transform: scale(1.02);
          color: #fcfcfc;
+         filter: brightness(0.9);
+         -webkit-filter: brightness(0.9);
      }
 
      &:disabled {
@@ -47,6 +49,11 @@ export default {
          &:hover {
              cursor: not-allowed;
          }
+     }
+
+     &:active {
+         filter: brightness(0.7) !important;
+         -webkit-filter: brightness(0.7) !important;
      }
 
      transition: all 0.16s ease-out;
