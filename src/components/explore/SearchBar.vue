@@ -41,7 +41,7 @@ export default defineComponent({
             e.preventDefault();
             const search = this.searchTerm.trim();
             if (search.length === 0) {
-                return;
+                this.$router.push("/explore");
             } else {
                 this.$router.push("/explore/" + search);
             }

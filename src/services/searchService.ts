@@ -35,7 +35,17 @@ export const getTrendingNew = async (page: number): Promise<Pager<Post[]>> => {
 };
 
 export const searchKeyword = async (keyword: string, page: number, size: number, sortBy: "MOST_LIKES" | "NEWEST"): Promise<SearchResultVO> => {
-    return await axios
+    const result = await axios
         .get(`/api/v1/explore/search?keyword=${keyword}&page=${page}&size=${size}&sortBy=${sortBy}`)
         .then((r) => r.data.data);
+    const posts = result.posts.data.map((post: any) => {
+        return {
+            ...post,
+            ctime: parseFromUTC(post.ctime),
+            utime: parseFromUTC(post.utime),
+            tags: JSON.parse(post.tags ?? "[]"),
+        }
+    });
+    result.posts.data = posts;
+    return result;
 }

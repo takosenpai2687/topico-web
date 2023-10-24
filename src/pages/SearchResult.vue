@@ -19,7 +19,10 @@
                     None
                 </p>
             </div>
-
+            <!-- Comms Card -->
+            <CommsCard :comms="comms" title="# Communities" />
+            <!-- Posts -->
+            <PostCard v-for="post in posts" :post="post" title="# Posts" />
         </div>
         <!-- Right Side -->
         <div class="content-side">
@@ -63,6 +66,7 @@ import TopicoButton from "@/components/common/TopicoButton.vue";
 import PostCard from "@/components/common/PostCard.vue";
 import useGlobalStore from "@/stores/global";
 import { DELAY, MAX_HISTORY } from '@/config/config';
+import CommsCard from "@/components/common/CommsCard.vue";
 
 
 export default defineComponent({
@@ -74,7 +78,8 @@ export default defineComponent({
         TopicoTitleCard,
         CommunityPlate,
         TopicoButton,
-        PostCard
+        PostCard,
+        CommsCard
     },
     setup() {
         const globalStore = useGlobalStore();
@@ -100,7 +105,9 @@ export default defineComponent({
         this.$watch(
             () => this.$route.params,
             (_toParams, _previousParams) => {
-                this.onMounted();
+                const path = this.$route.path;
+                if (path.startsWith('/explore/'))
+                    this.onMounted();
             }
         );
     },
@@ -110,6 +117,10 @@ export default defineComponent({
     methods: {
         onMounted() {
             this.search = ((this.$route.params.search as string) ?? "").trim();
+            if (!this.search || this.search.length === 0) {
+                this.$router.push("/explore");
+                return;
+            }
             document.title = "Topico Search - " + this.search;
             this.loadSearchHistory();
             this.fetchData();
@@ -131,6 +142,10 @@ export default defineComponent({
         },
         loadSearchHistory() {
             const { search } = this;
+            if (!search || search.length === 0) {
+                this.$router.push("/explore");
+                return;
+            }
             // Resolve search param
             if (!search || search.length === 0) {
                 this.$router.push("/explore");
@@ -152,8 +167,8 @@ export default defineComponent({
             this.searchHistory = _searchHistory
         },
         async fetchTopSearch() {
-            this.topSearch = [];
-            this.topSearch = await getTopSearch();
+            this.topSearch = {} as any;
+            this.topSearch = await getTopSearch() as any;
         },
         async fetchTopComms() {
             this.topComms = [];
@@ -269,7 +284,6 @@ export default defineComponent({
          .content-side {
              width: 100%;
 
-             .content-side-inner {}
          }
      }
  }
