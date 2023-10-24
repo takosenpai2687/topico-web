@@ -60,8 +60,7 @@ export default {
         },
     },
     computed: {
-        timeAgo() {
-            console.log(`post ctime: ${this.post.ctime}`);
+        timeAgo() { 
             return getTimeDiff(this.post.ctime, new Date());
         },
         commAvatar() {

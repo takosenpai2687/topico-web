@@ -167,7 +167,11 @@ export default defineComponent({
                         tags: JSON.stringify(this.tags),
                         spoiler: this.spoiler
                     };
-                    await createPost(post);
+                    const res = await createPost(post);
+                    if (res.code !== 200) {
+                        this.message.error('Failed to upload post: ' + res.message ?? 'Unknown error');
+                        return;
+                    }
                     this.message.success('Success!');
                     this.$router.go(0);
                 } else {
