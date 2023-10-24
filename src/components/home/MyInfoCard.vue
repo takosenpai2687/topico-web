@@ -9,7 +9,7 @@
         <p class="my-4 text-center"><strong>Location: </strong> {{ user.location }}</p>
         <p class="my-4 text-center"><strong>Description: </strong> {{ user.description }}</p>
         <p class="my-4 text-center"><strong>Cake Day: </strong> {{ cakeDay }}</p>
-        <TopicoButton class="mx-auto px-6 py-1">Edit Profile</TopicoButton>
+        <TopicoButton class="mx-auto px-6 py-1" @click="() => $router.push('/profile')">Edit Profile</TopicoButton>
     </TopicoTitleCard>
 </template>
 

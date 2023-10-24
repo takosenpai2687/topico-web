@@ -4,7 +4,7 @@
             <div class="title-row gap-2 pb-2">
                 <div class="flex flex-row justify-start items-center gap-2">
                     <!-- Community Icon-->
-                    <img class="community-avatar" :src="post.community.avatar" alt="" />
+                    <img class="community-avatar" :src="commAvatar" alt="" />
                     <!-- Post Title -->
                     <RouterLink :to="`/community/${post.community.id}/post/${post.id}`" class="title text-xl">{{ post.title
                     }}
@@ -23,9 +23,9 @@
             {{ post.content }}
         </p>
         <div class="img-row py-2">
-            <div class="img-container" v-for="url in post.images" :class="`${!globalStore.showSpoilers && post.spoiler ? 'spoiler' : ''
+            <div class="img-container" v-for="imgId in post.images" :class="`${!globalStore.showSpoilers && post.spoiler ? 'spoiler' : ''
                 }`">
-                <img :src="url" alt="" :draggable="false" />
+                <img :src="`/api/v1/images/${imgId}`" alt="" :draggable="false" />
             </div>
         </div>
         <div>
@@ -62,6 +62,9 @@ export default {
     computed: {
         timeAgo() {
             return getTimeDiff(this.post.ctime, new Date());
+        },
+        commAvatar() {
+            return `/api/v1/images/${this.post.community.avatar}`;
         },
     },
 };

@@ -52,7 +52,6 @@ export default {
     },
     mounted() {
         getFollowingComms().then((data) => {
-            console.log(data);
             this.followingComms = data;
         });
         getRecommendedComms().then((data) => {

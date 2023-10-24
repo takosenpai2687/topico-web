@@ -27,17 +27,18 @@ export const getRecommendedComms = async (): Promise<Community[]> => {
 
 export const getMyPosts = async (): Promise<Post[]> => {
     return await axios.get("/api/v1/home/my_posts").then((r) =>
-        r.data.data.map((post: Post) => ({
+        r.data.data.data.map((post: Post) => ({
             ...post,
             ctime: new Date(post.ctime),
             utime: new Date(post.utime),
+            tags: JSON.parse(post.tags ?? "[]"),
         }))
     );
 };
 
 export const getMyComments = async (): Promise<TopicoComment[]> => {
     return await axios.get("/api/v1/home/my_comments").then((r) =>
-        r.data.data.map((comment: TopicoComment) => ({
+        r.data.data.data.map((comment: TopicoComment) => ({
             ...comment,
             ctime: new Date(comment.ctime),
             utime: new Date(comment.utime),
