@@ -90,7 +90,7 @@ import useGlobalStore from "@/stores/global";
 import TopicoTitleCard from "@/components/common/TopicoTitleCard.vue";
 import { checkin, follow, getCommunityById, getUserCommunity, unfollow } from "@/services/communityService";
 import TopicoCard from "@/components/common/TopicoCard.vue";
-import CreatePostForm from '@/components/community/CreatePostForm.vue';
+import CreatePostForm from '@/components/post/CreatePostForm.vue';
 import { getTrendingHot, getTrendingNew } from '@/services/communityService';
 import TopicoButton from '@/components/common/TopicoButton.vue';
 import PostCard from "@/components/common/PostCard.vue";
