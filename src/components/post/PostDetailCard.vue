@@ -33,7 +33,7 @@
             </div>
         </div>
         <div>
-            <PostButtonsTray :likes="post.likes ?? 0" :dislikes="post.dislikes ?? 0" :comments="post.comments ?? 0" />
+            <PostButtonsTray :likes="post.likes ?? 0" :dislikes="post.dislikes ?? 0" :comments="post.replies ?? 0" />
         </div>
     </TopicoCard>
 </template>

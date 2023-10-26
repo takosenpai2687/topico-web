@@ -1,26 +1,24 @@
 <template>
     <div class="wrapper flex">
         <div class="content content-main">
-            <CommsCard v-if="followingComms.length" title="# Subscribed" :comms="followingComms" checkin />
+            <CommsCard v-if="followingComms.length" title="# Subscribed" :comms="followingComms" checkin
+                :onCheckin="fetchData" />
             <CommsCard v-if="recommendedComms.length" title="# Recommended" :comms="recommendedComms" />
             <MyPosts />
         </div>
         <div class="content content-side">
             <MyInfoCard />
-            <MyComments />
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import MyComments from "@/components/home/MyComments.vue";
 import MyInfoCard from "@/components/home/MyInfoCard.vue";
 import CommsCard from '@/components/common/CommsCard.vue';
 
 import MyPosts from "@/components/home/MyPosts.vue";
 import {
     getFollowingComms,
-    getMyComments,
     getMyPosts,
     getRecommendedComms,
 } from "@/services/userService";
@@ -32,7 +30,6 @@ export default {
     components: {
         MyInfoCard,
         MyPosts,
-        MyComments,
         CommsCard
     },
     setup() {
@@ -51,20 +48,22 @@ export default {
         this.globalStore.setShowWaves(true);
     },
     mounted() {
-        getFollowingComms().then((data) => {
-            this.followingComms = data;
-        });
-        getRecommendedComms().then((data) => {
-            this.recommendedComms = data;
-        });
-        getMyPosts().then((data) => {
-            this.homeStore.setMyPosts(data);
-        });
-        getMyComments().then((data) => {
-            this.homeStore.setMyComments(data);
-        });
+        this.fetchData();
         this.globalStore.setWaterLevel(280);
     },
+    methods: {
+        fetchData() {
+            getFollowingComms().then((data) => {
+                this.followingComms = data;
+            });
+            getRecommendedComms().then((data) => {
+                this.recommendedComms = data;
+            });
+            getMyPosts().then((data) => {
+                this.homeStore.setMyPosts(data);
+            });
+        }
+    }
 };
 </script>
 

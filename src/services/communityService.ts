@@ -1,5 +1,6 @@
 import axios from "axios";
 import ROOT from "@/services/root";
+import { parseFromUTC } from "@/util/dates";
 
 export const getCommunityById = async (id: number): Promise<Community> => {
     const community = await axios.get(ROOT + '/api/v1/communities/' + id).then((r) => r.data.data);
@@ -9,13 +10,21 @@ export const getCommunityById = async (id: number): Promise<Community> => {
 
 export const getTrendingHot = async (communityId: number, page: number, size: number): Promise<Pager<Post[]>> => {
     const pager = await axios.get(`/api/v1/communities/community_posts/${communityId}?page=${page}&size=${size}&sortBy=MOST_LIKES`).then((r) => r.data.data);
-    pager.data.forEach((p: any) => p.tags = JSON.parse(p.tags));
+    pager.data.forEach((p: any) => {
+        p.tags = JSON.parse(p.tags);
+        p.ctime = parseFromUTC(p.ctime);
+        p.utime = parseFromUTC(p.utime);
+    });
     return pager;
 };
 
 export const getTrendingNew = async (communityId: number, page: number, size: number): Promise<Pager<Post[]>> => {
     const pager = await axios.get(`/api/v1/communities/community_posts/${communityId}?page=${page}&size=${size}&sortBy=NEWEST`).then((r) => r.data.data);
-    pager.data.forEach((p: any) => p.tags = JSON.parse(p.tags));
+    pager.data.forEach((p: any) => {
+        p.tags = JSON.parse(p.tags);
+        p.ctime = parseFromUTC(p.ctime);
+        p.utime = parseFromUTC(p.utime);
+    });
     return pager;
 };
 

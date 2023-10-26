@@ -3,14 +3,14 @@
         <div class="content-main z-10">
             <!-- Community Name -->
             <TopicoCard>
-                <RouterLink to="`/community/${communityId}`" class="p-2 font-bold text-xl">#&nbsp;{{ community?.name }}
+                <RouterLink :to="`/community/${communityId}`" class="p-2 font-bold text-xl">#&nbsp;{{ community?.name }}
                 </RouterLink>
             </TopicoCard>
             <!-- Post Detail -->
             <PostDetailCard v-if="post" :post="post" />
             <!-- Create Comment -->
             <TopicoTitleCard title="# Create a Comment">
-                <CreateCommentForm v-if="postId" :postId="postId" />
+                <CreateCommentForm v-if="postId" :postId="postId" :key="Date.now()"/>
             </TopicoTitleCard>
             <!-- Trending -->
             <SectionHeader class="py-4 px-2 flex flex-row items-center justify-start gap-3 select-none">
@@ -26,7 +26,7 @@
             </div>
             <!-- Trending Comments -->
             <div class="py-4">
-                <CommentCard v-for="comment in comments" :comment="comment" />
+                <CommentCard v-for="comment in comments" :comment="comment" :is-parent="true"/>
             </div>
         </div>
         <div class="content-side z-10">
@@ -100,7 +100,7 @@ import SectionHeader from "@/components/common/SectionHeader.vue";
 import { useDialog, useMessage, NDialog, NProgress } from "naive-ui";
 import UserNameAvatar from "@/components/common/UserNameAvatar.vue";
 import { parseFromUTC } from "@/util/dates";
-import CommentCard from "@/components/common/CommentCard.vue";
+import CommentCard from "@/components/comment/CommentCard.vue";
 import CreateCommentForm from "@/components/comment/CreateCommentForm.vue";
 
 export default {
@@ -199,7 +199,7 @@ export default {
         },
         async fetchTrendingHot() {
             this.comments = [];
-            const trendingPager = await getTrendingHot(this.communityId, this.page, this.size);
+            const trendingPager = await getTrendingHot(this.postId, this.page, this.size);
             this.comments = trendingPager.data;
             this.page = trendingPager.page;
             this.size = trendingPager.size;
@@ -207,7 +207,7 @@ export default {
         },
         async fetchTrendingNew() {
             this.comments = [];
-            const trendingPager = await getTrendingNew(this.communityId, this.page, this.size);
+            const trendingPager = await getTrendingNew(this.postId, this.page, this.size);
             this.comments = trendingPager.data;
             this.page = trendingPager.page;
             this.size = trendingPager.size;

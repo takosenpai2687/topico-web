@@ -8,11 +8,11 @@
                 <n-input v-model:value="model.commentContentValue" placeholder="Comment content" type="textarea" :autosize="{
                     minRows: 3,
                     maxRows: 5
-                }" />
+                }" @change="handleChangeContent" />
             </n-form-item>
 
             <!-- Upload Images -->
-            <n-form-item label="Upload" path="uploadValue">
+            <n-form-item v-if="!!!noImage" label="Upload" path="uploadValue">
                 <n-upload :max="1" :show-cancel-button="false" :show-remove-button="false" action=""
                     :default-file-list="previewFileList" list-type="image-card" @preview="handlePreview"
                     :custom-request="customRequest" />
@@ -36,7 +36,7 @@ import { createComment } from '@/services/postService';
 import useGlobalStore from '@/stores/global';
 import axios from 'axios';
 import { FormInst, NButton, NForm, NFormItem, NInput, NModal, NSelect, NSwitch, NUpload, UploadCustomRequestOptions, UploadFileInfo, useMessage } from 'naive-ui';
-import { defineComponent, ref } from 'vue';
+import { PropType, defineComponent, ref } from 'vue';
 
 export default defineComponent({
     components: {
@@ -49,12 +49,20 @@ export default defineComponent({
             type: Number,
             required: true
         },
-        replyToUserId: {
-            type: Number,
+        replyToUser: {
+            type: Object as PropType<User>,
             required: false
         },
         parentId: {
             type: Number,
+            required: false
+        },
+        clearReplyToUser: {
+            type: Function as PropType<() => void>,
+            required: false
+        },
+        noImage: {
+            type: Boolean,
             required: false
         }
     },
@@ -94,12 +102,33 @@ export default defineComponent({
             ])
         }
     },
+    computed: {
+        prefix() {
+            return this.replyToUser ? `@${this.replyToUser.nickName} ` : '';
+        }
+    },
+    updated() {
+        const regex = /@(\S+)\s/;
+        const oldValue = this.model.commentContentValue;
+        if (regex.test(oldValue)) {
+            this.model.commentContentValue = oldValue.replace(regex, this.prefix);
+        } else if (this.prefix !== '') {
+            this.model.commentContentValue = this.prefix + oldValue;
+        }
+    },
     data() {
         return {
             imageId: null as number | null,
         }
     },
     methods: {
+        handleChangeContent(value: string) {
+            if (!value.startsWith(this.prefix)) {
+                this.clearReplyToUser && this.clearReplyToUser();
+                this.prefix = '';
+            }
+            this.model.commentContentValue = value;
+        },
         async customRequest({
             file, data,
         }: UploadCustomRequestOptions) {
@@ -127,7 +156,6 @@ export default defineComponent({
                         postId: this.postId,
                         content: this.model.commentContentValue,
                         parentId: this.parentId,
-                        replyToUserId: this.replyToUserId,
                         imageId: this.imageId,
                     };
                     const res = await createComment(comment);

@@ -2,14 +2,20 @@ import { parseFromUTC } from "@/util/dates";
 import axios from "axios";
 
 export const getTrendingHot = async (postId: number, page: number, size: number): Promise<Pager<CommentVO[]>> => {
-    const pager = await axios.get(`/api/v1/comments/${postId}?page=${page}&size=${size}&sortBy=MOST_LIKES`).then((r) => r.data.data);
-    pager.data.forEach((p: any) => p.tags = JSON.parse(p.tags));
+    const pager = await axios.get(`/api/v1/comments/by_post/${postId}?page=${page}&size=${size}&sortBy=MOST_LIKES`).then((r) => r.data.data);
+    pager.data.forEach((c: any) => {
+        c.ctime = parseFromUTC(c.ctime);
+        c.utime = parseFromUTC(c.utime);
+    });
     return pager;
 };
 
 export const getTrendingNew = async (postId: number, page: number, size: number): Promise<Pager<CommentVO[]>> => {
-    const pager = await axios.get(`/api/v1/comments/${postId}?page=${page}&size=${size}&sortBy=NEWEST`).then((r) => r.data.data);
-    pager.data.forEach((p: any) => p.tags = JSON.parse(p.tags));
+    const pager = await axios.get(`/api/v1/comments/by_post/${postId}?page=${page}&size=${size}&sortBy=NEWEST`).then((r) => r.data.data);
+    pager.data.forEach((c: any) => {
+        c.ctime = parseFromUTC(c.ctime);
+        c.utime = parseFromUTC(c.utime);
+    });
     return pager;
 }
 

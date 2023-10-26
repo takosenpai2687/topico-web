@@ -11,7 +11,7 @@ declare type Post = {
     utime: Date;
     likes?: number;
     dislikes?: number;
-    comments?: number;
+    replies: number;
 };
 
 declare type PostDetail = {
@@ -27,6 +27,7 @@ declare type PostDetail = {
     utime: Date;
     likes: number;
     dislikes: number;
+    replies: number;
     comments: any[];
 };
 

@@ -37,7 +37,7 @@ export const getMyPosts = async (): Promise<Post[]> => {
     );
 };
 
-export const getMyComments = async (): Promise<TopicoComment[]> => {
+export const getMyComments = async (): Promise<CommentVO[]> => {
     return await axios.get("/api/v1/home/my_comments").then((r) =>
         r.data.data.data.map((comment: any) => ({
             ...comment,

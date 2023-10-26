@@ -1,8 +1,9 @@
 declare type User = {
+    id: number;
     nickName: string;
     email: string;
     gender?: 'FEMALE' | 'MALE' | 'NOT_KNOWN' | 'NOT_APPLICABLE';
-    avatar?: string;
+    avatar?: number;
     exp?: number;
     level?: number;
     description?: string;

@@ -6,7 +6,7 @@ const useHomeStore = defineStore("home", {
             followingComms: [] as Community[],
             recommendedComms: [] as Community[],
             myPosts: [] as Post[], 
-            myComments: [] as TopicoComment[],
+            myComments: [] as CommentVO[],
         };
     },
     actions: {
@@ -19,7 +19,7 @@ const useHomeStore = defineStore("home", {
         setMyPosts(posts: Post[]) {
             this.myPosts = posts;
         },
-        setMyComments(comments: TopicoComment[]) {
+        setMyComments(comments: CommentVO[]) {
             this.myComments = comments;
         },
     },

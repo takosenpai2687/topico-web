@@ -77,9 +77,9 @@ export default defineComponent({
                 ctx.fillRect(0, 0, width, height);
             }
             ctx.imageSmoothingEnabled = true;
-            this.renderWave(this.time, 0.8);
-            this.renderWave(this.time + 5, 0.6);
-            this.renderWave(this.time + 10, 0.6);
+            this.renderWave(this.time, 0.75);
+            this.renderWave(this.time + 5, 0.5);
+            this.renderWave(this.time + 10, 0.5);
             setTimeout(() => {
                 requestAnimationFrame(this.render);
             }, INTERVAL_MS);
