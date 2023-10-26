@@ -13,7 +13,7 @@
                     <span class="text-gray-400 text-sm">{{ timeAgo(comment.ctime) }}</span>
                 </div>
                 <!-- Comment -->
-                <p class="py-4 px-1 text-lg">{{ comment.content }}</p>
+                <p class="py-2 px-1 text-lg">{{ comment.content }}</p>
                 <!-- Buttons -->
                 <div class="tray flex flex-row justify-start items-center gap-8 px-0 py-2">
                     <!-- Likes -->
@@ -48,7 +48,7 @@
                             <span class="text-gray-400 text-sm">{{ timeAgo(reply.ctime) }}</span>
                         </div>
                         <!-- Reply Content -->
-                        <p class="py-4 px-1 text-lg">{{ reply.content }}</p>
+                        <p class="py-2 px-1 text-lg">{{ reply.content }}</p>
                         <!-- Buttons -->
                         <div class="tray flex flex-row justify-start items-center gap-8 px-0 py-2">
                             <!-- Likes -->
@@ -170,8 +170,12 @@ img.author-avatar {
     height: 0;
 
     .reply-item {
-        border-left: 2px solid #cccccc7f;
-        padding-left: 1em;
+        border-left: 1px solid #ddd;
+        padding: 1em;
+        margin: 0 1em;
+        &:not(:last-child) {
+            border-bottom: 1px solid #ddd;
+        }
     }
 
     &.active {

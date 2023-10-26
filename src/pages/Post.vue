@@ -10,7 +10,7 @@
             <PostDetailCard v-if="post" :post="post" />
             <!-- Create Comment -->
             <TopicoTitleCard title="# Create a Comment">
-                <CreateCommentForm v-if="postId" :postId="postId" :key="Date.now()"/>
+                <CreateCommentForm v-if="postId" :postId="postId" :key="Date.now()" />
             </TopicoTitleCard>
             <!-- Trending -->
             <SectionHeader class="py-4 px-2 flex flex-row items-center justify-start gap-3 select-none">
@@ -26,64 +26,65 @@
             </div>
             <!-- Trending Comments -->
             <div class="py-4">
-                <CommentCard v-for="comment in comments" :comment="comment" :is-parent="true"/>
+                <CommentCard v-for="comment in comments" :comment="comment" :is-parent="true" />
             </div>
         </div>
-        <div class="content-side z-10">
+        <div class="content-side z-10 relative">
+            <div class="content-side-inner">
+                <!-- Community Info -->
+                <TopicoTitleCard :title="`# ${community?.name}`" class="card">
+                    <!-- Description -->
+                    <p>{{ community?.description }}</p>
 
-            <!-- Community Info -->
-            <TopicoTitleCard :title="`# ${community?.name}`">
-                <!-- Description -->
-                <p>{{ community?.description }}</p>
+                    <!-- Created -->
+                    <div class="flex flex-row justify-between my-4 mx-auto">
+                        <strong>Created: </strong>
+                        <span>{{ communityCDate }}</span>
+                    </div>
 
-                <!-- Created -->
-                <div class="flex flex-row justify-between my-4 mx-auto">
-                    <strong>Created: </strong>
-                    <span>{{ communityCDate }}</span>
-                </div>
+                    <!-- Followers -->
+                    <div class="flex flex-row justify-between my-4 mx-auto">
+                        <strong>Followers: </strong>
+                        <span>{{ community?.followers }}</span>
+                    </div>
 
-                <!-- Followers -->
-                <div class="flex flex-row justify-between my-4 mx-auto">
-                    <strong>Followers: </strong>
-                    <span>{{ community?.followers }}</span>
-                </div>
+                    <!-- Ranking -->
+                    <div class="flex flex-row justify-between my-4 mx-auto">
+                        <strong>Rank by size: </strong>
+                        <span>{{ community?.rank ?? 'N/A' }}</span>
+                    </div>
 
-                <!-- Ranking -->
-                <div class="flex flex-row justify-between my-4 mx-auto">
-                    <strong>Rank by size: </strong>
-                    <span>{{ community?.rank ?? 'N/A' }}</span>
-                </div>
+                    <!-- Follow Button -->
+                    <div>
+                        <TopicoButton v-if="!isFollowed" class="w-full" @click="handleFollow">Follow</TopicoButton>
+                        <TopicoButton v-if="isFollowed" class="w-full" color="#333" @click="handleUnfollow">Unfollow
+                        </TopicoButton>
+                    </div>
 
-                <!-- Follow Button -->
-                <div>
-                    <TopicoButton v-if="!isFollowed" class="w-full" @click="handleFollow">Follow</TopicoButton>
-                    <TopicoButton v-if="isFollowed" class="w-full" color="#333" @click="handleUnfollow">Unfollow
-                    </TopicoButton>
-                </div>
+                </TopicoTitleCard>
 
-            </TopicoTitleCard>
+                <!-- My Community Info -->
+                <TopicoTitleCard v-if="userCommunity" title="# My Stats" class="card">
 
-            <!-- My Community Info -->
-            <TopicoTitleCard v-if="userCommunity" title="# My Stats">
+                    <!-- Username and Avatar -->
+                    <UserNameAvatar :user="globalStore.user" />
 
-                <!-- Username and Avatar -->
-                <UserNameAvatar :user="globalStore.user" />
+                    <!-- Stats -->
+                    <p class="my-4 text-center"><strong>Cake Day: </strong> {{ joinDate }}</p>
 
-                <!-- Stats -->
-                <p class="my-4 text-center"><strong>Cake Day: </strong> {{ joinDate }}</p>
+                    <!-- Exp -->
 
-                <!-- Exp -->
+                    <p class="font-bold text-center">Level {{ userCommunity.level }}</p>
+                    <div class="flex flex-row justify-between items-center my-4 mx-auto gap-2 w-4/5">
+                        <strong>Exp: </strong>
+                        <n-progress type="line" :percentage="expPercentage" :indicator-placement="'inside'" processing />
+                    </div>
 
-                <p class="font-bold text-center">Level {{ userCommunity.level }}</p>
-                <div class="flex flex-row justify-between items-center my-4 mx-auto gap-2 w-4/5">
-                    <strong>Exp: </strong>
-                    <n-progress type="line" :percentage="expPercentage" :indicator-placement="'inside'" processing />
-                </div>
+                    <!-- Checkin -->
+                    <TopicoButton class="mx-auto" :disabled="isCheckedin" @click="handleCheckin">Checkin</TopicoButton>
 
-                <!-- Checkin -->
-                <TopicoButton class="mx-auto" :disabled="isCheckedin" @click="handleCheckin">Checkin</TopicoButton>
-
-            </TopicoTitleCard>
+                </TopicoTitleCard>
+            </div>
         </div>
     </div>
 </template>
@@ -258,6 +259,8 @@ export default {
 
 <style lang="scss" scoped> @import "@/styles/mixins.scss";
 
+ @import '@/styles/mixins.scss';
+
  .banner {
      width: 100%;
      height: 320px;
@@ -265,7 +268,7 @@ export default {
  }
 
  .content-main {
-     width: 66.67%;
+     width: 66.66%;
      height: 100%;
 
      .fa-eye {
@@ -295,5 +298,12 @@ export default {
  .content-side {
      width: 33.3%;
      height: 100%;
+     position: relative;
+
+     .content-side-inner {
+         position: fixed;
+         max-width: calc($max-width * 0.33);
+         top: 1em;
+     }
  }
 </style>

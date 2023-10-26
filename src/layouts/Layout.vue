@@ -188,7 +188,7 @@ export default defineComponent({
 @media screen and (min-width: 1919px) {
     .content-wrapper {
         .content {
-            max-width: 1300px !important;
+            max-width: $max-width !important;
         }
     }
 }
