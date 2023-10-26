@@ -16,16 +16,7 @@
                 <p class="py-2 px-1 text-lg">{{ comment.content }}</p>
                 <!-- Buttons -->
                 <div class="tray flex flex-row justify-start items-center gap-8 px-0 py-2">
-                    <!-- Likes -->
-                    <div class="tray-item flex flex-row justify-center items-center gap-1">
-                        <font-awesome-icon class="fa-icon" icon="fa-solid fa-thumbs-up" />
-                        <span> {{ comment.likes }}</span>
-                    </div>
-                    <!-- Dislikes -->
-                    <div class="tray-item flex flex-row justify-center items-center gap-1">
-                        <font-awesome-icon class="fa-icon" icon="fa-solid fa-thumbs-down" />
-                        <span> {{ comment.dislikes }}</span>
-                    </div>
+                    <CommentLikeButtons :comment="comment" />
                     <!-- Comments -->
                     <div v-if="isParent" class="tray-item flex flex-row justify-center items-center gap-1"
                         @click="onClickComment">
@@ -51,16 +42,7 @@
                         <p class="py-2 px-1 text-lg">{{ reply.content }}</p>
                         <!-- Buttons -->
                         <div class="tray flex flex-row justify-start items-center gap-8 px-0 py-2">
-                            <!-- Likes -->
-                            <div class="tray-item flex flex-row justify-center items-center gap-1">
-                                <font-awesome-icon class="fa-icon" icon="fa-solid fa-thumbs-up" />
-                                <span> {{ reply.likes }}</span>
-                            </div>
-                            <!-- Dislikes -->
-                            <div class="tray-item flex flex-row justify-center items-center gap-1">
-                                <font-awesome-icon class="fa-icon" icon="fa-solid fa-thumbs-down" />
-                                <span> {{ reply.dislikes }}</span>
-                            </div>
+                            <CommentLikeButtons :comment="reply" />
                             <!-- Reply -->
                             <div class="tray-item flex flex-row justify-center items-center gap-1"
                                 @click="() => setReplyToUser(reply.author)">
@@ -84,6 +66,8 @@ import { getTimeDiff } from '@/util/dates';
 import PostButtonsTray from '@/components/common/PostButtonsTray.vue';
 import { useMessage } from 'naive-ui'
 import CreateCommentForm from '@/components/comment/CreateCommentForm.vue';
+import { likeComment, unlikeComment } from '@/services/likeService';
+import CommentLikeButtons from '@/components/comment/CommentLikeButtons.vue';
 
 export default defineComponent({
     props: {
@@ -102,7 +86,8 @@ export default defineComponent({
     },
     components: {
         TopicoCard, PostButtonsTray,
-        CreateCommentForm
+        CreateCommentForm,
+        CommentLikeButtons
     },
     data() {
         return {
@@ -128,6 +113,24 @@ export default defineComponent({
         },
         clearReplyToUser() {
             this.replyToUser = undefined;
+        },
+        async onClickLikeComment(commentId: number) {
+            const res = await likeComment(commentId);
+            if (res.code !== 200) {
+                this.message.error(res.message);
+            } else {
+                this.message.success(res.message);
+                this.$emit('fetch-comments');
+            }
+        },
+        async onClickUnlikeComment(commentId: number) {
+            const res = await unlikeComment(commentId);
+            if (res.code !== 200) {
+                this.message.error(res.message);
+            } else {
+                this.message.success(res.message);
+                this.$emit('fetch-comments');
+            }
         }
     },
 });
@@ -173,6 +176,7 @@ img.author-avatar {
         border-left: 1px solid #ddd;
         padding: 1em;
         margin: 0 1em;
+
         &:not(:last-child) {
             border-bottom: 1px solid #ddd;
         }

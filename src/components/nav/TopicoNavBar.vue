@@ -42,6 +42,11 @@ const routes = [
         icon: "fa-magnifying-glass",
     },
     {
+        to: "/notifications",
+        text: "Notifications",
+        icon: "fa-solid fa-bell",
+    },
+    {
         to: "/profile",
         text: "Profile",
         icon: "fa-solid fa-user",

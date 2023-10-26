@@ -26,7 +26,7 @@
             </div>
             <!-- Trending Comments -->
             <div class="py-4">
-                <CommentCard v-for="comment in comments" :comment="comment" :is-parent="true" />
+                <CommentCard v-for="comment in comments" :comment="comment" :is-parent="true" @fetch-comments="fetchData" />
             </div>
         </div>
         <div class="content-side z-10 relative">

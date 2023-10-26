@@ -52,3 +52,4 @@ export const updateUser = async (updateUserDto: UpdateUserDto): Promise<User> =>
     if (res.code !== axios.HttpStatusCode.Ok) throw new Error(res.message);
     return res.data;
 };
+

@@ -6,6 +6,10 @@ export const getTrendingHot = async (postId: number, page: number, size: number)
     pager.data.forEach((c: any) => {
         c.ctime = parseFromUTC(c.ctime);
         c.utime = parseFromUTC(c.utime);
+        c.children.forEach((cc: any) => {
+            cc.ctime = parseFromUTC(cc.ctime);
+            cc.utime = parseFromUTC(cc.utime);
+        });
     });
     return pager;
 };
@@ -15,6 +19,10 @@ export const getTrendingNew = async (postId: number, page: number, size: number)
     pager.data.forEach((c: any) => {
         c.ctime = parseFromUTC(c.ctime);
         c.utime = parseFromUTC(c.utime);
+        c.children.forEach((cc: any) => {
+            cc.ctime = parseFromUTC(cc.ctime);
+            cc.utime = parseFromUTC(cc.utime);
+        });
     });
     return pager;
 }

@@ -33,7 +33,7 @@
             </div>
         </div>
         <div>
-            <PostButtonsTray :likes="post.likes ?? 0" :dislikes="post.dislikes ?? 0" :comments="post.replies ?? 0" />
+            <PostLikeButtons :post="post" />
         </div>
     </TopicoCard>
 </template>
@@ -41,15 +41,15 @@
 <script lang="ts">
 import { PropType } from "vue";
 import TopicoCard from "@/components/common/TopicoCard.vue";
-import PostButtonsTray from "@/components/common/PostButtonsTray.vue";
 import CommunityPlate from "@/components/common/CommunityPlate.vue";
 import Tag from "@/components/common/Tag.vue";
 import { getTimeDiff } from "@/util/dates";
 import useGlobalStore from "@/stores/global";
+import PostLikeButtons from "@/components/post/PostLikeButtons.vue";
 
 export default {
     name: "PostCard",
-    components: { TopicoCard, PostButtonsTray, Tag, CommunityPlate },
+    components: { TopicoCard, Tag, CommunityPlate, PostLikeButtons },
     setup() {
         const globalStore = useGlobalStore();
         return { globalStore };

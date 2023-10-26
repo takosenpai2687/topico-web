@@ -9,6 +9,7 @@ import Community from "@/pages/Community.vue";
 import PostVue from "@/pages/Post.vue";
 import SearchResultVue from "@/pages/SearchResult.vue";
 import LoginVue from "@/pages/Login.vue";
+import Notifications from "@/pages/Notifications.vue";
 
 const routes = [
     {
@@ -46,6 +47,10 @@ const routes = [
                 path: "/community/:id",
                 component: Community,
             },
+            {
+                path: "/notifications",
+                component: Notifications
+            }
         ],
     },
 ];
