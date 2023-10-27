@@ -15,3 +15,9 @@ declare type LoginVO = {
     nickName: string;
     token: string;
 };
+
+
+declare type UpdatePasswordDto = {
+    oldPassword: string;
+    newPassword: string;
+};

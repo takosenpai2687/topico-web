@@ -31,7 +31,10 @@
                 </n-form-item>
 
                 <!-- Submit -->
-                <div style="display: flex; justify-content: flex-end">
+                <div class="flex flex-row justify-between items-center">
+                    <TopicoButton color="#444">
+                        <RouterLink class="link" to="/edit_password">Change Password</RouterLink>
+                    </TopicoButton>
                     <TopicoButton @click="handleSubmit">Submit</TopicoButton>
                 </div>
             </n-form>
@@ -169,5 +172,9 @@ export default {
 .profile-card {
     transform: translate(-50%, -50%);
     width: 600px;
+}
+
+.link {
+    color: #fff !important;
 }
 </style>

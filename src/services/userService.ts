@@ -53,3 +53,9 @@ export const updateUser = async (updateUserDto: UpdateUserDto): Promise<User> =>
     return res.data;
 };
 
+export const updatePassword = async (updatePasswordDto: UpdatePasswordDto): Promise<void> => {
+    const res = await axios
+        .put("/api/v1/auth/password", updatePasswordDto)
+        .then((r) => r.data);
+    if (res.code !== axios.HttpStatusCode.Ok) throw new Error(res.message);
+};

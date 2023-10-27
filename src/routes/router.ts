@@ -10,6 +10,7 @@ import PostVue from "@/pages/Post.vue";
 import SearchResultVue from "@/pages/SearchResult.vue";
 import LoginVue from "@/pages/Login.vue";
 import Notifications from "@/pages/Notifications.vue";
+import EditPassword from "@/pages/EditPassword.vue";
 
 const routes = [
     {
@@ -50,6 +51,10 @@ const routes = [
             {
                 path: "/notifications",
                 component: Notifications
+            },
+            {
+                path: '/edit_password',
+                component: EditPassword
             }
         ],
     },

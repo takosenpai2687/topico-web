@@ -15,7 +15,7 @@
                 <!-- Comment -->
                 <p class="py-2 px-1 text-lg">{{ comment.content }}</p>
                 <!-- Image if any -->
-                <img class="comment-img" :src="`/api/v1/images/${comment.image}`">
+                <img v-if="comment.image" class="comment-img" :src="`/api/v1/images/${comment.image}`">
                 <!-- Buttons -->
                 <div class="tray flex flex-row justify-start items-center gap-8 px-0 py-2">
                     <CommentLikeButtons :comment="comment" />
