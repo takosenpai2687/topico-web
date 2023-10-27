@@ -9,6 +9,7 @@ declare type CommentVO = {
     dislikes: number;
     replies: number;
     location: string;
+    image: number;
     ctime: Date;
     utime: Date;
 }

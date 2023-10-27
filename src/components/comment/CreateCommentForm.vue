@@ -35,7 +35,7 @@ import TopicoButtonVue from '@/components/common/TopicoButton.vue';
 import { createComment } from '@/services/postService';
 import useGlobalStore from '@/stores/global';
 import axios from 'axios';
-import { FormInst, NButton, NForm, NFormItem, NInput, NModal, NSelect, NSwitch, NUpload, UploadCustomRequestOptions, UploadFileInfo, useMessage } from 'naive-ui';
+import { FormInst, FormItemRule, NButton, NForm, NFormItem, NInput, NModal, NSelect, NSwitch, NUpload, UploadCustomRequestOptions, UploadFileInfo, useMessage } from 'naive-ui';
 import { PropType, defineComponent, ref } from 'vue';
 
 export default defineComponent({
@@ -55,10 +55,6 @@ export default defineComponent({
         },
         parentId: {
             type: Number,
-            required: false
-        },
-        clearReplyToUser: {
-            type: Function as PropType<() => void>,
             required: false
         },
         noImage: {
@@ -91,7 +87,11 @@ export default defineComponent({
                 commentContentValue: {
                     required: true,
                     trigger: ['blur', 'input'],
-                    message: 'Please input comment content'
+                    message: 'Comment content cannot be blank',
+                    validator(_rule: FormItemRule, value: string) {
+                        if (!value || !value.trim().length) return false;
+                        return true;
+                    }
                 },
             },
             fileList: ref<UploadFileInfo[]>([
@@ -124,7 +124,7 @@ export default defineComponent({
     methods: {
         handleChangeContent(value: string) {
             if (!value.startsWith(this.prefix)) {
-                this.clearReplyToUser && this.clearReplyToUser();
+                this.$emit('clear-reply')
                 this.prefix = '';
             }
             this.model.commentContentValue = value;
@@ -151,7 +151,7 @@ export default defineComponent({
             e.preventDefault();
             this.formRef?.validate(async (errors) => {
                 if (!errors) {
-                    // Upload
+                    // Upload 
                     const comment: CreateCommentDto = {
                         postId: this.postId,
                         content: this.model.commentContentValue,

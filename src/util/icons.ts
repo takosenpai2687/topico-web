@@ -22,7 +22,8 @@ import {
     faGears,
     faCheck,
     faRightFromBracket,
-    faBell
+    faBell,
+    faTrashCan
 } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp as faThumbsUpRegular, faThumbsDown as faThumbsDownRegular } from '@fortawesome/free-regular-svg-icons'
 import { faCloudversify } from "@fortawesome/free-brands-svg-icons";
@@ -47,8 +48,11 @@ library.add(
     faGears,
     faCheck,
     faCloudversify,
-    faRightFromBracket, faThumbsUpRegular, faThumbsDownRegular,
-    faBell
+    faRightFromBracket,
+    faThumbsUpRegular,
+    faThumbsDownRegular,
+    faBell,
+    faTrashCan
 );
 
 export default FontAwesomeIcon;

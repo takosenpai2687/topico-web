@@ -14,6 +14,8 @@
                 </div>
                 <!-- Comment -->
                 <p class="py-2 px-1 text-lg">{{ comment.content }}</p>
+                <!-- Image if any -->
+                <img class="comment-img" :src="`/api/v1/images/${comment.image}`">
                 <!-- Buttons -->
                 <div class="tray flex flex-row justify-start items-center gap-8 px-0 py-2">
                     <CommentLikeButtons :comment="comment" />
@@ -51,8 +53,8 @@
                         </div>
                     </div>
                     <!-- Reply Input -->
-                    <CreateCommentForm class="mt-8" v-if="expanded" :parentId="comment.id!" :replyToUser="replyToUser"
-                        :postId="comment.postId" :onclearReplyToUser="clearReplyToUser" :noImage="true" />
+                    <CreateCommentForm class="mt-8" v-show="expanded" :parentId="comment.id!" :replyToUser="replyToUser"
+                        :postId="comment.postId" @clear-reply="clearReplyToUser" :noImage="true" />
                 </div>
             </div>
         </TopicoCard>
@@ -143,6 +145,10 @@ img.author-avatar {
     border-radius: 50%;
 }
 
+.comment-img {
+    height: 10em;
+    width: auto;
+}
 
 .tray {
     .tray-item {
