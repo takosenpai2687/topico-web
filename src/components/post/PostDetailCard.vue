@@ -1,39 +1,43 @@
 <template>
     <TopicoCard :delay="delay" class="card-wrapper">
-        <div class="title-row">
-            <div class="flex flex-row justify-start items-center gap-2 mb-2">
-                <!-- User Avatar-->
-                <img class="user-avatar" :src="userAvatar" alt="" />
-                <!-- User Name -->
-                <span class="user-name text-lg">{{ post.author.nickName }}</span>
-                <!-- Time -->
-                <span class="italic">{{ `Posted ${timeAgo} ago` }}</span>
+        <div class="pt-2 pb-4 px-1">
+            <div class="title-row">
+                <div class="flex flex-row justify-start items-center gap-2 mb-2">
+                    <!-- User Avatar-->
+                    <img class="user-avatar" :src="userAvatar" alt="" />
+                    <!-- User Name -->
+                    <span class="user-name text-lg">{{ post.author.nickName }}</span>
+                    <!-- Time -->
+                    <span class="italic">{{ `Posted ${timeAgo} ago` }}</span>
+                </div>
+                <div class="subtitle">
+                    <!-- Community Plate -->
+                    <CommunityPlate :community="post.community" />
+                </div>
             </div>
-            <div class="subtitle">
-                <!-- Community Plate -->
-                <CommunityPlate :community="post.community" />
+            <!-- Title -->
+            <h2 class="post-title block pb-2 text-xl">{{
+                post.title
+            }}
+            </h2>
+            <!-- Tags -->
+            <div class="tags-row flex flex-row justify-start items-center gap-1 pb-2">
+                <Tag v-for="tag in post.tags">{{ tag }}</Tag>
             </div>
-        </div>
-        <!-- Title -->
-        <h2 class="post-title block pb-2 text-xl">{{
-            post.title
-        }}
-        </h2>
-        <!-- Tags -->
-        <div class="tags-row flex flex-row justify-start items-center gap-1 pb-2">
-            <Tag v-for="tag in post.tags">{{ tag }}</Tag>
-        </div>
-        <p class="post-content">
-            {{ post.content }}
-        </p>
-        <div class="img-row py-2">
-            <div class="img-container" v-for="imgId in post.images" :class="`${!globalStore.showSpoilers && post.spoiler ? 'spoiler' : ''
-                }`">
-                <img :src="`/api/v1/images/${imgId}`" alt="" :draggable="false" />
+            <p class="post-content">
+                {{ post.content }}
+            </p>
+            <div class="img-row py-2">
+                <div class="img-container" v-for="imgId in post.images" :class="`${!globalStore.showSpoilers && post.spoiler ? 'spoiler' : ''
+                    }`">
+                    <img :src="`/api/v1/images/${imgId}`" alt="" :draggable="false" />
+                </div>
             </div>
-        </div>
-        <div>
-            <PostLikeButtons :post="post" />
+            <div class="flex flex-row justify-between items-center">
+                <PostLikeButtons :post="post" />
+                <!-- IP Location -->
+                <span class="text-gray-400 text-md ml-auto">IP Location: {{ post.author.location ?? 'Unknown' }}</span>
+            </div>
         </div>
     </TopicoCard>
 </template>

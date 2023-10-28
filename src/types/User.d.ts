@@ -7,6 +7,7 @@ declare type User = {
     exp?: number;
     level?: number;
     description?: string;
+    location?: string;
 };
 
 declare type UpdateUserDto = {

@@ -25,6 +25,8 @@
                         <font-awesome-icon class="fa-icon" icon="fa-solid fa-comments" />
                         <span> {{ comment.replies }}</span>
                     </div>
+                    <!-- IP Location -->
+                    <span class="text-gray-400 text-md ml-auto">IP Location: {{ comment.author.location?? 'Unknown' }}</span>
                 </div>
                 <!-- Replies -->
                 <div class="replies" :class="{ active: expanded }">
