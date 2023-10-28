@@ -49,5 +49,5 @@ export const getNotifications = async (): Promise<TopicoNotification[]> => {
 };
 
 export const readNotification = async (notificationId: number): Promise<void> => {
-    await axios.post(`/api/v1/notifications/read/${notificationId}`).then(r => r.data);
+    return await axios.post(`/api/v1/notifications/read/${notificationId}`).then(r => r.data);
 };

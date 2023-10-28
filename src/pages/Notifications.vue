@@ -65,7 +65,6 @@ export default defineComponent({
             this.loading = false;
         },
         async clickReadMessage(notificationId: number) {
-            this.message.success('Removed notification ' + notificationId);
             if (!notificationId) return;
             const res: any = await readNotification(notificationId);
             if (res.code !== 200) {
