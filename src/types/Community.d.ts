@@ -1,4 +1,4 @@
-type Community = {
+declare type Community = {
     id: number;
     name: string;
     description: string;
@@ -8,6 +8,12 @@ type Community = {
     tags: string;
     rank?: number;
     ctime: string;
-    utime: string; 
+    utime: string;
 };
 
+declare type CreateCommunityDto = {
+    name: string;
+    description: string;
+    avatar: number;
+    banner: number;
+};

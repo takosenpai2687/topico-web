@@ -28,8 +28,10 @@
                 <img :src="`/api/v1/images/${imgId}`" alt="" :draggable="false" />
             </div>
         </div>
-        <div>
+        <div class="flex flex-row justify-between items-center">
             <PostLikeButtons :post="post" />
+            <!-- IP Location -->
+            <span>IP Location: {{ post.author.location ?? 'Unknown' }}</span>
         </div>
     </TopicoCard>
 </template>

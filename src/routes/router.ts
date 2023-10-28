@@ -11,6 +11,7 @@ import SearchResultVue from "@/pages/SearchResult.vue";
 import LoginVue from "@/pages/Login.vue";
 import Notifications from "@/pages/Notifications.vue";
 import EditPassword from "@/pages/EditPassword.vue";
+import AdminPage from "@/pages/AdminPage.vue";
 
 const routes = [
     {
@@ -55,6 +56,10 @@ const routes = [
             {
                 path: '/edit_password',
                 component: EditPassword
+            },
+            {
+                path: '/admin',
+                component: AdminPage
             }
         ],
     },

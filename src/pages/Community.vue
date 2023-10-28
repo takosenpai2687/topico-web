@@ -63,6 +63,12 @@
                     </TopicoButton>
                 </div>
 
+                <!-- Admin: Delete Button -->
+                <div>
+                    <TopicoButton v-if="isAdmin" class="w-full mt-4" color="#E53935" @click="handleDelete">ADMIN: Delete
+                    </TopicoButton>
+                </div>
+
             </TopicoTitleCard>
 
             <!-- My Community Info -->
@@ -93,7 +99,7 @@
 <script lang="ts">
 import useGlobalStore from "@/stores/global";
 import TopicoTitleCard from "@/components/common/TopicoTitleCard.vue";
-import { checkin, follow, getCommunityById, getUserCommunity, unfollow } from "@/services/communityService";
+import { checkin, deleteCommunity, follow, getCommunityById, getUserCommunity, unfollow } from "@/services/communityService";
 import TopicoCard from "@/components/common/TopicoCard.vue";
 import CreatePostForm from '@/components/post/CreatePostForm.vue';
 import { getTrendingHot, getTrendingNew } from '@/services/communityService';
@@ -164,6 +170,9 @@ export default {
         },
         totalPages() {
             return Math.ceil(this.total / this.size);
+        },
+        isAdmin() {
+            return this.globalStore.user?.role === "ROLE_ADMIN";
         }
     },
     beforeUnmount() {
@@ -254,6 +263,23 @@ export default {
             this.page = page;
             this.fetchData();
         },
+        async handleDelete() {
+            this.dialog.warning({
+                title: 'Warning',
+                content: `Are you sure to delete ${this.community?.name ?? 'this community'}?`,
+                positiveText: 'Yes',
+                negativeText: 'No',
+                onPositiveClick: async () => {
+                    const res = await deleteCommunity(this.communityId);
+                    if (res.code !== 200) {
+                        this.message.error('Failed to delete community: ' + res.message);
+                    } else {
+                        this.message.success('Community deleted');
+                        this.$router.push('/');
+                    }
+                }
+            });
+        }
     }
 };
 </script>

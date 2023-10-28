@@ -30,7 +30,7 @@ import _ from "lodash";
 import { useMessage } from "naive-ui";
 import { defineComponent } from "vue";
 
-const routes = [
+const ROUTES = [
     {
         to: "/",
         text: "Home",
@@ -68,12 +68,24 @@ export default defineComponent({
         user: function () {
             return this.globalStore.user;
         },
+        isAdmin() {
+            return this.globalStore.user.role === "ROLE_ADMIN";
+        },
+        routes() {
+            return this.isAdmin ? [...ROUTES, {
+                to: "/admin",
+                text: "Admin",
+                icon: "fa-solid fa-user-shield",
+            }] : ROUTES;
+        }
     },
     data() {
-        return { activeIdx: -1, routes };
+        return {
+            activeIdx: -1,
+        };
     },
     mounted() {
-        this.activeIdx = routes.findIndex(
+        this.activeIdx = this.routes.findIndex(
             (route) => route.to === window.location.pathname
         );
     },
@@ -82,7 +94,7 @@ export default defineComponent({
             // This watcher function is called when the route changes
             this.$nextTick(() => {
                 // Perform actions that need to be done after the component has been updated
-                this.activeIdx = routes.findIndex(
+                this.activeIdx = this.routes.findIndex(
                     (route) => route.to === to.path
                 );
             });
