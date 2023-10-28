@@ -31,6 +31,8 @@ export const getTimeDiff = (dateFrom: Date, dateTo: Date): string => {
  * @returns 
  */
 export const parseFromUTC = (utc: string | undefined): Date => {
-    return new Date(Date.parse(utc ?? "1970-01-01T00:00:00.000Z"));
+    let _utc = utc ?? "1970-01-01T00:00:00.000Z";
+    if (!_utc.endsWith('Z')) _utc += 'Z';
+    return new Date(Date.parse(_utc));
 }
 
