@@ -28,6 +28,10 @@
             <div class="py-4">
                 <CommentCard v-for="comment in comments" :comment="comment" :is-parent="true" @fetch-comments="fetchData" />
             </div>
+            <!-- Pagination -->
+            <div class="w-full flex flex-row justify-center items-center pb-8 pt-4">
+                <n-pagination class="mx-auto" v-model:page="page" :page-count="totalPages" @update-page="handleGoToPage" />
+            </div>
         </div>
         <div class="content-side z-10 relative">
             <div class="content-side-inner">
@@ -98,7 +102,7 @@ import { getPost, getTrendingHot, getTrendingNew } from '@/services/postService'
 import TopicoButton from '@/components/common/TopicoButton.vue';
 import PostDetailCard from "@/components/post/PostDetailCard.vue";
 import SectionHeader from "@/components/common/SectionHeader.vue";
-import { useDialog, useMessage, NDialog, NProgress } from "naive-ui";
+import { useDialog, useMessage, NDialog, NProgress, NPagination } from "naive-ui";
 import UserNameAvatar from "@/components/common/UserNameAvatar.vue";
 import { parseFromUTC } from "@/util/dates";
 import CommentCard from "@/components/comment/CommentCard.vue";
@@ -109,7 +113,7 @@ export default {
     components: {
         TopicoTitleCard, TopicoCard, TopicoButton,
         PostDetailCard, SectionHeader, NDialog, UserNameAvatar, NProgress, CommentCard,
-        CreateCommentForm
+        CreateCommentForm, NPagination
     },
     setup() {
         const globalStore = useGlobalStore();
@@ -144,7 +148,7 @@ export default {
             ],
             page: 1,
             size: 10,
-            totalPages: 1
+            total: 0
         };
     },
     computed: {
@@ -165,6 +169,9 @@ export default {
         checkinDays() {
             return this.userCommunity?.checkin.checkinDays;
         },
+        totalPages() {
+            return Math.ceil(this.total / this.size);
+        }
     },
     beforeUnmount() {
         this.globalStore.setShowBanner(false);
@@ -204,7 +211,7 @@ export default {
             this.comments = trendingPager.data;
             this.page = trendingPager.page;
             this.size = trendingPager.size;
-            this.totalPages = trendingPager.total;
+            this.total = trendingPager.total;
         },
         async fetchTrendingNew() {
             this.comments = [];
@@ -212,7 +219,7 @@ export default {
             this.comments = trendingPager.data;
             this.page = trendingPager.page;
             this.size = trendingPager.size;
-            this.totalPages = trendingPager.total;
+            this.total = trendingPager.total;
         },
         handleFollow() {
             follow(this.communityId).then(_ => {
@@ -252,6 +259,10 @@ export default {
                 this.message.error("Failed to checkin");
                 this.fetchData();
             });
+        },
+        async handleGoToPage(page: number) {
+            this.page = page;
+            this.fetchTrending();
         }
     }
 };

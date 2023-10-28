@@ -29,8 +29,8 @@ export default {
                 },
                 {
                     duration: 0.1618,
-                    scaleX: 0.95,
-                    scaleY: 1.05,
+                    scaleX: 0.98,
+                    scaleY: 1.02,
                     repeat: 1,
                     yoyo: true,
                     ease: "power2.inOut",
@@ -50,4 +50,5 @@ export default {
         width: 100%;
         @include card-shadow-rounded;
     }
-}</style>
+}
+</style>

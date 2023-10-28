@@ -44,7 +44,7 @@
 
 <script lang="ts">
 import useGlobalStore from "@/stores/global";
-import { NForm, NInput, NFormItem, FormInst, UploadFileInfo, useMessage, UploadCustomRequestOptions, NSelect, NUpload } from "naive-ui";
+import { NForm, NInput, NFormItem, FormInst, UploadFileInfo, useMessage, UploadCustomRequestOptions, NSelect, NUpload, NModal } from "naive-ui";
 import TopicoButton from "@/components/common/TopicoButton.vue";
 import { ref } from "vue";
 import axios from "axios";
@@ -53,7 +53,7 @@ import TopicoTitleCard from "@/components/common/TopicoTitleCard.vue";
 
 export default {
     name: 'Profile',
-    components: { TopicoButton, NForm, NInput, NFormItem, TopicoTitleCard, NSelect, NUpload },
+    components: { TopicoButton, NForm, NInput, NFormItem, TopicoTitleCard, NSelect, NUpload, NModal },
     setup() {
         const formRef = ref<FormInst | null>(null);
         const message = useMessage();

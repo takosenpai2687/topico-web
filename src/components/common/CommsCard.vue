@@ -5,7 +5,7 @@
             } pr-2  mt-1`">
             <div class="comms-flex flex flex-row flex-wrap justify-between gap-x-3 gap-y-4 ">
                 <CommunityPlate :class="`${globalStore.isMobile ? 'w-1/3' : 'w-1/4'} grow flex-item`"
-                    v-for="comm in  comms " :community="comm" :key="Date.now()"/>
+                    v-for="comm in  comms " :community="comm" :key="checkin ? Date.now() : `comm-${comm.id}`" />
             </div>
         </div>
         <CircleButton :class="`${expanded ? 'rotate-180' : ''} mx-auto mt-2 -mb-2`" icon="fa-solid fa-angle-down"

@@ -97,9 +97,6 @@ export default defineComponent({
             replyToUser: undefined as User | undefined
         }
     },
-    mounted() {
-        console.log(this.comment);
-    },
     methods: {
         onClickComment() {
             this.expanded = !this.expanded;

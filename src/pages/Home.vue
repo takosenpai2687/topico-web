@@ -15,11 +15,9 @@
 <script lang="ts">
 import MyInfoCard from "@/components/home/MyInfoCard.vue";
 import CommsCard from '@/components/common/CommsCard.vue';
-
 import MyPosts from "@/components/home/MyPosts.vue";
 import {
     getFollowingComms,
-    getMyPosts,
     getRecommendedComms,
 } from "@/services/userService";
 import useGlobalStore from "@/stores/global";
@@ -52,15 +50,12 @@ export default {
         this.globalStore.setWaterLevel(280);
     },
     methods: {
-        fetchData() {
+        async fetchData() {
             getFollowingComms().then((data) => {
                 this.followingComms = data;
             });
             getRecommendedComms().then((data) => {
                 this.recommendedComms = data;
-            });
-            getMyPosts().then((data) => {
-                this.homeStore.setMyPosts(data);
             });
         }
     }

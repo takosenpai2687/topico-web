@@ -21,8 +21,18 @@
             </div>
             <!-- Comms Card -->
             <CommsCard :comms="comms" title="# Communities" />
+            <!-- Trending Sorting Types -->
+            <div class="sorts flex flex-row items-center justify-start gap-3 px-2 select-none">
+                <TopicoButton class="btn-sort" :class="{ active: idx === sortTypeIdx }" v-for="(sortType, idx) in sortTypes"
+                    @click="() => handleSetSortType(idx)">{{ sortType.name }}
+                </TopicoButton>
+            </div>
             <!-- Posts -->
             <PostCard v-for="post in posts" :post="post" title="# Posts" />
+            <!-- Pagination -->
+            <div class="w-full flex flex-row justify-center items-center pb-8 pt-4">
+                <n-pagination class="mx-auto" v-model:page="page" :page-count="totalPages" @update-page="handleGoToPage" />
+            </div>
         </div>
         <!-- Right Side -->
         <div class="content-side">
@@ -31,7 +41,7 @@
                 <TopicoTitleCard title="# Top Search" :delay="0">
                     <ul class="px-2">
                         <li class="py-1 flex flex-row items-center justify-start gap-3"
-                            v-for="(searchItem, idx) in topSearch">
+                            v-for="(searchItem, idx) in Object.keys(topSearch)">
                             <span class="text-lg select-none">{{ `${idx + 1}.` }}</span>
                             <RouterLink class="search-link text-lg" :to="`/explore/${searchItem}`">{{ searchItem }}
                             </RouterLink>
@@ -67,6 +77,7 @@ import PostCard from "@/components/common/PostCard.vue";
 import useGlobalStore from "@/stores/global";
 import { DELAY, MAX_HISTORY } from '@/config/config';
 import CommsCard from "@/components/common/CommsCard.vue";
+import { NPagination } from "naive-ui";
 
 
 export default defineComponent({
@@ -79,7 +90,8 @@ export default defineComponent({
         CommunityPlate,
         TopicoButton,
         PostCard,
-        CommsCard
+        CommsCard,
+        NPagination
     },
     setup() {
         const globalStore = useGlobalStore();
@@ -93,10 +105,22 @@ export default defineComponent({
             topSearch: [] as string[],
             topComms: [] as Community[],
             comms: [] as Community[],
-            sortBy: "MOST_LIKES" as "MOST_LIKES" | "NEWEST",
             posts: [] as Post[],
             page: 1,
-            DELAY
+            total: 0,
+            size: 0,
+            DELAY,
+            sortTypeIdx: 0,
+            sortTypes: [
+                {
+                    name: "Hot",
+                    fetchFn: this.fetchTrendingHot
+                },
+                {
+                    name: "New",
+                    fetchFn: this.fetchTrendingNew
+                }
+            ],
         };
     },
     created() {
@@ -114,6 +138,11 @@ export default defineComponent({
     mounted() {
         this.onMounted();
     },
+    computed: {
+        totalPages() {
+            return Math.ceil(this.total / this.size);
+        }
+    },
     methods: {
         onMounted() {
             this.search = ((this.$route.params.search as string) ?? "").trim();
@@ -128,17 +157,41 @@ export default defineComponent({
         toggleEditing() {
             this.editing = !!!this.editing;
         },
+        handleSetSortType(idx: number) {
+            if (idx === this.sortTypeIdx) return;
+            this.sortTypeIdx = idx;
+            this.fetchPosts();
+        },
+        async fetchPosts() {
+            this.posts = [];
+            await this.sortTypes[this.sortTypeIdx].fetchFn();
+        },
+        async fetchTrendingHot() {
+            searchKeyword(this.search, this.page, 10, "MOST_LIKES").then(searchResult => {
+                this.comms = searchResult.communities;
+                this.posts = searchResult.posts.data;
+                this.page = searchResult.posts.page;
+                this.total = searchResult.posts.total;
+                this.size = searchResult.posts.size;
+            });
+        },
+        async fetchTrendingNew() {
+            searchKeyword(this.search, this.page, 10, "NEWEST").then(searchResult => {
+                this.comms = searchResult.communities;
+                this.posts = searchResult.posts.data;
+                this.page = searchResult.posts.page;
+                this.total = searchResult.posts.total;
+                this.size = searchResult.posts.size;
+            });
+        },
         async fetchData() {
             const keyword = this.search;
             if (!keyword || keyword.length === 0) {
                 this.$router.push("/explore");
             }
-            searchKeyword(keyword, this.page, 10, this.sortBy).then(searchResult => {
-                this.comms = searchResult.communities;
-                this.posts = searchResult.posts.data;
-            });
             this.fetchTopSearch();
             this.fetchTopComms();
+            this.fetchPosts();
         },
         loadSearchHistory() {
             const { search } = this;
@@ -180,6 +233,10 @@ export default defineComponent({
             ) as string[];
             _searchHistory = _searchHistory.slice(0, MAX_HISTORY);
             this.searchHistory = _searchHistory;
+        },
+        async handleGoToPage(page: number) {
+            this.page = page;
+            this.fetchData();
         }
     }
 });
@@ -233,12 +290,12 @@ export default defineComponent({
 
  .btn-sort {
      @include card-shadow;
-     background-color: #fff;
-     color: var(--primary-color);
+     background-color: #fff !important;
+     color: var(--primary-color) !important;
 
      &.active {
-         background-color: var(--primary-color);
-         color: #fff;
+         background-color: var(--primary-color) !important;
+         color: #fff !important;
          font-weight: bold;
          cursor: inherit;
      }

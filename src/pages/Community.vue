@@ -25,6 +25,11 @@
             <div class="py-4">
                 <PostCard v-for="post in trending" :post="post" />
             </div>
+            <!-- Pagination -->
+            <div class="w-full flex flex-row justify-center items-center pb-8 pt-4">
+                <n-pagination :default-page-size="size" class="mx-auto" v-model:page="page" :page-count="totalPages"
+                    @update-page="handleGoToPage" />
+            </div>
         </div>
         <div class="content-side z-10">
 
@@ -95,7 +100,7 @@ import { getTrendingHot, getTrendingNew } from '@/services/communityService';
 import TopicoButton from '@/components/common/TopicoButton.vue';
 import PostCard from "@/components/common/PostCard.vue";
 import SectionHeader from "@/components/common/SectionHeader.vue";
-import { useDialog, useMessage, NDialog, NProgress } from "naive-ui";
+import { useDialog, useMessage, NDialog, NProgress, NPagination } from "naive-ui";
 import UserNameAvatar from "@/components/common/UserNameAvatar.vue";
 import { parseFromUTC } from "@/util/dates";
 
@@ -103,7 +108,7 @@ export default {
     name: 'Community',
     components: {
         TopicoTitleCard, TopicoCard, CreatePostForm, TopicoButton,
-        PostCard, SectionHeader, NDialog, UserNameAvatar, NProgress
+        PostCard, SectionHeader, NDialog, UserNameAvatar, NProgress, NPagination
     },
     setup() {
         const globalStore = useGlobalStore();
@@ -136,7 +141,7 @@ export default {
             ],
             page: 1,
             size: 10,
-            totalPages: 1
+            total: 0
         };
     },
     computed: {
@@ -157,6 +162,9 @@ export default {
         checkinDays() {
             return this.userCommunity?.checkin.checkinDays;
         },
+        totalPages() {
+            return Math.ceil(this.total / this.size);
+        }
     },
     beforeUnmount() {
         this.globalStore.setShowBanner(false);
@@ -193,7 +201,7 @@ export default {
             this.trending = trendingPager.data;
             this.page = trendingPager.page;
             this.size = trendingPager.size;
-            this.totalPages = trendingPager.total;
+            this.total = trendingPager.total;
         },
         async fetchTrendingNew() {
             this.trending = [];
@@ -201,7 +209,7 @@ export default {
             this.trending = trendingPager.data;
             this.page = trendingPager.page;
             this.size = trendingPager.size;
-            this.totalPages = trendingPager.total;
+            this.total = trendingPager.total;
         },
         handleFollow() {
             follow(this.communityId).then(_ => {
@@ -241,7 +249,11 @@ export default {
                 this.message.error("Failed to checkin");
                 this.fetchData();
             });
-        }
+        },
+        handleGoToPage(page: number) {
+            this.page = page;
+            this.fetchData();
+        },
     }
 };
 </script>

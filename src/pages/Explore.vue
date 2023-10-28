@@ -35,6 +35,10 @@
             <div class="py-4">
                 <PostCard v-for="(post, idx) in trending" :post="post" :delay="idx * DELAY" />
             </div>
+            <!-- Pagination -->
+            <div class="w-full flex flex-row justify-center items-center pb-8 pt-4">
+                <n-pagination class="mx-auto" v-model:page="page" :page-count="totalPages" @update-page="handleGoToPage" />
+            </div>
         </div>
         <!-- Right Side -->
         <div class="content-side">
@@ -76,8 +80,8 @@ import CommunityPlate from "@/components/common/CommunityPlate.vue";
 import TopicoButton from "@/components/common/TopicoButton.vue";
 import PostCard from "@/components/common/PostCard.vue";
 import { getTopSearch, getTopComms, getTrendingHot, getTrendingNew } from "@/services/searchService";
-
 import { DELAY, } from '@/config/config';
+import { NPagination } from "naive-ui";
 
 
 export default {
@@ -89,7 +93,8 @@ export default {
         TopicoTitleCard,
         CommunityPlate,
         TopicoButton,
-        PostCard
+        PostCard,
+        NPagination
     },
     setup() {
         const globalStore = useGlobalStore();
@@ -124,8 +129,14 @@ export default {
             ],
             page: 1,
             total: 0,
+            size: 10,
             DELAY
         };
+    },
+    computed: {
+        totalPages() {
+            return Math.ceil(this.total / this.size);
+        }
     },
     methods: {
         loadSearchHistory() {
@@ -157,6 +168,7 @@ export default {
             getTrendingHot(this.page).then(pager => {
                 this.trending = pager.data;
                 this.total = pager.total;
+                this.size = pager.size ?? 10;
             });
         },
         async fetchTrendingNew() {
@@ -164,6 +176,7 @@ export default {
             getTrendingNew(this.page).then(pager => {
                 this.trending = pager.data;
                 this.total = pager.total;
+                this.size = pager.size ?? 10;
             });
         },
         async fetchTopSearch() {
@@ -173,6 +186,10 @@ export default {
         async fetchTopComms() {
             this.topComms = [];
             this.topComms = await getTopComms();
+        },
+        async handleGoToPage(page: number) {
+            this.page = page;
+            this.fetchTrending();
         }
     },
 };
@@ -277,7 +294,9 @@ export default {
          .content-side {
              width: 100%;
 
-             .content-side-inner {}
+             .content-side-inner {
+                 display: block;
+             }
          }
      }
  }

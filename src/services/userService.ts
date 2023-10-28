@@ -26,15 +26,14 @@ export const getRecommendedComms = async (): Promise<Community[]> => {
     return await axios.get("/api/v1/home/communities_recommended").then((r) => r.data.data);
 };
 
-export const getMyPosts = async (): Promise<Post[]> => {
-    return await axios.get("/api/v1/home/my_posts").then((r) =>
-        r.data.data.data.map((post: any) => ({
-            ...post,
-            ctime: parseFromUTC(post.ctime),
-            utime: parseFromUTC(post.utime),
-            tags: JSON.parse(post.tags ?? "[]"),
-        }))
-    );
+export const getMyPosts = async (page: number, size: number): Promise<Pager<Post[]>> => {
+    const pager = await axios.get(`/api/v1/home/my_posts?page=${page}&size=${size}`).then(r => r.data.data);
+    pager.data.forEach((post: any) => {
+        post.ctime = parseFromUTC(post.ctime);
+        post.utime = parseFromUTC(post.utime);
+        post.tags = JSON.parse(post.tags ?? "[]");
+    });
+    return pager;
 };
 
 export const getMyComments = async (): Promise<CommentVO[]> => {
