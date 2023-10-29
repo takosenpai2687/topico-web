@@ -39,3 +39,6 @@ export const createComment = async (comment: CreateCommentDto): Promise<any> => 
     return await axios.post(`/api/v1/comments`, comment).then((r) => r.data);
 }
 
+export const deletePost = async (postId: number): Promise<any> => {
+    return await axios.delete(`/api/v1/posts/${postId}`).then((r) => r.data);
+};

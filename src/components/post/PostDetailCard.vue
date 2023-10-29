@@ -34,7 +34,16 @@
                 </div>
             </div>
             <div class="flex flex-row justify-between items-center">
-                <PostLikeButtons :post="post" />
+                <div class="flex flex-row justify-start items-center">
+                    <!-- Like Buttons -->
+                    <PostLikeButtons :post="post" />
+                    <!-- Admin: delete -->
+                    <div v-if="isAdmin" class="ml-8">
+                        <button class="text-red-500 hover:text-red-700" @click="handleDeletePost(post.id)">
+                            <font-awesome-icon icon="fa-solid fa-trash-can" />
+                        </button>
+                    </div>
+                </div>
                 <!-- IP Location -->
                 <span class="text-gray-400 text-md ml-auto">IP Location: {{ post.author.location ?? 'Unknown' }}</span>
             </div>
@@ -50,13 +59,17 @@ import Tag from "@/components/common/Tag.vue";
 import { getTimeDiff } from "@/util/dates";
 import useGlobalStore from "@/stores/global";
 import PostLikeButtons from "@/components/post/PostLikeButtons.vue";
+import { useDialog, useMessage } from "naive-ui";
+import { deletePost } from "@/services/postService";
 
 export default {
     name: "PostCard",
     components: { TopicoCard, Tag, CommunityPlate, PostLikeButtons },
     setup() {
         const globalStore = useGlobalStore();
-        return { globalStore };
+        const dialog = useDialog();
+        const message = useMessage();
+        return { globalStore, dialog, message };
     },
     props: {
         post: {
@@ -74,8 +87,31 @@ export default {
         },
         userAvatar() {
             return `/api/v1/images/${this.post.author.avatar}`;
-        }
+        },
+        isAdmin() {
+            return this.globalStore?.user?.role === "ROLE_ADMIN";
+        },
+
     },
+    methods: {
+        handleDeletePost(postId: number) {
+            this.dialog.warning({
+                title: 'Warning',
+                content: `Are you sure to delete this post?`,
+                positiveText: 'Yes',
+                negativeText: 'No',
+                onPositiveClick: async () => {
+                    const res = await deletePost(postId);
+                    if (res.code !== 200) {
+                        this.message.error("Failed to delete post: " + res.message ?? "Unknown error");
+                        return;
+                    }
+                    this.message.success("Post deleted");
+                    this.$router.push('/community/' + this.post?.community?.id ?? '');
+                }
+            });
+        }
+    }
 };
 </script>
 

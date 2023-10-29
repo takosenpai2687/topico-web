@@ -233,7 +233,7 @@ export default {
         handleUnfollow() {
             this.dialog.warning({
                 title: 'Warning',
-                content: `Are you sure to unfollow ${this.community?.name ?? 'this community'}? All your exp will be gone!`,
+                content: `Are you sure to unfollow ${this.community?.name ?? 'this community'}?`,
                 positiveText: 'Yes',
                 negativeText: 'No',
                 onPositiveClick: () => {
