@@ -38,7 +38,7 @@
                     <!-- Like Buttons -->
                     <PostLikeButtons :post="post" />
                     <!-- Admin: delete -->
-                    <div v-if="isAdmin" class="ml-8">
+                    <div v-if="canDelete" class="ml-8">
                         <button class="text-red-500 hover:text-red-700" @click="handleDeletePost(post.id)">
                             <font-awesome-icon icon="fa-solid fa-trash-can" />
                         </button>
@@ -88,8 +88,10 @@ export default {
         userAvatar() {
             return `/api/v1/images/${this.post.author.avatar}`;
         },
-        isAdmin() {
-            return this.globalStore?.user?.role === "ROLE_ADMIN";
+        canDelete() {
+            const isAdmin = this.globalStore?.user?.role === "ROLE_ADMIN";
+            const isAuthor = this.globalStore?.user?.id === this.post.author.id;
+            return isAdmin || isAuthor;
         },
 
     },
